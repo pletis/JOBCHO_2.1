@@ -14,5 +14,5 @@ public class AccessLogVO {
 	private Date log_date;
 	private int member_num;
 	
-	private MembersVO member;
+	private MemberVO member;
 }

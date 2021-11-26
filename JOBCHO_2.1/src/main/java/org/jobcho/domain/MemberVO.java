@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MembersVO {
+public class MemberVO {
 	private int member_num;
 	private String member_position;
 	private int team_num;

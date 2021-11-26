@@ -18,6 +18,6 @@ public class BoardVO {
 	private int isLive;
 	private Date board_date;
 	
-	private MembersVO member;
+	private MemberVO member;
 	private TeamVO team;
 }
