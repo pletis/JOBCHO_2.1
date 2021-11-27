@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="org.jobcho.mapper.ReplyMapper">
+	<cache />
+	
+	
+	<!-- 댓글 목록 -->
+	<select id="listReply" resultType="org.jobcho.domain.ReplyVO">
+		<![CDATA[ 
+			select * from Reply
+		]]>
+	</select>
+	
+	
+	<!-- 댓글 생성 -->
+	<insert id="insertReply" parameterType="org.jobcho.domain.ReplyVO"> 
+		<![CDATA[ 
+			insert into Reply(Reply_num, Reply_contents) 
+				values(
+					Reply_num.nextval, #{Reply_contents}
+				)
+		]]>
+	</insert>
+	
+
+	<update id="updateReply" parameterType="org.jobcho.domain.ReplyVO">
+		update Reply set Reply_contents= #{Reply_contents }
+		where Reply_num= #{Reply_num }
+	</update>
+	
+	
+	<select id="deleteReply" parameterType="int">
+		DELETE FROM Reply WHERE Reply_num = #{Reply_num}
+	</select> 
+	
+	
+	<select id="readReply" resultType="org.jobcho.domain.ReplyVO">
+		select * from Replys where Reply_num = #{Reply_num}
+		</select>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
