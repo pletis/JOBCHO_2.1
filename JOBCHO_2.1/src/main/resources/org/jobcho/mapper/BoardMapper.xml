@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jobcho.mapper.BoardMapper">
+	<cache />
+	
+	
+	<!-- 게시판 목록 -->
+	<select id="listBoard" resultType="org.jobcho.domain.BoardVO">
+		<![CDATA[ 
+			select * from boards  
+		]]>
+	</select>
+	
+	
+	<!-- 게시판 생성 -->
+	<insert id="insertBoard" parameterType="org.jobcho.domain.BoardVO"> 
+		<![CDATA[ 
+			insert into boards(board_num, board_name, board_info) 
+				values(
+					board_num.nextval, #{board_name}, #{board_info}
+				)
+		]]>
+	</insert>
+	
+
+	<update id="updateBoard" parameterType="org.jobcho.domain.BoardVO">
+		update boards set board_name= #{board_name }, board_info= #{board_info }
+		where board_num= #{board_num }
+	</update>
+	
+	
+	<select id="deleteBoard" parameterType="int">
+		DELETE FROM boards WHERE board_num = #{board_num}
+	</select> 
+	
+	
+	<select id="readBoard" resultType="org.jobcho.domain.BoardVO">
+		select * from boards where board_num = #{board_num}
+		</select>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
