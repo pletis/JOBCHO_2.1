@@ -17,6 +17,6 @@ public class ReplyVO {
 	private int isLive;
 	private Date reply_date;
 	
-	private MembersVO member;
+	private MemberVO member;
 	private PostVO post;
 }
