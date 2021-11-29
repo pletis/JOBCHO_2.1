@@ -49,8 +49,7 @@ public class BoardController {
 //		board.setMember_num(member_num);
 		board.setTeam_num(team_num);
 		
-		System.out.println("팀번호: " + team_num);
-		log.info("게시판 생성" + board);
+		log.info("게시판 생성: " + board + "팀번호: " + team_num);
 		
 		int insertCount = service.insertBoard(board); //DB 저장
 		
@@ -97,7 +96,7 @@ public class BoardController {
 	
 	
 	/*
-	 * 게시판 삭제(PostMan 확인O)
+	 * 게시판 삭제(PostMan 확인O, isLive 변경)
 	 * team_num, member_num 필요
 	 */
 	@DeleteMapping(value = "/{board_num}",
