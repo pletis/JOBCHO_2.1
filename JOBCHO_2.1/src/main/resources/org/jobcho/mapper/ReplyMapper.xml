@@ -9,7 +9,7 @@
 	
 	
 	<!-- 댓글 목록 -->
-	<select id="listReply" resultType="org.jobcho.domain.ReplyVO">
+	<select id="getListReply" resultType="org.jobcho.domain.ReplyVO">
 		<![CDATA[ 
 			select * from reply
 		]]>
@@ -19,9 +19,9 @@
 	<!-- 댓글 생성 -->
 	<insert id="insertReply" parameterType="org.jobcho.domain.ReplyVO"> 
 		<![CDATA[ 
-			insert into reply(reply_num, reply_contents) 
+			insert into reply(reply_num, reply_contents, member_num, post_num, islive, reply_date ) 
 				values(
-					Reply_num.nextval, #{reply_contents}
+					Reply_num.nextval, #{reply_contents}, #{member_num}, #{post_num}, default, default
 				)
 		]]>
 	</insert>

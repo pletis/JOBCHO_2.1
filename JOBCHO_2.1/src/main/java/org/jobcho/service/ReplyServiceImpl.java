@@ -21,27 +21,27 @@ public class ReplyServiceImpl implements ReplyService{
 	private ReplyMapper mapper;
 
 	@Override
-	public int insert(ReplyVO reply) {
-		log.info("왜이러는거야 대체");
+	public int insertReply(ReplyVO reply) {
+		log.info("댓글 등록 =====" + reply);
 		return mapper.insertReply(reply);
 	}
 
 	@Override
-	public List<ReplyVO> getList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ReplyVO> getListReply(int post_num) {
+		log.info("댓글 리스트 =====" + post_num);
+		return mapper.getListReply(post_num);
 	}
 
 	@Override
-	public int update(ReplyVO reply) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateReply(ReplyVO reply) {
+		log.info("댓글 수정 =====" + reply);
+		return mapper.updateReply(reply);
 	}
 
 	@Override
-	public void delete(int reply_num) {
-		// TODO Auto-generated method stub
-		
+	public void deleteReply(int reply_num) {
+		log.info("댓글 삭제 =====" + reply_num);
+		mapper.deleteReply(reply_num);
 	}
 
 	
