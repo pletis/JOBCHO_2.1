@@ -33,6 +33,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jre1.8.0_45/lib/ext/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/Tomcat 9.0/lib/ojdbc6.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

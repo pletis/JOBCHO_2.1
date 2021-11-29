@@ -22,7 +22,7 @@ public class ReplyServiceImpl implements ReplyService{
 
 	@Override
 	public int insert(ReplyVO reply) {
-		log.info("´ñ±Û ÀÛ¼º ¼º°ø");
+		log.info("ì™œì´ëŸ¬ëŠ”ê±°ì•¼ ëŒ€ì²´");
 		return mapper.insertReply(reply);
 	}
 
