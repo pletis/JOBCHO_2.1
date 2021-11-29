@@ -6,11 +6,11 @@ import org.jobcho.domain.ReplyVO;
 
 public interface ReplyService {
 	
-	public int insert(ReplyVO reply);
+	public int insertReply(ReplyVO reply);
 	
-	public List<ReplyVO> getList();
+	public List<ReplyVO> getListReply(int post_num);
 	
-	public int update(ReplyVO reply);
+	public int updateReply(ReplyVO reply);
 	
-	public void delete (int reply_num);
+	public void deleteReply(int reply_num);
 }
