@@ -15,9 +15,9 @@
 		메인페이지
 		
 		 
-  		 <%-- <h3><sec:authentication property="principal.users.user_name"/>님 안녕하세요</h3>
+  		 <h3><sec:authentication property="principal.users.user_name"/>님 안녕하세요</h3>
   		<br>
-  		<h2><sec:authentication property="principal.users.user_email"/>< --%>/h2>
+  		<h2><sec:authentication property="principal.users.user_email"/></h2>
   			
   		<br>
  		 <a href="/users/update">프로필편집 </a>
