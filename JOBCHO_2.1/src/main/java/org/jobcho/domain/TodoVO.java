@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TodoListVO {
+public class TodoVO {
 	private int todo_num;
 	private String todo_title;
 	private String todo_description;

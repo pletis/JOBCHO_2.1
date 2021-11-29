@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="org.jobcho.mapper.TodoMapper">
+	<cache />
+	
+	
+	<!-- 오늘의 할일 insert -->
+	<insert id="insertTodo" parameterType="org.jobcho.domain.TodoVO">
+		insert into todoList (todo_num, todo_title, todo_description , todo_endDate, member_num) 
+			values (
+				todoList_num.nextval, #{todo_title}, #{todo_description}, #{todo_endDate}, #{member_num}
+			)
+	</insert>
+
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
