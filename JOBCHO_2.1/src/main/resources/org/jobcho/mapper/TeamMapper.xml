@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.jobcho.mapper.TeamMapper">
-	<cache />
+	
 	
 	<!-- 팀 생성 -->	
 	<insert id="insertTeam" parameterType="org.jobcho.domain.TeamVO">
@@ -15,6 +15,7 @@
 			]]>
 	</insert>
 	
+	<!-- 팀 리스트 조회 -->
 	<select id="getListTeam" parameterType="int" resultType="org.jobcho.domain.TeamVO">
 		<![CDATA[
 			select t.* from team t, member m
@@ -24,15 +25,20 @@
 		]]>
 	</select>
 	
+	<!-- 팀 조회 -->
 	<select id="getTeam" parameterType = "int" resultType="org.jobcho.domain.TeamVO">
 		select * from team where team_num = #{team_num}
 	</select>
 	
+	<!-- 팀 업데이트 -->
 	<update id="updateTeam" parameterType="org.jobcho.domain.TeamVO">
 		update team set team_name = #{team_name}, team_info = #{team_info}
 		where team_num = #{team_num}
 	</update>
 	
+	<!-- 팀 삭제 -->
 	<update id="deleteTeam" parameterType="int">
 		update team set islive = 0 where team_num = {team_num}
 	</update>
+	
+	</mapper>
