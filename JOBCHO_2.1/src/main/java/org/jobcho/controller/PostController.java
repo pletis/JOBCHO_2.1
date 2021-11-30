@@ -1,9 +1,12 @@
 package org.jobcho.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.ws.Response;
 
+import org.jobcho.domain.Criteria;
 import org.jobcho.domain.PostVO;
 import org.jobcho.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,28 +58,48 @@ public class PostController {
 	
 	
 	/*
-	 * 게시글 리스트(PostMan 확인O)
+	 * 게시글 리스트+ 페이지 처리(PostMan 확인O)
 	 * board_num, member_num 필요
 	 */
-	@GetMapping("")
-	public ResponseEntity<List<PostVO>> getListPost(@PathVariable("board_num") int board_num){
+	@GetMapping(value = "",
+							produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<List<PostVO>> getListPost(@PathVariable("board_num") Integer board_num){
 		
-		log.info("게시글 : " + board_num);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("board_num", board_num);
+		map.put("cri", new Criteria(2,10));
 		
-		List<PostVO> getListPost = service.getListPost(board_num);
+		log.info("게시글 리스트 : " + board_num);
+		log.info("서비스 게시글 리스트: " + map);
+		
+		List<PostVO> getListPost = service.getListPost(map);
 		return new ResponseEntity<>(getListPost, HttpStatus.OK);
 	}
 	
 	
 	/*
-	 *게시글 수정()
-	 * 
+	 * 게시글 상세조회(PostMan 확인O)
+	 * post_num 필요
+	 */
+	@GetMapping(value = "{post_num}",
+							produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<PostVO> getPost(@PathVariable("post_num") int post_num){
+		
+		log.info("게시글 상세조회 : " + post_num);
+		
+		PostVO getPost = service.getList(post_num);
+		return new ResponseEntity<>(getPost, HttpStatus.OK);
+	}
+	
+	
+	/*
+	 *게시글 수정(PostMan 확인O)
+	 * post_num 필요
 	 */
 	@PutMapping("/{post_num}")
 	public ResponseEntity<PostVO> updatePost(@RequestBody PostVO post,
-																	@PathVariable("post_num") int post_num,
-																	@PathVariable("board_num") int board_num){
-		
+																			 @PathVariable("post_num") int post_num,
+																			 @PathVariable("board_num") int board_num){
 		post.setPost_num(post_num);
 		post.setBoard_num(board_num);
 		int updateCount = service.updateBoard(post);
@@ -88,7 +111,6 @@ public class PostController {
 	}
 	
 	
-	
 	/*
 	 * 게시글 삭제(PostMan 확인O)
 	 * post_num 필요
@@ -98,7 +120,7 @@ public class PostController {
 		
 		log.info("게시글 삭제: " + post_num);
 		service.deletePost(post_num);
-		return new ResponseEntity<>("success", HttpStatus.OK);
+		return new ResponseEntity<>("삭제 완료", HttpStatus.OK);
 	}
 	
 	

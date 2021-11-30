@@ -1,7 +1,10 @@
 package org.jobcho.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.jobcho.domain.Criteria;
 import org.jobcho.domain.PostVO;
 import org.jobcho.mapper.PostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,29 +26,40 @@ public class PostServiceImpl implements PostService {
 	
 	@Override
 	public int insertPost(PostVO post) {
-		log.info("서비스 게시글 생성");
+		log.info("서비스 게시글 생성: " + post.getPost_title());
 		
 		return mapper.insertPost(post);
 	}
 
 	@Override
-	public List<PostVO> getListPost(int board_num) {
-		log.info("서비스 게시글 리스트");
+	public List<PostVO> getListPost(HashMap<String, Object> map) {
+		log.info("서비스 게시글 리스트: " + map);
 		
-		return mapper.getListPost(board_num);
+		return mapper.getListPost(map);
+	}
+	
+	@Override
+	public PostVO getList(int post_num) {
+		log.info("서비스 게시글 상세조회: " + post_num);
+		
+		return mapper.getPost(post_num);
 	}
 
 	@Override
 	public int updateBoard(PostVO post) {
-		log.info("서비스 게시글 수정");
+		log.info("서비스 게시글 수정: " + post.getPost_num());
 		
 		return mapper.updatePost(post);
 	}
 
 	@Override
 	public void deletePost(int post_num) {
-		log.info("서비스 게시글 삭제");
+		log.info("서비스 게시글 삭제: " + post_num);
 		mapper.deletePost(post_num);
 	}
+
+	
+
+	
 
 }
