@@ -34,7 +34,6 @@ import lombok.NoArgsConstructor;
 @RestController
 @AllArgsConstructor
 @NoArgsConstructor
-@CrossOrigin("*")
 @RequestMapping("/users/*")
 public class UsersController {
 
@@ -47,7 +46,6 @@ public class UsersController {
 	// 회원가입
 	
 	@PostMapping("/register")
-	@CrossOrigin("*")
 	public ResponseEntity<Integer> register(@RequestBody UsersVO users) {
 		System.out.println(users);
 		// 비밀번호 암호화 (인코더)

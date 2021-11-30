@@ -4,43 +4,44 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>login</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="/resources/login/css/login.css">
+
 </head>
 <body>
-		<div>
-			<h1>JOBCHO</h1>
-		</div>
-
-	<h2><c:out value="${error }"/></h2>
-	<h2><c:out value="${logout }"></c:out></h2>
+	<div id="wrap" class="job-login">
+		<h1>JOBCHO</h1>
+		
+		<form action="/login" method="post">
+			<div class="job-container">
+				<div class="login-input">
+					<p class="id-pass-inp">
+						<input type="text" id="inputId" name="username" placeholder="아이디">
+					</p>
+					
+					<p class="id-pass-inp">
+						<input type="password" id="password" name="password" placeholder="비밀번호">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					</p>
+			</div>
 	
-	<form class="row g-3" action="/login" method="post">
-			
-			
-		<div class="col-md-6">
-   			 <label for="inputPassword2" class="visually-hidden">이메일</label>
-    			<input type="text" class="form-control" id="username" name="username" placeholder="이메일">
-  		<br>
-  			 <label for="inputPassword2" class="visually-hidden">비밀번호</label>
-    			<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호">
-  		
-  		<br>
-  			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-  		
-  			  <button type="submit"  class="btn btn-primary mb-6">로그인</button>
-  			  
-  		</form>	  
-  		
-  		<br>
-  			  <a href="/users/register">회원가입</a>
-  		<br>
-  		<a href="/users/findPw_1">비밀번호가 기억이 안나십니까?</a>
-  			
-  		</div>
-  			
+		<div class="login-btn">
+			<button type="submit">JOBCHO로그인</button>
+		</div>
+		</form>
+		<div>
+			<a href="/users/findPw_1">비밀번호 찾기</a>
+		</div>
+		
+	</div>
+
+	<p class="job-signup"><span>JOBCHO가 처음이신가요?</span>
+	<a href="/users/register" >회원가입</a>
+
 	
 </body>
 </html>
