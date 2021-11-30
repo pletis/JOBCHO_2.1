@@ -1,5 +1,5 @@
 package org.jobcho.domain;
 
-public class test {
+public class VoteVO {
 
 }

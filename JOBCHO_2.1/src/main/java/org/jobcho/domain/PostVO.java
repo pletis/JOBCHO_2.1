@@ -19,5 +19,5 @@ public class PostVO {
 	private int isLive;
 	
 	private BoardVO board;
-	private MembersVO member;
+	private MemberVO member;
 }

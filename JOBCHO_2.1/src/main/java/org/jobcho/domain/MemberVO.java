@@ -1,6 +1,5 @@
 package org.jobcho.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -10,15 +9,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardVO implements Serializable {
-	private int board_num;
-	private String board_name;
-	private String board_info;
+public class MemberVO {
 	private int member_num;
+	private String member_position;
 	private int team_num;
-	private int isLive; // delete 여부
-	private Date board_date;
+	private int user_num;
+	private int isLive;
+	private Date member_date;
 	
-	private MembersVO member;
+	private UsersVO user;
 	private TeamVO team;
 }
+
