@@ -41,6 +41,9 @@
 		<!-- 접근제한 -->
 		<security:access-denied-handler  ref="customAccessDenied"/>
 		
+		<!-- postMan으로 할때 주석 풀어야됨 -->
+      <!--  <security:csrf disabled="true"/>--> 
+		
 	</security:http>
 
 
