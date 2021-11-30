@@ -7,7 +7,7 @@ import java.util.Map;
 import org.jobcho.domain.Criteria;
 import org.jobcho.domain.PostVO;
 
-import oracle.jdbc.proxy.annotation.Post;
+//import oracle.jdbc.proxy.annotation.Post;
 
 public interface PostService {
 	
