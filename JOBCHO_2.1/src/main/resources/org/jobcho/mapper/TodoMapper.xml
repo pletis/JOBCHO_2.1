@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.jobcho.mapper.TodoMapper">
+	<cache />
+	
+	
+	<!--새로운 할일 생성 -->
+	<insert id="insertTodo" parameterType="org.jobcho.domain.TodoVO">
+		insert into todoList (todo_num, todo_title, todo_description , todo_endDate, member_num) 
+			values (
+				todoList_num.nextval, #{todo_title}, #{todo_description}, #{todo_endDate}, #{member_num}
+			)
+	</insert>
+
+	<!-- 할일 정보 반환 -->
+	<select id="getTodo" parameterType="int" resultType="org.jobcho.domain.TodoVO">
+		select * from TodoList where todo_num = #{todo_num}
+	</select>
+	
+	<!-- 할일 리스트 반환 -->
+	<select id="selectTodoList" resultType="org.jobcho.domain.TodoVO">
+		select * from TodoList where islive = 1
+	</select>
+	
+	<!-- 할일 수정 -->
+	<update id="updateTodo" parameterType="org.jobcho.domain.TodoVO">
+		update todoList set 
+			todo_title = #{todo_title},
+			todo_description = #{todo_description},
+			todo_endDate = #{todo_endDate}
+		where todo_num = #{todo_num}
+	</update>
+	 
+	 
+	<!--  할일 삭제 -> update로 islive를 0으로 수정  -->
+	 <update id="deleteTodo" parameterType="int" >
+	 	update todoList set islive = 0 where todo_num = #{todo_num}
+	 </update>
+	 
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

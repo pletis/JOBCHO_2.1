@@ -1,6 +1,5 @@
 package org.jobcho.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TodoVO implements Serializable{
+public class TodoListVO {
 	private int todo_num;
 	private String todo_title;
 	private String todo_description;
@@ -19,5 +18,5 @@ public class TodoVO implements Serializable{
 	private int member_num;
 	private int isLive;
 	
-	private MemberVO member;
+	private MembersVO member;
 }
