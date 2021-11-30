@@ -15,7 +15,7 @@
 	</insert>
 	
 	
-	<!-- 게시글 리스트 조회 -->
+	<!-- 게시글 리스트 조회 + 페이지, 검색 -->
 	<select id="getListPost" parameterType="hashMap" resultType="org.jobcho.domain.PostVO">
 		<![CDATA[ 
 				select *
@@ -23,11 +23,16 @@
 					select /*+INDEX_DESC(SYS_C007525) */
 						 rownum rn, post_num, post_title, post_contents, board_num, member_num, post_date
 					from post
-					where rownum <= #{cri.pageNum} * #{cri.amount}
+					where 
+		]]>	
+				<include refid="criteria"></include>
+		
+		<![CDATA[ 		
+					rownum <= #{cri.pageNum} * #{cri.amount}
 				)
 				where rn > (#{cri.pageNum} -1) * #{cri.amount}
 				and board_num = #{board_num}
-			]]>
+		]]>	
 	</select>
 	
 	
@@ -40,13 +45,11 @@
 	</select>
 	
 	
-	
 	<!-- 게시글 수정 -->
 	<update id="updatePost" parameterType="org.jobcho.domain.PostVO">
 		update post set post_title = #{post_title}, post_contents = #{post_contents}
 		where post_num= #{post_num } 
 	</update>
-	
 	
 	
 	<!-- 게시글 삭제 -->
@@ -56,8 +59,32 @@
 	</delete>
 	
 	
+	<!-- 전체 게시글 수 -->
+	<select id="getTotalCount" resultType="int">
+		select count(*) from post where post_num > 0
+	</select>
 	
 	
+	<!-- 검색조건 -->
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like '%'||#{cri.keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							content like '%'||#{cri.keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							writer like '%'||#{cri.keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
 	
 
 </mapper>
