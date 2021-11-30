@@ -29,7 +29,6 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class BoardController {
 	
-	
 	@Autowired
 	private BoardService service;
 		
@@ -43,15 +42,15 @@ public class BoardController {
 						consumes = "application/json",
 						produces = {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<BoardVO> insertBoard(@RequestBody BoardVO board,
-																				@PathVariable("team_num") int team_num
-																				) {
+																				@PathVariable("team_num") int team_num) {
 		
 //		board.setMember_num(member_num);
 		board.setTeam_num(team_num);
 		
-		log.info("게시판 생성: " + board + "팀번호: " + team_num);
+		log.info("게시판 생성: " + board);
+		log.info("팀번호: " + team_num);
 		
-		int insertCount = service.insertBoard(board); //DB 저장
+		int insertCount = service.insertBoard(board);
 		
 		return insertCount == 1
 				? new ResponseEntity<>(HttpStatus.OK)
@@ -63,13 +62,14 @@ public class BoardController {
 	/*
 	 * 게시판 리스트 조회(PostMan 확인O)
 	 * 메인 화면에서 항상 호출
+	 * team_num 필요 
 	 */
 	@GetMapping(value = "",
 			produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<List<BoardVO>> getListBoard(@PathVariable int team_num){
 		
 		
-		log.info("getListBoards =====: " + team_num);
+		log.info("팀번호" + team_num);
 		return new ResponseEntity<>(service.getListBoard(team_num), HttpStatus.OK);
 	}
 	
@@ -84,7 +84,7 @@ public class BoardController {
 																				  @PathVariable("board_num") int board_num
 																				){
 		
-		log.info("putMapping ================== " + board_num);
+		log.info("수정할 게시판 번호: " + board_num);
 		
 		board.setBoard_num(board_num);
 		int updateCount = service.updateBoard(board);
@@ -103,7 +103,7 @@ public class BoardController {
 			produces = {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> deleteBoard(@PathVariable int board_num){
 		
-		log.info("DeleteMapping ============" + board_num);
+		log.info("삭제할 게시판 번호: " + board_num);
 		service.deleteBoard(board_num);
 		
 		return new ResponseEntity<>("success", HttpStatus.OK);
