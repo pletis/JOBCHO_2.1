@@ -1,9 +1,11 @@
 package org.jobcho.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.jobcho.domain.BoardVO;
-
+import org.jobcho.domain.MembersVO;
+import org.jobcho.domain.TeamVO;
 import org.jobcho.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,11 +20,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @RestController
-@RequestMapping("boards/*")
+@RequestMapping("/team/{team_num}/board")
 @Log4j
+@AllArgsConstructor
 public class BoardController {
 	
 	
@@ -35,12 +39,19 @@ public class BoardController {
 	 * 메인화면에서 생성버튼 클릭 시
 	 * team_num, member_num 필요
 	 */
-	@PostMapping("/insertboard")
-	public ResponseEntity<BoardVO> insertBoard(@RequestBody BoardVO vo) {
+	@PostMapping(value = "/new",
+						consumes = "application/json",
+						produces = {MediaType.TEXT_PLAIN_VALUE})
+	public ResponseEntity<BoardVO> insertBoard(@RequestBody BoardVO board,
+																				@PathVariable("team_num") int team_num
+																				) {
 		
-
-		log.info("insertBoard ================== " + vo);
-		int insertCount = service.insert(vo);
+//		board.setMember_num(member_num);
+		board.setTeam_num(team_num);
+		
+		log.info("게시판 생성: " + board + "팀번호: " + team_num);
+		
+		int insertCount = service.insertBoard(board); //DB 저장
 		
 		return insertCount == 1
 				? new ResponseEntity<>(HttpStatus.OK)
@@ -53,12 +64,13 @@ public class BoardController {
 	 * 게시판 리스트 조회(PostMan 확인O)
 	 * 메인 화면에서 항상 호출
 	 */
-	@GetMapping(value = "/getlistboard",
+	@GetMapping(value = "",
 			produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<List<BoardVO>> getListBoards(){
+	public ResponseEntity<List<BoardVO>> getListBoard(@PathVariable int team_num){
 		
-		log.info("getListBoards ================== ");
-		return new ResponseEntity<>(service.getList(), HttpStatus.OK);
+		
+		log.info("getListBoards =====: " + team_num);
+		return new ResponseEntity<>(service.getListBoard(team_num), HttpStatus.OK);
 	}
 	
 	
@@ -68,13 +80,14 @@ public class BoardController {
 	 * team_num, member_num 필요
 	 */
 	@PutMapping(value = "/{board_num}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<BoardVO> updateBoard(@PathVariable("board_num") int board_num,
-																					@RequestBody BoardVO board){
+	public ResponseEntity<BoardVO> updateBoard(@RequestBody BoardVO board,
+																				  @PathVariable("board_num") int board_num
+																				){
 		
 		log.info("putMapping ================== " + board_num);
 		
 		board.setBoard_num(board_num);
-		int updateCount = service.update(board);
+		int updateCount = service.updateBoard(board);
 		
 		return  updateCount == 1
 				? new ResponseEntity<>(HttpStatus.OK)
@@ -83,15 +96,15 @@ public class BoardController {
 	
 	
 	/*
-	 * 게시판 삭제(PostMan 확인O)
+	 * 게시판 삭제(PostMan 확인O, isLive 변경)
 	 * team_num, member_num 필요
 	 */
-	@DeleteMapping(value = "/board/{board_num}",
+	@DeleteMapping(value = "/{board_num}",
 			produces = {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> deleteBoard(@PathVariable int board_num){
 		
 		log.info("DeleteMapping ============" + board_num);
-		service.delete(board_num);
+		service.deleteBoard(board_num);
 		
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}

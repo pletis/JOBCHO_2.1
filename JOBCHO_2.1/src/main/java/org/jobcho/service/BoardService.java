@@ -7,12 +7,12 @@ import org.jobcho.domain.BoardVO;
 
 public interface BoardService {
 	
-	public int insert(BoardVO board);
+	public int insertBoard(BoardVO board);
 	
-	public List<BoardVO> getList();
+	public List<BoardVO> getListBoard(int team_num);
 	
-	public int update(BoardVO board);
+	public int updateBoard(BoardVO board);
 	
-	public void delete(int board_num);
+	public void deleteBoard(int board_num);
 
 }
