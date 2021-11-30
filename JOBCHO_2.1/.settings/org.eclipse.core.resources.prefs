@@ -1,2 +1,7 @@
 eclipse.preferences.version=1
+encoding//src/main/java/org/jobcho/controller/BoardController.java=UTF-8
+encoding//src/main/java/org/jobcho/controller/CalendarController.java=UTF-8
+encoding//src/main/java/org/jobcho/controller/ReplyController.java=UTF-8
+encoding//src/main/java/org/jobcho/domain/BoardVO.java=UTF-8
 encoding//src/main/java/org/jobcho/service/PostService.java=UTF-8
+encoding//src/main/webapp/WEB-INF/views/calendar/calendar.jsp=UTF-8

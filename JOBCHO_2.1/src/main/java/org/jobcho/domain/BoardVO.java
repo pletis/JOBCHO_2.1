@@ -16,9 +16,9 @@ public class BoardVO implements Serializable {
 	private String board_info;
 	private int member_num;
 	private int team_num;
-	private int isLive; // delete 여부
+	private int isLive; // delete �뿬遺�
 	private Date board_date;
 	
-	private MembersVO member;
+	private MemberVO member;
 	private TeamVO team;
 }

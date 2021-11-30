@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.jobcho.domain.BoardVO;
-import org.jobcho.domain.MembersVO;
+
 import org.jobcho.domain.TeamVO;
 import org.jobcho.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +34,9 @@ public class BoardController {
 		
 
 	/*
-	 * 게시판 생성(PostMan 확인O)
-	 * 메인화면에서 생성버튼 클릭 시
-	 * team_num, member_num 필요
+	 * 寃뚯떆�뙋 �깮�꽦(PostMan �솗�씤O)
+	 * 硫붿씤�솕硫댁뿉�꽌 �깮�꽦踰꾪듉 �겢由� �떆
+	 * team_num, member_num �븘�슂
 	 */
 	@PostMapping(value = "/new",
 						consumes = "application/json",
@@ -47,8 +47,8 @@ public class BoardController {
 //		board.setMember_num(member_num);
 		board.setTeam_num(team_num);
 		
-		log.info("게시판 생성: " + board);
-		log.info("팀번호: " + team_num);
+		log.info("寃뚯떆�뙋 �깮�꽦: " + board);
+		log.info("��踰덊샇: " + team_num);
 		
 		int insertCount = service.insertBoard(board);
 		
@@ -60,31 +60,31 @@ public class BoardController {
 	
 	
 	/*
-	 * 게시판 리스트 조회(PostMan 확인O)
-	 * 메인 화면에서 항상 호출
-	 * team_num 필요 
+	 * 寃뚯떆�뙋 由ъ뒪�듃 議고쉶(PostMan �솗�씤O)
+	 * 硫붿씤 �솕硫댁뿉�꽌 �빆�긽 �샇異�
+	 * team_num �븘�슂 
 	 */
 	@GetMapping(value = "",
 			produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<List<BoardVO>> getListBoard(@PathVariable int team_num){
 		
 		
-		log.info("팀번호" + team_num);
+		log.info("��踰덊샇" + team_num);
 		return new ResponseEntity<>(service.getListBoard(team_num), HttpStatus.OK);
 	}
 	
 	
 	
 	/*
-	 * 게시판 수정(PostMan 확인O)
-	 * team_num, member_num 필요
+	 * 寃뚯떆�뙋 �닔�젙(PostMan �솗�씤O)
+	 * team_num, member_num �븘�슂
 	 */
 	@PutMapping(value = "/{board_num}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<BoardVO> updateBoard(@RequestBody BoardVO board,
 																				  @PathVariable("board_num") int board_num
 																				){
 		
-		log.info("수정할 게시판 번호: " + board_num);
+		log.info("�닔�젙�븷 寃뚯떆�뙋 踰덊샇: " + board_num);
 		
 		board.setBoard_num(board_num);
 		int updateCount = service.updateBoard(board);
@@ -96,14 +96,14 @@ public class BoardController {
 	
 	
 	/*
-	 * 게시판 삭제(PostMan 확인O, isLive 변경)
-	 * team_num, member_num 필요
+	 * 寃뚯떆�뙋 �궘�젣(PostMan �솗�씤O, isLive 蹂�寃�)
+	 * team_num, member_num �븘�슂
 	 */
 	@DeleteMapping(value = "/{board_num}",
 			produces = {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> deleteBoard(@PathVariable int board_num){
 		
-		log.info("삭제할 게시판 번호: " + board_num);
+		log.info("�궘�젣�븷 寃뚯떆�뙋 踰덊샇: " + board_num);
 		service.deleteBoard(board_num);
 		
 		return new ResponseEntity<>("success", HttpStatus.OK);

@@ -3,8 +3,10 @@ package org.jobcho.controller;
 import java.util.List;
 
 import org.jobcho.domain.BoardVO;
+import org.jobcho.domain.CalendarVO;
 import org.jobcho.domain.MemberVO;
 import org.jobcho.domain.ReplyVO;
+import org.jobcho.service.CalendarService;
 import org.jobcho.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,30 +25,30 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.log4j.Log4j;
 
 @RestController
-@RequestMapping("/team/{team_num}/board/{board_num}/post/{post_num}/reply")
+@RequestMapping("/team/{team_num}/calendar")
 @Log4j
-public class ReplyController {
+public class CalendarController {
 	@Autowired
-	private ReplyService service;
+	private CalendarService service;
 	
 	// /team/{team_num}/board/{board_num}/post/{post_num}/reply/new
-	//�룷�뒪�듃留� o
+	//
 	@RequestMapping(value="/new", method = {RequestMethod.GET, RequestMethod.POST})
 	
-	public ResponseEntity<ReplyVO> insertReply(@RequestBody ReplyVO rvo,
-																				@PathVariable("post_num") int post_num
+	public ResponseEntity<CalendarVO> insertReply(@RequestBody CalendarVO calendar
+																				//@PathVariable("member_num") int member_num
 																				){
 		
 		
-		rvo.setPost_num(post_num);
-		log.info("insertReply ==================" + rvo);
-		int r_insertCount = service.insertReply(rvo);
+		//calendar.setMember_num(member_num);
+		log.info("insertReply ==================" + calendar);
+		int c_insertCount = service.insertCalendar(calendar);
 		
-		return r_insertCount == 1
+		return c_insertCount == 1
 				? new ResponseEntity<>(HttpStatus.OK)
 				:  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
+	/*
 	//�룷�뒪�듃留� o 
 	@GetMapping(value = "",
 			produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
@@ -80,7 +82,7 @@ public class ReplyController {
 		
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
-	
+	*/
 	
 	
 	
