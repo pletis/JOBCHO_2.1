@@ -23,7 +23,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	//게시판 등록
 	@Override
-	public int insert(BoardVO board) {
+	public int insertBoard(BoardVO board) {
 		
 		log.info("서비스 게시판 등록");
 		
@@ -33,15 +33,15 @@ public class BoardServiceImpl implements BoardService {
 	
 	//게시판 목록
 	@Override
-	public List<BoardVO> getList() {
+	public List<BoardVO> getListBoard(int team_num) {
 		log.info("서비스 목록 테스트!!");
-		return mapper.listBoard();
+		return mapper.getListBoard(team_num);
 	}
 
 	
 	//게시판 수정
 	@Override
-	public int update(BoardVO board) {
+	public int updateBoard(BoardVO board) {
 		log.info("서비스 수정 테스트!!" + board);
 		
 		return mapper.updateBoard(board);
@@ -50,7 +50,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	//게시판 삭제
 	@Override
-	public void delete(int board_num) {
+	public void deleteBoard(int board_num) {
 		
 		log.info("서비스 삭제 테스트!!"+ board_num );
 		mapper.deleteBoard(board_num);

@@ -1,5 +1,6 @@
 package org.jobcho.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -9,14 +10,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReplyVO {
-	private int reply_num; // ´ñ±Û¹øÈ£
-	private String reply_contents; //´ñ±Û³»¿ë
-	private int member_num; //¸â¹ö¹øÈ£
-	private int post_num; //°Ô½Ã±Û¹øÈ£
+public class ReplyVO  implements Serializable{
+	private int reply_num; // ï¿½ï¿½Û¹ï¿½È£
+	private String reply_contents; //ï¿½ï¿½Û³ï¿½ï¿½ï¿½
+	private int member_num; //ï¿½ï¿½ï¿½ï¿½ï¿½È£
+	private int post_num; //ï¿½Ô½Ã±Û¹ï¿½È£
 	private int isLive; //??
-	private Date reply_date; //´ñ±Û ÀÛ¼º½Ã°£
+	private Date reply_date; //ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½Ã°ï¿½
 	
-	private MembersVO member; //´ñ±Û ÀÛ¼ºÀÚ
-	private PostVO post; //°Ô½Ã±Û
+	private MembersVO member; //ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½
+	private PostVO post; //ï¿½Ô½Ã±ï¿½
 }
