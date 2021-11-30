@@ -5,35 +5,37 @@ import java.util.List;
 import org.jobcho.domain.TeamVO;
 import org.jobcho.mapper.TeamMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TeamServiceImpl implements TeamService {
 
 	@Autowired
 	private TeamMapper mapper;
 	
 	
-	//ÆÀ »ý¼º
+	//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public int insertTeam(TeamVO team) {
 		
 		return mapper.insertTeam(team);
 	}
 
-	//ÆÀ ¸®½ºÆ® Á¶È¸
+	//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È¸
 	@Override
 	public List<TeamVO> getListTeam(int user_num) {
 		
 		return mapper.getListTeam(user_num);
 	}
 
-	//ÆÀ ÇÏ³ª Á¶È¸
+	//ï¿½ï¿½ ï¿½Ï³ï¿½ ï¿½ï¿½È¸
 	@Override
 	public TeamVO getTeam(int team_num) {
 		
 		return mapper.getTeam(team_num);
 	}
 
-	//ÆÀ ¾÷µ¥ÀÌÆ®
+	//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 	@Override
 	public int updateTeam(TeamVO team) {
 		
