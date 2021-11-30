@@ -9,14 +9,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TodoListVO {
-	private int todo_num;
-	private String todo_title;
-	private String todo_description;
-	private Date todo_startDate;
-	private Date todo_endDate;
+public class ChatMemberVO {
+	private int chatMember_num;
+	private int chatRoom_num;
 	private int member_num;
-	private int isLive;
+	private Date chatMember_date;
+	private int islive;
 	
 	private MemberVO member;
+	private ChatRoomVO chatRoom;
 }
