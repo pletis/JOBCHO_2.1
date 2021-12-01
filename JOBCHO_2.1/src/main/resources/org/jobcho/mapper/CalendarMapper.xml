@@ -11,7 +11,8 @@
 	<!-- 댓글 목록 -->
 	<select id="getListCalendar" resultType="org.jobcho.domain.CalendarVO">
 		<![CDATA[ 
-			select * from reply
+			select * from calendar
+			where islive = 1
 		]]>
 	</select>
 	
@@ -19,17 +20,17 @@
 	<!-- 댓글 생성 -->
 	<insert id="insertCalendar" parameterType="org.jobcho.domain.CalendarVO"> 
 		<![CDATA[ 
-			insert into calendar(cal_num, cal_title, member_num, cal_contents, starts, ends, allday, islive) 
+			insert into calendar(cal_num, cal_title,cal_contents, starts, ends, allday, islive) 
 				values(
-					Reply_num.nextval, #{cal_title}, #{member_num}, #{cal_contents}, default, default, 1, 1
+					Reply_num.nextval, #{cal_title}, #{cal_contents}, default, default, 1, 1
 				)
 		]]>
 	</insert>
 	
 	<!-- 댓글 수정 -->
 	<update id="updateCalendar" parameterType="org.jobcho.domain.CalendarVO">
-		update reply set reply_contents= #{reply_contents}
-		where reply_num= #{reply_num}
+		update calendar set cal_contents= #{cal_contents}
+		where cal_num= #{cal_num}
 	</update>
 	
 	<!-- 댓글 삭제 -->
@@ -39,8 +40,8 @@
 	</select> 
 	
 	<!-- 댓글 조회 -->
-	<select id="readReply" resultType="org.jobcho.domain.CalendarVO">
-		select * from reply where reply_num = #{reply_num}
+	<select id="readCalendar" resultType="org.jobcho.domain.CalendarVO">
+		select * from calendar where cal_num = #{cal_num}
 		</select>
 	
 	
