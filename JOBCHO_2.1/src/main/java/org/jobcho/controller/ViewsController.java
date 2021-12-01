@@ -44,5 +44,8 @@ public class ViewsController {
 	public void updateForm(){
 	}
 	
-	
+	//이메일로 비밀번호 찾기 
+	@GetMapping("/users/emailFindPw")
+	public void emailFindPw(){
+	}
 }

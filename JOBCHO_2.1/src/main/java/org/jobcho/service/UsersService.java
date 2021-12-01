@@ -1,5 +1,7 @@
 package org.jobcho.service;
 
+import java.util.Map;
+
 import org.jobcho.domain.UsersVO;
 
 public interface UsersService {
@@ -11,4 +13,5 @@ public interface UsersService {
 	public int updateUsers(UsersVO users);
 	public UsersVO selectUsers(int user_num);
 	public int idCheck(UsersVO users);
+	public UsersVO emailFindPw(Map<String, String> map);
 }
