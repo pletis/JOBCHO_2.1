@@ -18,10 +18,7 @@
 	<!-- 팀 리스트 조회 -->
 	<select id="getListTeam" parameterType="int" resultType="org.jobcho.domain.TeamVO">
 		<![CDATA[
-			select t.* from team t, member m
-			where t.team_num = m.team_num
-			and m.user_num = #{user_num}
-			and t.islive = 1
+			select * from team where user_num = #{user_num}
 		]]>
 	</select>
 	

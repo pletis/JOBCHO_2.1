@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.log4j.Log4j;
 
 @RestController
-@RequestMapping("/team/*")
+@RequestMapping("/team")
 @Log4j
 public class TeamController {
 
@@ -28,7 +28,7 @@ public class TeamController {
 	private TeamService service;
 	
 	//ÆÀ »ý¼º
-	@PostMapping("/{user_num}")
+	@PostMapping("/new")
 	public ResponseEntity<TeamVO> insertTeam(@RequestBody TeamVO teamVO, @PathVariable("user_num") int user_num){
 		
 		TeamVO team = new TeamVO();
@@ -46,12 +46,20 @@ public class TeamController {
 	}
 	
 	//ÆÀ ¸®½ºÆ® Á¶È¸
-	@GetMapping(value = "/{user_num}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+	@GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<List<TeamVO>> getListTeam(@PathVariable("user_num") int user_num){
 		log.info("ÆÀ ¸ñ·Ï È£Ãâ È®ÀÎ");
 		return new ResponseEntity<>(service.getListTeam(user_num), HttpStatus.OK);
 	}
 	
+	//ÆÀ Á¤º¸ Á¶È¸
+	@GetMapping(value="/{team_num}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<TeamVO> getTeam(@PathVariable("team_num") int team_num){
+		log.info("ÆÀ Á¤º¸ Á¶È¸");
+		return new ResponseEntity<>(service.getTeam(team_num), HttpStatus.OK);
+	}
+	
+	//ÆÀ Á¤º¸ ¼öÁ¤
 	@PutMapping(value = "/{team_num}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<TeamVO> getTeam(@PathVariable("team_num") int team_num, @RequestBody TeamVO teamVO){
 		/*int user_num = 
