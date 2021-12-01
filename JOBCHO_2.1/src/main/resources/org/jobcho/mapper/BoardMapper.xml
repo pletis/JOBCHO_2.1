@@ -11,6 +11,7 @@
 		<![CDATA[ 
 			select board_name from board
 			where team_num = #{team_num}
+			and islive = 1
 		]]>
 	</select>
 	

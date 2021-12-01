@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.jobcho.domain.Criteria;
 import org.jobcho.domain.PostVO;
 
@@ -14,6 +15,8 @@ public interface PostMapper {
 	PostVO getPost(int post_num); //게시글 상세조회
 	int updatePost(PostVO post); //게시글 수정
 	void deletePost(int post_num); //게시글 삭제
+	void updateReplyCnt(@Param("post_num") int post_num, 
+									   @Param("amount") int amount);  //댓글 수 업데이트
 	
 	int getTotalCount(Criteria cri); //전체 게시글 수
 	

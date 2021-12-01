@@ -21,7 +21,7 @@
 				select *
 				from(
 					select /*+INDEX_DESC(SYS_C007525) */
-						 rownum rn, post_num, post_title, post_contents, board_num, member_num, post_date
+						 rownum rn, post_num, post_title, post_contents, board_num, member_num, post_date, replycnt
 					from post
 					where 
 		]]>	
@@ -32,6 +32,7 @@
 				)
 				where rn > (#{cri.pageNum} -1) * #{cri.amount}
 				and board_num = #{board_num}
+				and islive = 1
 		]]>	
 	</select>
 	
@@ -41,6 +42,7 @@
 		<![CDATA[ 
 				select * from post
 				where post_num = #{post_num}
+				and islive = 1
 			]]>
 	</select>
 	
@@ -63,6 +65,13 @@
 	<select id="getTotalCount" resultType="int">
 		select count(*) from post where post_num > 0
 	</select>
+	
+	
+	<!-- 댓글 수 업데이트 -->
+	<update id="updateReplyCnt">
+		update post set replycnt = replycnt + #{amount}
+		where post_num = #{post_num}
+	</update>
 	
 	
 	<!-- 검색조건 -->

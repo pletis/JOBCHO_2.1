@@ -17,6 +17,7 @@ public class PostVO {
 	private int member_num;
 	private Date post_date;
 	private int isLive;
+	private int replyCnt; //댓글 수 컬럼추가
 	
 	private BoardVO board;
 	private MemberVO member;
