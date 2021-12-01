@@ -3,7 +3,7 @@ package org.jobcho.controller;
 import java.util.List;
 
 import org.jobcho.domain.BoardVO;
-import org.jobcho.domain.MembersVO;
+import org.jobcho.domain.MemberVO;
 import org.jobcho.domain.ReplyVO;
 import org.jobcho.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
