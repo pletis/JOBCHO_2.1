@@ -26,7 +26,6 @@ public class ChatSocketController {
 	private static Map<Integer,List<Session>> sessionMap = Collections.synchronizedMap(new HashMap());
 	// 메시지에서 유저 명을 취득하기 위한 정규식 표현
 	private static Pattern pattern = Pattern.compile("^\\{\\{.*?\\}\\}");
-	private ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 	// WebSocket으로 브라우저가 접속하면 요청되는 함수
 	@OnOpen
 	public void handleOpen(Session userSession, @PathParam("chatroom_num") int chatroom_num) {
@@ -38,12 +37,20 @@ public class ChatSocketController {
 		
 		// 콘솔에 접속 로그를 출력한다.
 		System.out.println("client is now connected...");
+		
+		try {
+			// 리스트에 있는 모든 세션(메시지 보낸 유저 제외)에 메시지를 보낸다. (형식: 유저명 => 메시지)
+			userSession.getBasicRemote().sendText("연결");
+		} catch (IOException e) {
+			// 에러가 발생하면 콘솔에 표시한다.
+			e.printStackTrace();
+		}
 	}
-	
 	
 	// WebSocket으로 메시지가 오면 요청되는 함수
 	@OnMessage
-	public void handleMessage(String message, Session userSession, @PathParam("chatroom_num") int chatroom_num) throws IOException {
+	public void handleMessage(String message, Session userSession, 
+			@PathParam("chatroom_num") int chatroom_num) throws IOException {
 		// 메시지 내용을 콘솔에 출력한다.
 		System.out.println(message);
 		// 초기 유저 명

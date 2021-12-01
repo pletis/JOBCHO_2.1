@@ -41,4 +41,9 @@ public class HomeController {
 	public void members(){
 		
 	}
+	
+	@GetMapping("/chat/main")
+	public String team(){
+		return "chat";
+	}
 }
