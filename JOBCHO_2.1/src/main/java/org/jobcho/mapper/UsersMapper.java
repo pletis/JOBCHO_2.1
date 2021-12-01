@@ -1,5 +1,7 @@
 package org.jobcho.mapper;
 
+import java.util.Map;
+
 import org.jobcho.domain.UsersVO;
 
 public interface UsersMapper {
@@ -12,4 +14,5 @@ public interface UsersMapper {
 	public UsersVO selectUsers(int user_num);
 	public UsersVO read(String user_email);
 	public int idCheck(UsersVO users);
+	public UsersVO emailFindPw(Map<String, String> map);
 }

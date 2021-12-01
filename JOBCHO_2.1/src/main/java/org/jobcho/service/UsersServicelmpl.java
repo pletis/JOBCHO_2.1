@@ -2,6 +2,10 @@ package org.jobcho.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.jobcho.domain.UsersVO;
 import org.jobcho.mapper.UsersMapper;
 
@@ -66,6 +70,19 @@ public class UsersServicelmpl implements UsersService {
 	public int idCheck(UsersVO users) {
 		int re = mapper.idCheck(users);
 		return re;
+	}
+
+	//비밀번호 찾기 이메일 
+/*	@Override
+	public UsersVO emailFindPw(String users_name, String users_email) {
+		UsersVO users = mapper.emailFindPw(users_name, users_email);
+		return users;
+	}*/
+
+	@Override
+	public UsersVO emailFindPw(Map<String, String> map) {
+		UsersVO users = mapper.emailFindPw(map);
+		return users;
 	}
 
 	

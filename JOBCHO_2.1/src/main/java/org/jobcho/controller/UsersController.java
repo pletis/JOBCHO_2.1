@@ -1,7 +1,9 @@
 package org.jobcho.controller;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,6 +32,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import spring.board.email.Email;
+import spring.board.email.EmailSender;
 
 @RestController
 @AllArgsConstructor
@@ -40,11 +44,40 @@ public class UsersController {
 	@Autowired
 	private UsersService service;
 	
-//	@Autowired
-//	AuthenticationManager authenticationManager;
+	@Autowired
+	private Email email;
+	
+	@Autowired
+	private EmailSender emailSender;
+	
+	//비밀번호 찾기 실제이메일로 
+	@PostMapping("/emailFindPw")
+	public ResponseEntity<String> emailFindPw(@RequestBody UsersVO users) throws Exception{
+		String user_name = users.getUser_name();
+		String user_email = users.getUser_email();
+		
+		//hashMap 사용 
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("user_name", user_name);
+		map.put("user_email", user_email);
+		//user 객체 가져오기 
+		UsersVO users1 = service.emailFindPw(map);
+		System.out.println(users1);
+		//비밀번호
+		String user_pw = users1.getUser_pw();
+		System.out.println(user_pw);
+		if(user_pw != null){
+			email.setContent("비밀번호는 " + user_pw + "입니다");
+			email.setReceiver(user_email);
+			email.setSubject(user_name +"님 비밀번호 찾기 메일입니다.");
+			emailSender.sendEmail(email);
+		}
+		
+		return new ResponseEntity<String>(user_pw, HttpStatus.OK);
+	}
+	
 	
 	// 회원가입
-	
 	@PostMapping("/register")
 	public ResponseEntity<Integer> register(@RequestBody UsersVO users) {
 		System.out.println(users);
@@ -106,7 +139,10 @@ public class UsersController {
 	//회원수정 -> 비동기 
 	@PostMapping("/update")
 	public ResponseEntity<Integer> update(@RequestBody UsersVO users, 
-		  HttpSession session){
+		  HttpSession session, Principal principal){
+		
+		
+		
 		
 		int re = service.updateUsers(users);
 		System.out.println("수정완료여부 : " + re);
@@ -114,12 +150,12 @@ public class UsersController {
 //		Authentication authentication = 
 //				authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(users.getUser_name(), users.getUser_pw()));
 //		SecurityContextHolder.getContext().setAuthentication(authentication);
-//		
+		
 		//principal가져오기 
 		/*String user_email = principal.getName();
 		System.out.println(user_email);
-		UsersVO users2 = service.findUsers(user_email);*/
-
+		UsersVO users2 = service.findUsers(user_email);
+		System.out.println(users2.getUser_num());*/
 		
 		// 비밀번호 암호화 (인코더)
 		// BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
