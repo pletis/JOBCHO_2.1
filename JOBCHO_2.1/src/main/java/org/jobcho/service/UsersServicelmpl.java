@@ -73,12 +73,6 @@ public class UsersServicelmpl implements UsersService {
 	}
 
 	//비밀번호 찾기 이메일 
-/*	@Override
-	public UsersVO emailFindPw(String users_name, String users_email) {
-		UsersVO users = mapper.emailFindPw(users_name, users_email);
-		return users;
-	}*/
-
 	@Override
 	public UsersVO emailFindPw(Map<String, String> map) {
 		UsersVO users = mapper.emailFindPw(map);
