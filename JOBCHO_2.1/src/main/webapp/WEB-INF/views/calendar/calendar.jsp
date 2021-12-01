@@ -60,8 +60,6 @@
                 start: arg.start,
                 end: arg.end,
                 allDay: arg.allDay,
-                backgroundColor: "yellow",
-                textColor: "blue",
               });
             }
             calendar.unselect();
@@ -76,7 +74,17 @@
           },
           editable: true,
           dayMaxEvents: true, // allow "more" link when too many events
-          //events: //================ ajax데이터 불러올 부분 =====================//
+        //================ ajax데이터 불러올 부분 =====================//
+          events: function(info, successCallback, failureCallback){ // ajax 처리로 데이터를 로딩 시킨다. 
+        	  $.ajax({ 
+        		  		type:"get", 
+        		  		url:"${path}/calendar.do?method=data", 
+        				  dataType:"json" 
+        		}); 
+        	  }
+        	  }
+          }
+
         });
         calendar.render();
       });

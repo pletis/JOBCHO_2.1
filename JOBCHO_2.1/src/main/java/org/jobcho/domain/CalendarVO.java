@@ -11,8 +11,8 @@ public class CalendarVO implements Serializable{
 	private String cal_title;
 	private int member_num;
 	private String cal_contents;
-	private Date starts;
-	private Date ends;
+	private String starts;
+	private String ends;
 	private boolean allday;
 	private int isLive;
 	

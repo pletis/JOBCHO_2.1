@@ -6,12 +6,21 @@
 
 <mapper namespace="org.jobcho.mapper.CalendarMapper">
 	<cache />
+	<resultMap type="Calendar" id="calMap">
+		<result property="start" column="starts"/>
+		<result property="end" column="ends"></result>
+	</resultMap>
 	
 	
 	<!-- 댓글 목록 -->
-	<select id="getListCalendar" resultType="org.jobcho.domain.CalendarVO">
+	<select id="getListCalendar" resultMap="calMap" resultType="org.jobcho.domain.CalendarVO">
 		<![CDATA[ 
-			select * from calendar
+			select cal_num, cal_title,
+			cal_writer, cal_contents,
+			TO_char(starts, 'YYYY-MM-DD"T"HH24:MI:SS') starts,
+			allday,
+			islive
+			from calendar
 			where islive = 1
 		]]>
 	</select>
