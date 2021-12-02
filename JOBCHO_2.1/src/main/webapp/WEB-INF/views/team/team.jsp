@@ -70,7 +70,7 @@
         </div>
 
         <div class="job-container-new">
-            <div><a href="#">팀생성하기</a></div>
+            <div><a href="#" id="createNewTeam">팀생성하기</a></div>
         </div>
 	</div>
 <!--왼쪽 사이드바 시작-->
@@ -147,7 +147,28 @@
 						<input id="updateTeamNum" type="hidden">
 						<input id="updateTeamName" type="text" class="form-control"> 
 						<input id="updateTeamInfo" type="text" class="form-control">
-						<input id="updateTeamAction" type="button" class="btn btn-success" value="수정">
+						<input id="updateTeamAction" type="button" class="btn btn-success" onclick="insertTeam();" value="수정">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+	<!-- 팀생성 모달 -->
+	<div class="modal" id="insertTeamInfoModal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						팀 정보 수정
+						<button class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						
+						<input id="insertTeamName" type="text" class="form-control"> 
+						<input id="insertTeamInfo" type="text" class="form-control">
+						<input id="insertUser_num" type="text" class="form-control" value="<sec:authentication property="principal.users.user_num"/>">
+						<input id="insertTeamAction" type="button" class="btn btn-success" value="팀생성">
 						
 					</div>
 				</div>
@@ -287,7 +308,11 @@ function checkValue(){
 		}
 	})
 	
-	
+	//users 정보 추가 모달 호출 
+	$(document).on("click","#createNewTeam" ,function(e){
+		$("#insertTeamInfoModal").modal("show");
+		updataMemberNum = this.value
+	});
 	
 	
 }//end checkValue
