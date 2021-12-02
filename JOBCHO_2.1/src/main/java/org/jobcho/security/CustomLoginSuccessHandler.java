@@ -37,13 +37,13 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		//권한이 member일 경우 -> 이번프로젝트는 권한을 한가지로 할 예정 ㅇ
 		if (roleNames.contains("member")) {
 
-			response.sendRedirect("/users/main");
+			response.sendRedirect("/team/choose");
 			return;
 		}
 
 		if (roleNames.contains("ROLE_MEMBER")) {
 		
-			response.sendRedirect("/users/main");
+			response.sendRedirect("/team/choose");
 			return;
 		}
 

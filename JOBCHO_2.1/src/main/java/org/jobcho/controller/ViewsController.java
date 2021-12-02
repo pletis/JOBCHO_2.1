@@ -48,4 +48,9 @@ public class ViewsController {
 	@GetMapping("/users/emailFindPw")
 	public void emailFindPw(){
 	}
+	
+	@GetMapping("/team/choose")
+	public String teamChoose(){
+		return "/team/team";
+	}
 }

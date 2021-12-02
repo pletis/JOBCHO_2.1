@@ -31,7 +31,7 @@
 		<!-- 비밀번호 찾기 세번째 -> 모든사용자 -->
 		<security:intercept-url pattern="/users/findPw_3" access="permitAll"/>
 		<!-- 로그인하고 나서 다음화면 -> 로그인된사람 -->
-		<security:intercept-url pattern="/users/main" access="hasRole('ROLE_MEMBER')"/>
+		<security:intercept-url pattern="/team/choose" access="hasRole('ROLE_MEMBER')"/>
 	
 	
 		<!-- 로그인 -->
@@ -64,7 +64,6 @@
 	</security:authentication-manager> -->
 
 	<!-- db연결 -->
-	
  	<security:authentication-manager>
 		<security:authentication-provider user-service-ref="customUserDetailsService">
 		
