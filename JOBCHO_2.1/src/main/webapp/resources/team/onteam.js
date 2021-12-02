@@ -2,7 +2,7 @@
  * 
  */
 $(document).ready(function(){
-	var user_num=1;
+	var user_num=$("#authUserNum").val();
 	function showTeamList(result){
 		str="";
 		result.forEach(function(item){
@@ -56,20 +56,28 @@ $(document).ready(function(){
             		}),
             dataType: 'json',
             success:function(result){
-            	alert("수정완료")
+            	console.log(result);
             }
         });
+		$("#updataTeamInfoModal").modal("hide");
+		alert("수정완료");
+		getTeamList();
 	}
 	
-	$.ajax({
-        url:'/team/'+user_num,
-        type:'Get',
-        dataType:'json',
-        success:function(result){
-        	console.log(result);
-        	showTeamList(result);
-        }
-    });//$.ajax
+	function getTeamList(){
+		$.ajax({
+	        url:'/team/'+user_num,
+	        type:'Get',
+	        dataType:'json',
+	        success:function(result){
+	        	console.log(result);
+	        	showTeamList(result);
+	        }
+	    });//$.ajax
+	}
+	
+	//초기화면 출력
+	getTeamList()
 	
 	$(document).on("click","#teamAdminModal", function(){
 		$("#updataTeamInfoModal").modal("show");
