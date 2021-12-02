@@ -102,6 +102,7 @@ public class UsersController {
 		UsersVO users = (UsersVO) session.getAttribute("users");
 		users.setUser_pw(passwordEncoder.encode(user_pw));
 		int re = service.updatePw(users);
+		System.out.println(re);
 		// 세션 초기화
 		session.invalidate();
 
@@ -111,10 +112,6 @@ public class UsersController {
 	// 회원수정 -> 비동기
 	@PostMapping("/update")
 	public ResponseEntity<Integer> update(@RequestBody UsersVO users, HttpSession session, Principal principal) {
-
-		int re = service.updateUsers(users);
-		System.out.println("수정완료여부 : " + re);
-
 		// principal가져오기
 		/*
 		 * String user_email = principal.getName();
@@ -124,9 +121,11 @@ public class UsersController {
 		 */
 
 		// 비밀번호 암호화 (인코더)
-		// BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		// users.setUser_pw(passwordEncoder.encode(users.getUser_pw()));
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		users.setUser_pw(passwordEncoder.encode(users.getUser_pw()));
 
+		int re = service.updateUsers(users);
+		System.out.println("수정완료여부 : " + re);
 		System.out.println(users);
 
 		return new ResponseEntity<Integer>(re, HttpStatus.OK);
@@ -151,6 +150,7 @@ public class UsersController {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("user_name", user_name);
 		map.put("user_email", user_email);
+
 		// user 객체 가져오기
 		UsersVO users1 = service.emailFindPw(map);
 		System.out.println(users1);
@@ -159,22 +159,25 @@ public class UsersController {
 		System.out.println(user_pw);
 		if (user_pw != null) {
 			UUID uid = UUID.randomUUID();
-			//임시비밀번호 생성 
+			// 임시비밀번호 생성
 			String pwd = uid.toString().substring(0, 8);
 			System.out.println(pwd);
-			
+
 			email.setContent("당신의 임시 비밀번호는 " + pwd + "입니다");
 			email.setReceiver(user_email);
 			email.setSubject(user_name + "님 비밀번호 찾기 메일입니다.");
 			emailSender.sendEmail(email);
-			
+
 			// 비밀번호 암호화 (인코더)
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			//임시로 만든 비밀번호를 db에 적용 
-			users.setUser_pw(passwordEncoder.encode(pwd));
-			int re = service.updatePw(users);
-			System.out.println("비밀번호 변경 성공여부 : " +  re);
-			
+			// 임시로 만든 비밀번호를 db에 적용
+			// 암호화된 비밀번호
+			String encodePw = passwordEncoder.encode(pwd);
+			System.out.println("암호화된 비밀번호 : " + encodePw);
+			users1.setUser_pw(encodePw);
+			int re = service.updatePw(users1);
+			System.out.println("비밀번호 변경 성공여부 : " + re);
+
 		}
 
 		return new ResponseEntity<String>(user_pw, HttpStatus.OK);
