@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -43,40 +44,13 @@ public class UsersController {
 
 	@Autowired
 	private UsersService service;
-	
+
 	@Autowired
 	private Email email;
-	
+
 	@Autowired
 	private EmailSender emailSender;
-	
-	//비밀번호 찾기 실제이메일로 
-	@PostMapping("/emailFindPw")
-	public ResponseEntity<String> emailFindPw(@RequestBody UsersVO users) throws Exception{
-		String user_name = users.getUser_name();
-		String user_email = users.getUser_email();
-		
-		//hashMap 사용 
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("user_name", user_name);
-		map.put("user_email", user_email);
-		//user 객체 가져오기 
-		UsersVO users1 = service.emailFindPw(map);
-		System.out.println(users1);
-		//비밀번호
-		String user_pw = users1.getUser_pw();
-		System.out.println(user_pw);
-		if(user_pw != null){
-			email.setContent("비밀번호는 " + user_pw + "입니다");
-			email.setReceiver(user_email);
-			email.setSubject(user_name +"님 비밀번호 찾기 메일입니다.");
-			emailSender.sendEmail(email);
-		}
-		
-		return new ResponseEntity<String>(user_pw, HttpStatus.OK);
-	}
-	
-	
+
 	// 회원가입
 	@PostMapping("/register")
 	public ResponseEntity<Integer> register(@RequestBody UsersVO users) {
@@ -103,10 +77,10 @@ public class UsersController {
 		return new ResponseEntity<>(users, HttpStatus.OK);
 	}
 
-	
 	// 비밀번호 찾기 두번째 비동기
 	@PostMapping("/findPw_2")
-	public ResponseEntity<Integer> findPw_2(HttpServletRequest request, @RequestParam("user_pwHint") String user_pwHint) {
+	public ResponseEntity<Integer> findPw_2(HttpServletRequest request,
+			@RequestParam("user_pwHint") String user_pwHint) {
 		HttpSession session = request.getSession();
 		UsersVO users = (UsersVO) session.getAttribute("users");
 
@@ -117,8 +91,7 @@ public class UsersController {
 		}
 		return new ResponseEntity<Integer>(re, HttpStatus.OK);
 	}
-	
-	
+
 	// 비밀번호 찾기 세번째 비동기
 	@PostMapping("/findPw_3")
 	public ResponseEntity<Integer> findPw_3(HttpServletRequest request, @RequestParam("user_pw") String user_pw) {
@@ -134,47 +107,31 @@ public class UsersController {
 
 		return new ResponseEntity<Integer>(re, HttpStatus.OK);
 	}
-	
-	
-	//회원수정 -> 비동기 
+
+	// 회원수정 -> 비동기
 	@PostMapping("/update")
-	public ResponseEntity<Integer> update(@RequestBody UsersVO users, 
-		  HttpSession session, Principal principal){
-		
-		
-		
-		
+	public ResponseEntity<Integer> update(@RequestBody UsersVO users, HttpSession session, Principal principal) {
+
 		int re = service.updateUsers(users);
 		System.out.println("수정완료여부 : " + re);
-		
-//		Authentication authentication = 
-//				authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(users.getUser_name(), users.getUser_pw()));
-//		SecurityContextHolder.getContext().setAuthentication(authentication);
-		
-		//principal가져오기 
-		/*String user_email = principal.getName();
-		System.out.println(user_email);
-		UsersVO users2 = service.findUsers(user_email);
-		System.out.println(users2.getUser_num());*/
-		
+
+		// principal가져오기
+		/*
+		 * String user_email = principal.getName();
+		 * System.out.println(user_email); UsersVO users2 =
+		 * service.findUsers(user_email);
+		 * System.out.println(users2.getUser_num());
+		 */
+
 		// 비밀번호 암호화 (인코더)
 		// BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		// users.setUser_pw(passwordEncoder.encode(users.getUser_pw()));
-		
-//		Authentication authentication = new UsernamePasswordAuthenticationToken(principal, null, principal.getAuthorities());
-//		SecurityContext securityContext = SecurityContextHolder.getContext();
-//		securityContext.setAuthentication(authentication);
-//		
-//		session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
-		
+
 		System.out.println(users);
-		/*int re = service.updateUsers(users);
-		System.out.println("수정완료여부 : " + re);*/
-		
+
 		return new ResponseEntity<Integer>(re, HttpStatus.OK);
-		
 	}
-	
+
 	// 아이디 중복체크
 	@PostMapping("/idCheck")
 	public ResponseEntity<Integer> idCheck(UsersVO users) throws Exception {
@@ -183,22 +140,44 @@ public class UsersController {
 		System.out.println(re);
 		return new ResponseEntity<Integer>(re, HttpStatus.OK);
 	}
-	
-	
-	
-	
-	
+
+	// 비밀번호 찾기 실제이메일로
+	@PostMapping("/emailFindPw")
+	public ResponseEntity<String> emailFindPw(@RequestBody UsersVO users) throws Exception {
+		String user_name = users.getUser_name();
+		String user_email = users.getUser_email();
+
+		// hashMap 사용
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("user_name", user_name);
+		map.put("user_email", user_email);
+		// user 객체 가져오기
+		UsersVO users1 = service.emailFindPw(map);
+		System.out.println(users1);
+		// 비밀번호
+		String user_pw = users1.getUser_pw();
+		System.out.println(user_pw);
+		if (user_pw != null) {
+			UUID uid = UUID.randomUUID();
+			//임시비밀번호 생성 
+			String pwd = uid.toString().substring(0, 8);
+			System.out.println(pwd);
+			
+			email.setContent("당신의 임시 비밀번호는 " + pwd + "입니다");
+			email.setReceiver(user_email);
+			email.setSubject(user_name + "님 비밀번호 찾기 메일입니다.");
+			emailSender.sendEmail(email);
+			
+			// 비밀번호 암호화 (인코더)
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			//임시로 만든 비밀번호를 db에 적용 
+			users.setUser_pw(passwordEncoder.encode(pwd));
+			int re = service.updatePw(users);
+			System.out.println("비밀번호 변경 성공여부 : " +  re);
+			
+		}
+
+		return new ResponseEntity<String>(user_pw, HttpStatus.OK);
+	}
+
 }// endController
-
-
-
-
-
-
-
-
-
-
-
-
-
