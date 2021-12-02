@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="en">
+
+
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -49,155 +50,22 @@
     </header>
     <div class="job-team-body">
 		<h1>팀리스트</h1>
-		<div class="job-container">
-                <!--프로필-->
-                
-                <div class="team-profile-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                
-                <div>
-                    <p class="team-profile-name">팀이름</p>
-                    <p class="team-profile-email"> 팀 소유자 이메일</p>
-                </div>
-                <!--프로필 끝-->
-                <div class="team-btn">
-                    <button>팀관리</button>
-                    <button>팀으로 가기</button>
-                </div>
-        </div>
-        <div class="job-container">
-            <!--프로필-->
-            
-            <div class="team-profile-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-            
-            <div>
-                <p class="team-profile-name">팀이름</p>
-                <p class="team-profile-email"> 팀 소유자 이메일</p>
-            </div>
-            <!--프로필 끝-->
-            <div class="team-btn">
-                <button>팀관리</button>
-                <button>팀으로 가기</button>
-            </div>
-        </div>
-        <div class="job-container">
-            <!--프로필-->
-            
-            <div class="team-profile-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-            
-            <div>
-                <p class="team-profile-name">팀이름</p>
-                <p class="team-profile-email"> 팀 소유자 이메일</p>
-            </div>
-            <!--프로필 끝-->
-            <div class="team-btn">
-                <button>팀관리</button>
-                <button>팀으로 가기</button>
-            </div>
-        </div>
-        <div class="job-container">
-            <!--프로필-->
-            
-            <div class="team-profile-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-            
-            <div>
-                <p class="team-profile-name">팀이름</p>
-                <p class="team-profile-email"> 팀 소유자 이메일</p>
-            </div>
-            <!--프로필 끝-->
-            <div class="team-btn">
-                <button>팀관리</button>
-                <button>팀으로 가기</button>
-            </div>
-        </div>
-        <div class="job-container">
-            <!--프로필-->
-            
-            <div class="team-profile-image" style="background-image: url('/resources/team/99D279435B3D788602.jfif');"></div>
-            
-            <div>
-                <p class="team-profile-name">팀이름</p>
-                <p class="team-profile-email"> 팀 소유자 이메일</p>
-            </div>
-            <!--프로필 끝-->
-            <div class="team-btn">
-                <button>팀관리</button>
-                <button>팀으로 가기</button>
-            </div>
-        </div>
-        <div class="job-container">
-            <!--프로필-->
-            
-            <div class="team-profile-image" style="background-image: url('/resources/team/99D279435B3D788602.jfif');"></div>
-            
-            <div>
-                <p class="team-profile-name">팀이름</p>
-                <p class="team-profile-email"> 팀 소유자 이메일</p>
-            </div>
-            <!--프로필 끝-->
-            <div class="team-btn">
-                <button>팀관리</button>
-                <button>팀으로 가기</button>
-            </div>
-        </div>
-        <div class="job-container">
-            <!--프로필-->
-            
-            <div class="team-profile-image" style="background-image: url('/resources/team/99D279435B3D788602.jfif');"></div>
-            
-            <div>
-                <p class="team-profile-name">팀이름</p>
-                <p class="team-profile-email"> 팀 소유자 이메일</p>
-            </div>
-            <!--프로필 끝-->
-            <div class="team-btn">
-                <button>팀관리</button>
-                <button>팀으로 가기</button>
-            </div>
-        </div>
-        <div class="job-container">
-            <!--프로필-->
-            
-            <div class="team-profile-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-            
-            <div>
-                <p class="team-profile-name">팀이름</p>
-                <p class="team-profile-email"> 팀 소유자 이메일</p>
-            </div>
-            <!--프로필 끝-->
-            <div class="team-btn">
-                <button>팀관리</button>
-                <button>팀으로 가기</button>
-            </div>
-        </div>
-        <div class="job-container">
-            <!--프로필-->
-            
-            <div class="team-profile-image" style="background-image: url('/resources/team/99D279435B3D788602.jfif');"></div>
-            
-            <div>
-                <p class="team-profile-name">팀이름</p>
-                <p class="team-profile-email"> 팀 소유자 이메일</p>
-            </div>
-            <!--프로필 끝-->
-            <div class="team-btn">
-                <button>팀관리</button>
-                <button>팀으로 가기</button>
-            </div>
-        </div>
-        <div class="job-container">
-            <!--프로필-->
-            
-            <div class="team-profile-image" style="background-image: url('/resources/team/99D279435B3D788602.jfif');"></div>
-            
-            <div>
-                <p class="team-profile-name">팀이름</p>
-                <p class="team-profile-email"> 팀 소유자 이메일</p>
-            </div>
-            <!--프로필 끝-->
-            <div class="team-btn">
-                <button>팀관리</button>
-                <button>팀으로 가기</button>
-            </div>
+		<div class="job-teamlist-wrap">
+	        <div class="job-container">
+	            <!--프로필-->
+	            
+	            <div class="team-profile-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
+	            
+	            <div>
+	                <p class="team-profile-name">팀이름</p>
+	                <p class="team-profile-email"> 팀 소유자 이메일</p>
+	            </div>
+	            <!--프로필 끝-->
+	            <div class="team-btn">
+	                <button>팀관리</button>
+	                <button>팀으로 가기</button>
+	            </div>
+	        </div>
         </div>
 
         <div class="job-container-new">
@@ -234,7 +102,26 @@
 <!--왼쪽 사이드바 끝-->
 <!--왼쪽 사이드바 끝-->
 <!--왼쪽 사이드바 끝-->
-
+	<!-- 팀정보수정 모달 -->
+	<div class="modal" id="updataTeamInfoModal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						팀 정보 수정
+						<button class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						
+						<input id="updateTeamNum" type="hidden">
+						<input id="updateTeamName" type="text" class="form-control"> 
+						<input id="updateTeamInfo" type="text" class="form-control">
+						<input id="updateTeamAction" type="button" class="btn btn-success" value="수정">
+						
+					</div>
+				</div>
+			</div>
+		</div>
 <script src="/resources/team/sidebar-left.js"></script>
+<script src="/resources/team/onteam.js"></script>
 </body>
 </html>
