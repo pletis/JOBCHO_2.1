@@ -79,6 +79,12 @@ public class UsersServicelmpl implements UsersService {
 		return users;
 	}
 
+	@Override
+	public UsersVO read(String user_email) {
+		UsersVO users = mapper.read(user_email);
+		return null;
+	}
+
 	
 
 
