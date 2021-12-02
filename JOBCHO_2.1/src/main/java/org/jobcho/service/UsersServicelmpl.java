@@ -58,6 +58,13 @@ public class UsersServicelmpl implements UsersService {
 		return re;
 	}
 
+	//비밀번호 뺴고 회원정보수정 
+	@Override
+	public int updateUsers2(UsersVO users) {
+		int re = mapper.updateUsers2(users);
+		return re;
+	}
+	
 	//회원 한명 조회 
 	@Override
 	public UsersVO selectUsers(int user_num) {
@@ -84,6 +91,10 @@ public class UsersServicelmpl implements UsersService {
 		UsersVO users = mapper.read(user_email);
 		return null;
 	}
+
+	
+
+	
 
 	
 

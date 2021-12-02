@@ -50,7 +50,8 @@ public class UsersController {
 
 	@Autowired
 	private EmailSender emailSender;
-
+	
+	
 	// 회원가입
 	@PostMapping("/register")
 	public ResponseEntity<Integer> register(@RequestBody UsersVO users) {
@@ -112,19 +113,32 @@ public class UsersController {
 	// 회원수정 -> 비동기
 	@PostMapping("/update")
 	public ResponseEntity<Integer> update(@RequestBody UsersVO users, HttpSession session, Principal principal) {
-		// principal가져오기
-		/*
-		 * String user_email = principal.getName();
-		 * System.out.println(user_email); UsersVO users2 =
-		 * service.findUsers(user_email);
-		 * System.out.println(users2.getUser_num());
-		 */
+		// principal로 user객체 가져오기 
+		String user_email = principal.getName();
+		System.out.println(user_email);
+		//user객체 
+		UsersVO users2 = service.findUsers(user_email);
+		//원래 비밀번호
+		String principalPw = users2.getUser_pw();
+		System.out.println("principal의 비밀번호 : " + users2.getUser_pw());
+		System.out.println("수정전 : " + users.getUser_pw());
+		// 입력받은 비밀번호 
+		String beforePw = users.getUser_pw();
+		
+		int re = 0;
+		
+		if(principalPw.equals(beforePw)){
+			//비밀번호 뺴고 업데이트하도록 
+			re = service.updateUsers2(users);
+		}else{
+			// 비밀번호 암호화 (인코더)
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			users.setUser_pw(passwordEncoder.encode(users.getUser_pw()));
+			 re = service.updateUsers(users);
+		}
 
-		// 비밀번호 암호화 (인코더)
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		users.setUser_pw(passwordEncoder.encode(users.getUser_pw()));
-
-		int re = service.updateUsers(users);
+		
+		
 		System.out.println("수정완료여부 : " + re);
 		System.out.println(users);
 
@@ -183,6 +197,4 @@ public class UsersController {
 		return new ResponseEntity<String>(user_pw, HttpStatus.OK);
 	}
 
-	
-	
 }// endController
