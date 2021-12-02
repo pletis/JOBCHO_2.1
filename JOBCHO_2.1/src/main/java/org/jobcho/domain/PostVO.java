@@ -21,4 +21,5 @@ public class PostVO {
 	
 	private BoardVO board;
 	private MemberVO member;
+	
 }

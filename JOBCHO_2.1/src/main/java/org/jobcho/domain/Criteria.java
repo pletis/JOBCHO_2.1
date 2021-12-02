@@ -28,4 +28,5 @@ public class Criteria { //페이지 처리 도메인
 	public String[] getTypeArr() {
 		return type == null ? new String[] {}: type.split("");
 	}
+	
 }
