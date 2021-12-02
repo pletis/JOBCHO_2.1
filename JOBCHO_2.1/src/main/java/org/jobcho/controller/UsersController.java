@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -157,10 +158,23 @@ public class UsersController {
 		String user_pw = users1.getUser_pw();
 		System.out.println(user_pw);
 		if (user_pw != null) {
-			email.setContent("비밀번호는 " + user_pw + "입니다");
+			UUID uid = UUID.randomUUID();
+			//임시비밀번호 생성 
+			String pwd = uid.toString().substring(0, 8);
+			System.out.println(pwd);
+			
+			email.setContent("당신의 임시 비밀번호는 " + pwd + "입니다");
 			email.setReceiver(user_email);
 			email.setSubject(user_name + "님 비밀번호 찾기 메일입니다.");
 			emailSender.sendEmail(email);
+			
+			// 비밀번호 암호화 (인코더)
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			//임시로 만든 비밀번호를 db에 적용 
+			users.setUser_pw(passwordEncoder.encode(pwd));
+			int re = service.updatePw(users);
+			System.out.println("비밀번호 변경 성공여부 : " +  re);
+			
 		}
 
 		return new ResponseEntity<String>(user_pw, HttpStatus.OK);
