@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.jobcho.domain.BoardVO;
-import org.jobcho.domain.MembersVO;
+import org.jobcho.domain.MemberVO;
 import org.jobcho.domain.TeamVO;
 import org.jobcho.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;

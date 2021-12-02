@@ -54,6 +54,17 @@
 				where user_num = #{user_num}
 	</update>
 	
+	<!-- 비밀번호 빼고 수정 -->
+	<update id="updateUsers2" parameterType="org.jobcho.domain.UsersVO">
+		update Users set
+			user_name = #{user_name},
+			user_phoneNum = #{user_phoneNum},
+			user_email = #{user_email},
+			user_birth = #{user_birth},
+			user_pwHint = #{user_pwHint}
+				where user_num = #{user_num}
+	</update>
+	
 	<!-- 한명 조회 -->
 	<select id="selectUsers" resultType="org.jobcho.domain.UsersVO" parameterType="int">
 		select * from users where user_num = #{user_num}
@@ -86,19 +97,18 @@
 		where user1.user_email = #{user_email}
 	</select> 
 	
-	<!-- 필요없음 -->
-	 <!-- <select id="read" resultType="org.jobcho.domain.UsersVO">
-		select 
-		user_num, user_name, user_phoneNum, user_email, user_pw, user_birth, user_pwHint, auth, user_date
-		from
-		users
-		where user_email = #{user_email}
-	</select>  -->
-	
+
 	<!-- 아이디 중복체크 -->
 	<select id="idCheck" resultType="int">
 		select count(*) from users where user_email = #{user_email}
 	</select>
+	
+	<!-- 비밀번호찾기 -> 이메일 -->
+	<select id="emailFindPw" parameterType="HashMap" resultType="org.jobcho.domain.UsersVO" >
+		select * from users
+    		where user_name = #{user_name} and user_email = #{user_email}
+	</select>
+	
 	
 </mapper>
 
