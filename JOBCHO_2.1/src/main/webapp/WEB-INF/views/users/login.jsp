@@ -27,11 +27,11 @@
 						<input type="password" id="password" name="password" placeholder="비밀번호">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					</p>
-			</div>
+				</div>
 	
-		<div class="login-btn">
-			<button type="submit">JOBCHO로그인</button>
-		</div>
+			<div class="login-btn">
+				<button type="submit">JOBCHO로그인</button>
+			</div>
 		</form>
 		<div>
 			<a href="/users/findPw_1">힌트로 비밀번호 찾기</a><br>
