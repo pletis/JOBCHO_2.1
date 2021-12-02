@@ -30,13 +30,13 @@
 				}),
 			
 			success : function(data){ // 성공할때 
-					alert("success");
-					console.log("성공");
-					//window.location.href = "/users/findPw_2"; //성공하면 왼쪽페이지로 이동한다.
+					alert("해당이메일에 임시 비밀번호를 전송하였습니다");
+					console.log("해당이메일에 임시 비밀번호를 전송하였습니다");
+					window.location.href = "/users/login"; //성공하면 로그인페이지로 이동한다.
 			},
 			error : function(error){
-				console.log("실패");
-				alert("실패");
+				console.log("이메일과 이름이 알맞지 않습니다.");
+				alert("이메일과 이름이 알맞지 않습니다.");
 				return false;
 			}
 		})	

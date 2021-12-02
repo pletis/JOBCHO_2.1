@@ -1,14 +1,21 @@
 /**
  * 
  */
+
 function onChatting(e){
 		e.preventDefault();
 }
 $(document).ready(function(){
+	var search = location.search 
+	var params = new URLSearchParams(search); 
+	var member_num= params.get('member_num');
+	console.log("member_num:"+member_num)
 	var team_num = 1;
+	var chatRoom_num=0;
+	var chatMember_num = 0;
 	var searchTeamMemberList = null;
 	var inviteChatMemberList = [];
-	
+	var webSocket = null;
 	
 	//채팅방 초대를 위한 팀 멤버리스트 호출
 	function getInviteChatMemberList(){
@@ -26,15 +33,11 @@ $(document).ready(function(){
 	
 	//채팅 보여주기
 	function showChatting(result){
-		var member_num = 1;
 		var str=`<div class="job-chat-body">
 			<h3>채팅방</h3>
 	        <div class="job-chat"> 
 	            <hr>`
 		result.forEach(function(item){
-			console.log(item);
-			console.log(item.chatMember);
-			console.log(item.chat_contents);
 			if(item.chatMember.member_num == member_num){
 				str +=`<p class="send">`+item.chat_contents+`</p>`
 			}else{
@@ -42,23 +45,22 @@ $(document).ready(function(){
 			}
 		});
 	        str +=`</div>
-	        <textarea id="commentParentText" class="form-control col-lg-12"
-	                                        style="width: 100%" rows="5" name="comment_contents">
-	                                    </textarea>
-	        <input type="submit" value="댓글남기기" class="btn btn-default btn-lg">
+	        <textarea id="commentParentText" 
+	        class="form-control col-lg-12"style="width: 100%" rows="5" 
+	        name="comment_contents"></textarea>
+	        <input id="sendMessage" type="submit" value="댓글남기기" class="btn btn-default btn-lg">
 		</div>`
 			
 			
 		$("#body-pd-left").html(str);
+	    
 	}
 	
 	//채팅방 목록 왼쪽 사이드바에 출력
 	function showChatRoomList(result){
 		var str = "";
 		result.forEach(function(item){
-			console.log(item);
-			console.log(item.chatRoom_name)
-			str +=`<a href="#" class="nav__link-left onChatting" onclick="onChatting(event)"> <ion-icon
+			str +=`<a href="#" class="nav__link-left onChatting" onclick="onChatting(event)" data-value="`+item.chatRoom_num+`"> <ion-icon
 								name="chatbubbles-outline" class="nav__icon-left"></ion-icon> <span
 							class="nav__name-left">`+item.chatRoom_name+`</span>
 						</a>`
@@ -71,8 +73,6 @@ $(document).ready(function(){
 	function showInviteChatRoomMemberList(result){
 		var str="";
 		result.forEach(function(item){
-			console.log(item);
-			console.log(item.chatRoom_name)
 			str +=`<ul id="invite-list-group" class="list-group">
 								<li class="list-group-item">
 									<div class="thumnail-profile"></div> Lorem
@@ -84,21 +84,86 @@ $(document).ready(function(){
 		});	
 	}
 	
+	//Socket onmessage 
+	function socketOnmessage(message){
+		str =`<p class="receive">`+message.data+`</p>`
+		$(document).find(".job-chat").append(str);
+	}
+	
+	function getChatMemberNum(){
+		//채팅방 리스트 ajax요청
+		$.ajax({
+			
+	        url:'/team/'+team_num+'/chatroom/'+chatRoom_num+'/chatmember',
+	        type:'Get',
+	        dataType:'json',
+	        success:function(result){
+	        	findChatMemberNum(result)
+	        }
+	    });//$.ajax
+	}
+	
+	function findChatMemberNum(result){
+		result.forEach(function(item){
+			if(item.chatRoom_num==chatRoom_num && item.member_num==member_num){
+				chatMember_num = item.chatMember_num
+			}
+		})
+	}
+	
+	
 	//채팅방 선택하면 실행
 	$(document).on("click",".onChatting" ,function(e){
 		var team_num = 1;
-		var chatroom_num = 1;
+		chatRoom_num = $(this).data("value");
+		getChatMemberNum()
 		$.ajax({
-            url:'/team/'+team_num+'/chatroom/'+chatroom_num+'/chat',
+            url:'/team/'+team_num+'/chatroom/'+chatRoom_num+'/chat',
             type:'Get',
             dataType:'json',
             success:function(result){
-            	console.log(result);
+
             	showChatting(result);
             }
         });//$.ajax
+		console.log(webSocket)
+		if(webSocket){webSocket.close()}
+		console.log("1"+webSocket)
+		webSocket = new WebSocket("ws://localhost:8081/chatsocket/"+chatRoom_num)
+		console.log("2"+webSocket)
+		webSocket.onopen = function(message){
+			console.log("연결"+message)
+		}
 		
+		webSocket.onclose = function(message){
+			console.log("연결해제"+message)
+		}
+		
+		webSocket.onerror = function(message){
+			console.log("socketError"+message)
+		}
+		
+		webSocket.onmessage = socketOnmessage
 	})
+	
+	//채팅방 생성되고 채팅방에 초대
+	function inviteChatMemberAction(){
+		inviteChatMemberList.forEach(function(member_num,index){
+			$.ajax({
+		        url:'/team/'+team_num+'/chatroom/'+chatRoom_num+'/chatmember/new',
+		        type:'Post',
+		        contentType:'application/json',
+		        data:JSON.stringify({
+		        	"chatRoom_num": chatRoom_num,
+		            "member_num": member_num
+		        }),
+		        dataType:'json',
+		        success:function(result){
+		        	console.log("member invite succss");
+		        }
+	    	});
+		})
+	}
 	
 	//채팅방 리스트 ajax요청
 	$.ajax({
@@ -107,7 +172,6 @@ $(document).ready(function(){
         type:'Get',
         dataType:'json',
         success:function(result){
-        	console.log(result);
         	showChatRoomList(result);
         }
     });//$.ajax
@@ -139,11 +203,11 @@ $(document).ready(function(){
 	});
 	
 	$(document).on('click','#inviteChatMember',function(e){
-		member_num = this.value;
+		var invitemember_num = this.value;
 		$(this).parent().remove();
 		var str=""
 		searchTeamMemberList.forEach(function(member,index){
-			if(member.member_num==member_num){
+			if(member.member_num==invitemember_num){
 				str +=`<li class="list-group-item">
 		            <div class="thumnail-profile"></div>
 		            `+member.user.user_name+"__"+member.user.user_email+`<button id="cancelInviteChatMember" class="badge " value="`+member.member_num+`">취소</button>
@@ -157,7 +221,6 @@ $(document).ready(function(){
 	})
 	
 	$(document).on('click','#cancelInviteChatMember',function(e){
-		console.log("cancel Do")
 		member_num = this.value;
 		var str=""
 		$(this).parent().remove();
@@ -180,23 +243,69 @@ $(document).ready(function(){
 	})
 	
 	$("#createRoomAction").on('click',function(){
-		console.log($("#insertChatRoomName").val())
-		console.log(this.value)
-		console.log(inviteChatMemberList)
 		$.ajax({
-        url:'/team/'+team_num+'/chatroom/new',
-        type:'Post',
-        data:{
-            "chatRoom_name": $("#insertChatRoomName").val(),
-            "team_num": team_num,
-            "inviteMember_list": inviteChatMemberList
-        },
-        dataType:'json',
-        success:function(result){
-        	console.log(result);
-        	showChatRoomList(result);
-        }
+	        url:'/team/'+team_num+'/chatroom/new',
+	        type:'Post',
+	        contentType:'application/json',
+	        data:JSON.stringify({
+	            "chatRoom_name": $("#insertChatRoomName").val(),
+	            "team_num": team_num,
+	        }),
+	        dataType:'json',
+	        success:function(result){
+	        	console.log("chatroom create succss");
+	        	chatRoom_num = result.chatRoom_num;
+	        	inviteChatMemberAction()
+	        }
     	});//$.ajax
+		
 	})
 	
+	//채팅 전송
+	$(document).on("click", "#sendMessage",function(e){
+		
+		var message = $(document).find("#commentParentText").val()
+		$(document).find("#commentParentText").val("")
+		str =`<p class="send">`+message+`</p>`
+		$(document).find(".job-chat").append(str);
+		$.ajax({
+	        url:'/team/'+team_num+'/chatroom/'+chatRoom_num+'/chat/new',
+	        type:'Post',
+	        contentType:'application/json',
+	        data:JSON.stringify({
+	            "chatMember_num": chatMember_num,
+	            "chat_contents": message,
+	        }),
+	        dataType:'json',
+	        success:function(result){
+	        	console.log("creat chat succss");
+	        }
+    	});//$.ajax
+		webSocket.send(message)
+	})
+	
+	$(document).on("keydown", "#commentParentText",function(e){
+		if(e.keyCode !=13){
+			return
+		}
+		
+		var message = $(document).find("#commentParentText").val()
+		$(document).find("#commentParentText").val("")
+		str =`<p class="send">`+message+`</p>`
+		$(document).find(".job-chat").append(str);
+		$.ajax({
+	        url:'/team/'+team_num+'/chatroom/'+chatRoom_num+'/chat/new',
+	        type:'Post',
+	        contentType:'application/json',
+	        data:JSON.stringify({
+	            "chatMember_num": chatMember_num,
+	            "chat_contents": message,
+	        }),
+	        dataType:'json',
+	        success:function(result){
+	        	console.log("creat chat succss");
+	        }
+    	});//$.ajax
+		webSocket.send(message)
+	})
 });

@@ -386,7 +386,7 @@
 	<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 	<script src="/resources/chat/css/sidebar-right.js"charset="UTF-8"></script>
 	<script src="/resources/chat/css/sidebar-left.js"charset="UTF-8"></script>
-	<script src="/resources/chat/js/onchat.js"></script>
+	<script src="/resources/chat/js/onchat.js" charset="UTF-8"></script>
 
 	<script>
 	//멤버리스트와 수정모달

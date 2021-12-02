@@ -19,14 +19,12 @@ import javax.websocket.server.ServerEndpoint;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-@ServerEndpoint("/chat/{chatroom_num}")
+@ServerEndpoint("/chatsocket/{chatroom_num}")
 public class ChatSocketController {
 	
-	// 접속 된 클라이언트 WebSocket session 관리 리스트
+	// 접속 된 클라이언트 WebSocket session 관리 Map
 	private static Map<Integer,List<Session>> sessionMap = Collections.synchronizedMap(new HashMap());
-	// 메시지에서 유저 명을 취득하기 위한 정규식 표현
-	private static Pattern pattern = Pattern.compile("^\\{\\{.*?\\}\\}");
-	// WebSocket으로 브라우저가 접속하면 요청되는 함수
+	
 	@OnOpen
 	public void handleOpen(Session userSession, @PathParam("chatroom_num") int chatroom_num) {
 		// 클라이언트가 접속하면 WebSocket세션을 리스트에 저장한다.
@@ -51,19 +49,7 @@ public class ChatSocketController {
 	@OnMessage
 	public void handleMessage(String message, Session userSession, 
 			@PathParam("chatroom_num") int chatroom_num) throws IOException {
-		// 메시지 내용을 콘솔에 출력한다.
-		System.out.println(message);
-		// 초기 유저 명
-		String name = "anonymous";
-		// 메시지로 유저 명을 추출한다.
-		Matcher matcher = pattern.matcher(message);
-		// 메시지 예: {{유저명}}메시지
-		if (matcher.find()) {
-			name = matcher.group();
-		}
-		// 클로져를 위해 변수의 상수화
-		final String msg = message.replaceAll(pattern.pattern(), "");
-		final String username = name.replaceFirst("^\\{\\{", "").replaceFirst("\\}\\}$", "");
+		
 		// session관리 리스트에서 Session을 취득한다.
 		sessionMap.get(chatroom_num).forEach(session -> {
 			// 리스트에 있는 세션과 메시지를 보낸 세션이 같으면 메시지 송신할 필요없다.
@@ -72,7 +58,7 @@ public class ChatSocketController {
 			}
 			try {
 				// 리스트에 있는 모든 세션(메시지 보낸 유저 제외)에 메시지를 보낸다. (형식: 유저명 => 메시지)
-				session.getBasicRemote().sendText(username + " => " + msg);
+				session.getBasicRemote().sendText(message);
 			} catch (IOException e) {
 				// 에러가 발생하면 콘솔에 표시한다.
 				e.printStackTrace();
@@ -85,6 +71,9 @@ public class ChatSocketController {
 	public void handleClose(Session userSession, @PathParam("chatroom_num") int chatroom_num) {
 		// session 리스트로 접속 끊은 세션을 제거한다.
 		sessionMap.get(chatroom_num).remove(userSession);
+		if(sessionMap.get(chatroom_num).size()==0){
+			sessionMap.remove(chatroom_num);
+		}
 		// 콘솔에 접속 끊김 로그를 출력한다.
 		System.out.println("client is now disconnected...");
 	}

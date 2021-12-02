@@ -23,11 +23,15 @@
 	<!-- ChatRoom -->
 	<!-- ChatRoom -->
 	<insert id="insertChatRoom" parameterType="org.jobcho.domain.ChatRoomVO">
+		<selectKey keyProperty="chatRoom_num" order="BEFORE" resultType="int">
+			select chatroom_num.nextval from dual
+		</selectKey>
+		
 		insert into chatroom(
 			chatroom_num , chatroom_name , team_num, chatroom_date, islive
 		)
 		values(
-			chatroom_num.nextval, #{chatRoom_name}, #{team_num}, default,default
+			#{chatRoom_num}, #{chatRoom_name}, #{team_num}, default,default
 		)
 	</insert>
 	
