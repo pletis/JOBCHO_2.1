@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.log4j.Log4j;
 
 @RestController
-@RequestMapping("/team/{team_num}/vote")
+@RequestMapping("/team/{team_num}/vote/*")
 @Log4j
 public class VoteController {
 
@@ -58,7 +58,7 @@ public class VoteController {
 	}
 	
 	//투표 목록보기
-	@GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+	@GetMapping(value = "/list", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<List<VoteVO>> listVote(@PathVariable("team_num") int team_num){
 		return new ResponseEntity<List<VoteVO>>(service.listVote(team_num), HttpStatus.OK);
 	}
