@@ -32,6 +32,8 @@
 		<security:intercept-url pattern="/users/findPw_3" access="permitAll"/>
 		<!-- 로그인하고 나서 다음화면 -> 로그인된사람 -->
 		<security:intercept-url pattern="/team/choose" access="hasRole('ROLE_MEMBER')"/>
+		<!-- 팀선택후 다음화면 -->
+		<security:intercept-url pattern="/team/choose" access="hasRole('ROLE_MEMBER')"/>
 	
 	
 		<!-- 로그인 -->

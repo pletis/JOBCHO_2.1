@@ -21,7 +21,7 @@
 		<![CDATA[ 
 			insert into reply(reply_num, reply_contents, member_num, post_num, islive, reply_date ) 
 				values(
-					Reply_num.nextval, #{reply_contents}, #{member_num}, #{post_num}, default, default
+					reply_num.nextval, #{reply_contents}, #{member_num}, #{post_num}, default, default
 				)
 		]]>
 	</insert>
@@ -37,6 +37,7 @@
 		update reply set islive = 0
 		where reply_num = #{reply_num}
 	</select> 
+	
 	
 	<!-- 댓글 조회 -->
 	<select id="readReply" resultType="org.jobcho.domain.ReplyVO">

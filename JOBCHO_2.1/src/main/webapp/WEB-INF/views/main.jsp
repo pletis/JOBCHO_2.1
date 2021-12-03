@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false"%>
 <html>
 <head>
 <meta charset='utf-8'>
+<meta name="_csrf" content="${_csrf.token}"/>
 <title>Page Title</title>
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -87,6 +89,8 @@
 					<div class="nav-profile-content-left">
 						<p>cjhun0516@gmail.com</p>
 						<p>2팀 팀장</p>
+						팀넘버 : ${param.team_num }<br>
+						사용자 이름 : <sec:authentication property="principal.users.user_name"/>
 					</div>
 				</div>
 				<!--프로필 끝-->
@@ -315,45 +319,8 @@
                     </div>
                 </div>
                 <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
+               
+             
                 <div class="nav-search-result active-right">
                     <div class="result-container">
                         <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
@@ -404,6 +371,7 @@
                     
                 </ul>
                 <div class="nav-search-result-scroll">
+                <div class="job-todolist-wrap">
                 <div class="nav-search-result active-right">
                     <div class="result-container">
                         <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
@@ -417,70 +385,8 @@
                     </div>
                 </div>
                 <hr>
-                <div class="nav-search-result active-right">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result active-right">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
+               
+             
             </div>
             </div>
         </nav>
@@ -705,12 +611,118 @@
 			</div>
 		</div>
 
+		<!-- 오늘의 할일 생성 모달 -->
+	<div class="modal" id="insertTodoListInfoModal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						오늘의 할일 생성
+						<button class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						
+						오늘의 할일<input id="todo_title" type="text" class="form-control"> 
+						내용<input id="todo_description" type="text" class="form-control">
+						마감날짜<input id="todo_endDate" type="date" class="form-control">
+						member_num<input id="member_num" type="text" class="form-control" value="1">
+						team_num<input id="team_num" type="text" class="form-control" value="${param.team_num}">
+						<input id="insertTeamAction" type="button" class="btn btn-success" onclick="insertTodoListAction();" value="오늘의 할일 생성">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
 	</div>
-
+	
 	<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 	<script src="/resources/main/css/sidebar-right.js"></script>
 	<script src="/resources/main/css/sidebar-left.js"></script>
+	<script src="/resources/members/js/todoList.js"></script>
+	
+	<!-- 외부js에 변수 전달 -->
+	<input type="hidden" id="userName" value="<sec:authentication property="principal.users.user_name"/>"> 
+	
+	<input type="hidden" id="userNum" value="<sec:authentication property="principal.users.user_num"/>"> 
 
+	<input type="hidden" id="teamNum" value=${param.team_num }>
+	
+	<script type="text/javascript">
+	
+	
+	//security ajax를 사용하면 403에러가 발생하기 때문에 아래와 같은 코드를 작성해야됨 
+	var csrfToken = $("meta[name='_csrf']").attr("content");
+
+	$.ajaxPrefilter(function(options, originalOptions, jqXHR){
+		if (options['type'].toLowerCase() === "post") {
+	    	jqXHR.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+		}
+		});
+	
+	
+	//오늘의 할일 추가 모달 이벤트 
+	$(document).on("click","#createToDo" ,function(e){
+		e.preventDefault();
+		console.log("클릭");
+		$("#insertTodoListInfoModal").modal("show");
+		updataMemberNum = this.value
+	});
+	
+	//할일 추가 ajax
+function insertTodoListAction(){
+	console.log("insertTodoListAction 버튼 눌림");
+	 	
+	var todo_title = document.getElementById('todo_title').value;
+	var todo_description = document.getElementById('todo_description').value;
+	var todo_endDate = document.getElementById('todo_endDate').value;
+	var member_num = document.getElementById('member_num').value;
+	var team_num = document.getElementById('team_num').value;
+		
+	if(!todo_title){
+		alert('오늘의 할일을 입력해주세요');
+		return false;
+	}
+	if(!todo_description){
+		alert('내용을 입력해주세요');
+		return false;
+	}
+	if(!todo_endDate){
+		alert('마감날짜를 선택해주세요');
+		return false;
+	}
+		
+	$.ajax({
+		url : '/team/'+team_num+'/todo/new',
+		type : "post",
+		contentType : "application/json",
+		data : JSON.stringify({"todo_title" : $("#todo_title").val(),
+					"todo_description" : $("#todo_description").val(),			
+					"todo_endDate" : $("#todo_endDate").val(),
+					"member_num" : $("#member_num").val(),
+					"team_num" : $("#team_num").val(),
+		}),
+		success : function(data){
+				console.log(data);
+				alert("오늘의 할일이 추가되었습니다.");
+				$('#insertTodoListInfoModal').modal("hide");
+				//window.location.href = "/team/choose";
+				//window.location.replace("/users/main");
+		},
+		error : function(error){
+			alert("실패");
+			return false;
+		}
+	})
+	
+}//endi nsertTodoListAction
+		
+	
+	
+	
+	
+	</script>
 
 
 	<script>
@@ -1040,7 +1052,7 @@
             
         });//끝
     </script>
-
+	
 
 
 </body>
