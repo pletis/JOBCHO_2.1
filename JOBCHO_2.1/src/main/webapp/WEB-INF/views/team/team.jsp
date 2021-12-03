@@ -70,7 +70,7 @@
         </div>
 
         <div class="job-container-new">
-            <div><a href="#" id="createNewTeam">팀생성하기</a></div>
+            <div><a href="#" id="createNewTeam" >팀생성하기</a></div>
         </div>
 	</div>
 <!--왼쪽 사이드바 시작-->
@@ -87,6 +87,7 @@
                         <h3><sec:authentication property="principal.users.user_email"/></h3>
                     </div>
                 </div>
+                
                 <!--프로필 끝-->
                 
                 
@@ -104,6 +105,7 @@
 <!--왼쪽 사이드바 끝-->
 <!--왼쪽 사이드바 끝-->
 
+	<!-- 사용자정보 수정 -->
 	<div class="modal" id="updataUsersModal" tabindex="-1">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -145,9 +147,9 @@
 					<div class="modal-body">
 						
 						<input id="updateTeamNum" type="hidden">
-						<input id="updateTeamName" type="text" class="form-control"> 
-						<input id="updateTeamInfo" type="text" class="form-control">
-						<input id="updateTeamAction" type="button" class="btn btn-success" onclick="insertTeam();" value="수정">
+						팀이름<input id="updateTeamName" type="text" class="form-control"> 
+						팀내용<input id="updateTeamInfo" type="text" class="form-control">
+						<input id="updateTeamAction" type="button" class="btn btn-success" onclick="updateTeamAction();" value="수정">
 						
 					</div>
 				</div>
@@ -165,10 +167,10 @@
 					</div>
 					<div class="modal-body">
 						
-						<input id="insertTeamName" type="text" class="form-control"> 
-						<input id="insertTeamInfo" type="text" class="form-control">
-						<input id="insertUser_num" type="text" class="form-control" value="<sec:authentication property="principal.users.user_num"/>">
-						<input id="insertTeamAction" type="button" class="btn btn-success" value="팀생성">
+						팀이름<input id="insertTeamName" type="text" class="form-control"> 
+						팀정보<input id="insertTeamInfo" type="text" class="form-control">
+						<input id="insertUser_num" type="hidden" class="form-control" value="<sec:authentication property="principal.users.user_num"/>">
+						<input id="insertTeamAction" type="button" class="btn btn-success" onclick="insertTeamAction()" value="팀생성">
 						
 					</div>
 				</div>
@@ -192,6 +194,39 @@ $(document).on("click",".nav-profile-content-left" ,function(e){
 	$("#updataUsersModal").modal("show");
 	updataMemberNum = this.value
 });
+
+
+//팀생성
+function insertTeamAction(){
+	console.log("insertTeamAction 버튼 눌림");
+	 var insertTeamName = document.getElementById('insertTeamName').value;
+	 var insertTeamInfo = document.getElementById('insertTeamName').value;
+	 var insertUser_num = document.getElementById('insertTeamName').value;
+	
+	 $.ajax({
+			url : '/team/'+<sec:authentication property="principal.users.user_num"/>,
+			type : "post",
+			contentType : "application/json",
+			data : JSON.stringify({
+						"team_name" : $("#insertTeamName").val(),			
+						"team_info" : $("#insertTeamInfo").val(),
+						"user_num" : $("#insertUser_num").val()
+			}),
+			success : function(data){
+					console.log(data);
+					alert("팀생성이 완료되었습니다");
+					//window.location.href = "/team/choose";
+					//window.location.replace("/users/main");
+			},
+			error : function(error){
+				alert("실패");
+				return false;
+			}
+		})
+	
+	
+}//end insertTeamAction
+
 
 function checkValue(){
 	console.log("버튼눌림");
@@ -308,14 +343,19 @@ function checkValue(){
 		}
 	})
 	
-	//users 정보 추가 모달 호출 
-	$(document).on("click","#createNewTeam" ,function(e){
-		$("#insertTeamInfoModal").modal("show");
-		updataMemberNum = this.value
-	});
-	
 	
 }//end checkValue
+
+
+
+
+//users 정보 추가 모달 호출 
+$(document).on("click","#createNewTeam" ,function(e){
+	e.preventDefault();
+	console.log("클릭");
+	$("#insertTeamInfoModal").modal("show");
+	updataMemberNum = this.value
+});
 
 </script>
 <script src="/resources/team/onteam.js"></script>

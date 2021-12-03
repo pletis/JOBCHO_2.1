@@ -4,10 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>find_reg_pass</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="/resources/login/css/find.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<meta charset="UTF-8">
 	<meta name="_csrf" content="${_csrf.token}"/>
 	<script type="text/javascript">
 	//security ajax를 사용하면 403에러가 발생하기 때문에 아래와 같은 코드를 작성해야됨 
@@ -57,31 +59,26 @@
 	}//find_Pw3
 	
 	</script>
-<title>findPw_3</title>
 </head>
 <body>
-		
-		<div>
-			<h1>JOBCHO</h1>
+	<div id="wrap" class="job-login">
+		<h1>JOBCHO</h1>
+		<div class="job-container">
+			
+		<div class="login-input">
+			<p class="id-pass-inp">
+				<input type="password" id="user_pw" name="user_pw"  placeholder="비밀번호 재설정">
+			</p>
+			<p class="id-pass-inp">
+				<input type="password" id="user_pw2"  name="user_pw2"  placeholder="비밀번호 재설정 확인">
+			</p>
 		</div>
-		
-		
-		<form>
-			<div class="col-auto">
-    			<label for="inputPassword2" class="visually-hidden">비밀번호</label>
-    				비밀번호 재설정<input type="password" class="user_pw" id="user_pw" name="user_pw">
-			</div>
-			<div class="col-auto">
-    			<label for="inputPassword2" class="visually-hidden">비밀번호</label>
-    				비밀번호 확인<input type="password" class="user_pw2" id="user_pw2" name="user_pw2">
-			</div>
-			<br>
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-			<div class="col-auto">
-    			<button type="button" class="btn btn-primary mb-6" onclick="find_Pw3();">확인</button>
-  			</div>		
-		</form>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<div class="login-btn">
+			<button type="button" onclick="find_Pw3();">확인</button>
+		</div>
+	</div>
+</div>
 	
-		
 </body>
 </html>

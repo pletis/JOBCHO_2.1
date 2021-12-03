@@ -1,6 +1,7 @@
 /**
  * 
  */
+
 $(document).ready(function(){
 	var user_num=1;
 	function showTeamList(result){
