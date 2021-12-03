@@ -178,7 +178,7 @@
 		</div>
 		
 		<!-- 외부js에 변수 전달 -->
-		<input id="authUserNum" value="<sec:authentication property="principal.users.user_num"/>">
+		<input id="authUserNum" value="<sec:authentication property="principal.users.user_num"/>"> 
 <script src="/resources/team/sidebar-left.js"></script>
 <script type="text/javascript">
 
@@ -197,6 +197,10 @@ $(document).on("click",".nav-profile-content-left" ,function(e){
 	$("#updataUsersModal").modal("show");
 	updataMemberNum = this.value
 });
+
+
+
+
 
 
 //팀생성
@@ -218,8 +222,10 @@ function insertTeamAction(){
 			success : function(data){
 					console.log(data);
 					alert("팀생성이 완료되었습니다");
-					//window.location.href = "/team/choose";
-					//window.location.replace("/users/main");
+					$('#insertTeamInfoModal').modal("hide");
+					window.location.href = "/team/choose";
+
+
 			},
 			error : function(error){
 				alert("실패");
