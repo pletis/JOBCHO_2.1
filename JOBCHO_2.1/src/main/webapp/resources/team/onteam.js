@@ -26,14 +26,15 @@ $(document).ready(function(){
 		$(".job-teamlist-wrap").html(str);
 	}
 	
-	function showUpdateTeamInfo(){
+	function showUpdateTeamInfo(team_num){
 		$.ajax({
 	        url:'/team/'+user_num,
 	        type:'Get',
 	        dataType:'json',
 	        success:function(result){
+	        	console.log(result);
 	        	result.forEach(function(item){
-	        		if(item.user_num==user_num){
+	        		if(item.team_num==team_num){
 	        			$("#updateTeamNum").val(item.team_num)
 	        			$("#updateTeamName").val(item.team_name)
 	        			$("#updateTeamInfo").val(item.team_info)
@@ -81,7 +82,8 @@ $(document).ready(function(){
 	
 	$(document).on("click",".teamAdminModal", function(){
 		$("#updataTeamInfoModal").modal("show");
-		showUpdateTeamInfo();
+		
+		showUpdateTeamInfo($(this).val());
 	})
 	
 	$("#updateTeamAction").on("click", function(){

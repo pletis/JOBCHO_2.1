@@ -634,6 +634,30 @@
 		</div>
 		
 		
+		<!-- 오늘의 할일 수정 모달 -->
+	<div class="modal" id="updateTodoListInfoModal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						오늘의 할일 수정
+						<button class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+					
+						<input id="updateTodoNum" type="text" >
+						오늘의 할일<input id="updateTodoTitle" type="text" class="form-control"> 
+						내용<input id="updateTodoDescription" type="text" class="form-control">
+						마감날짜<input id="updateTodoEnd" type="date" class="form-control">
+						<input id="insertTeamAction" type="button" class="btn btn-success" onclick="updateTodoLAction();" value="수정">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
 		
 	</div>
 	
@@ -707,7 +731,7 @@ function insertTodoListAction(){
 				console.log(data);
 				alert("오늘의 할일이 추가되었습니다.");
 				$('#insertTodoListInfoModal').modal("hide");
-				//window.location.href = "/team/choose";
+				//window.location.href = "/team/main?team_num="${param.team_num}";
 				//window.location.replace("/users/main");
 		},
 		error : function(error){
@@ -716,12 +740,8 @@ function insertTodoListAction(){
 		}
 	})
 	
-}//endi nsertTodoListAction
+}//end insertTodoListAction
 		
-	
-	
-	
-	
 	</script>
 
 

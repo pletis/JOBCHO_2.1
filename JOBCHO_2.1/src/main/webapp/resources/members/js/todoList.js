@@ -7,6 +7,7 @@ $(document).ready(function(){
 	console.log("사용자이름  test : " + userName);
 	var user_num= $("#userNum").val();
 	var member_num = 1;
+	
 	function showTodoList(result){
 		console.log("showTodoList 함수실행");
 		str="";
@@ -29,23 +30,24 @@ $(document).ready(function(){
 		$(".job-todolist-wrap").html(str);
 	}
 	
-	//하나 불러오기 
-	/*function showUpdateTeamInfo(){
+	//여러개 불러오는 ajax
+	function showUpdateTodoInfo(){
 		$.ajax({
-	        url:'/team/'+user_num,
+	        url:'/team/' +team_num+'/todo',
 	        type:'Get',
 	        dataType:'json',
 	        success:function(result){
+	        	console.log(result);
 	        	result.forEach(function(item){
-	        		if(item.user_num==user_num){
-	        			$("#updateTeamNum").val(item.team_num)
-	        			$("#updateTeamName").val(item.team_name)
-	        			$("#updateTeamInfo").val(item.team_info)
+	        		if(item.member_num== member_num){
+	        			$("#updateTodoNum").val(item.todo_num)
+	        			$("#updateTodoDescription").val(item.todo_description)
+	        			$("#updateTodoEnd").val(item.todo_endDate)
 	        		}
 	        	})
 	        }
 	    });//$.ajax
-	}*/
+	}
 	
 	//수정
 	/*function updateTeamAction(){
@@ -89,14 +91,14 @@ $(document).ready(function(){
 	
 	
 	//초기화면 출력
-	/*getTeamList()
+	//getTeamList()
 	
-	$(document).on("click",".teamAdminModal", function(){
-		$("#updataTeamInfoModal").modal("show");
-		showUpdateTeamInfo();
+	$(document).on("click",".team-profile-email", function(){
+		$("#updateTodoListInfoModal").modal("show");
+		showUpdateTodoInfo();
 	})
 	
-	$("#updateTeamAction").on("click", function(){
+	/*$("#updateTeamAction").on("click", function(){
 		updateTeamAction();
 	})*/
 	
