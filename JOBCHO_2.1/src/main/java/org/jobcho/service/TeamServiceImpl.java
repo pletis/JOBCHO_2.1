@@ -14,28 +14,28 @@ public class TeamServiceImpl implements TeamService {
 	private TeamMapper mapper;
 	
 	
-	//�� ����
+
 	@Override
 	public int insertTeam(TeamVO team) {
 		
 		return mapper.insertTeam(team);
 	}
 
-	//�� ����Ʈ ��ȸ
+	
 	@Override
 	public List<TeamVO> getListTeam(int user_num) {
 		
 		return mapper.getListTeam(user_num);
 	}
 
-	//�� �ϳ� ��ȸ
+	
 	@Override
 	public TeamVO getTeam(int team_num) {
 		
 		return mapper.getTeam(team_num);
 	}
 
-	//�� ������Ʈ
+	
 	@Override
 	public int updateTeam(TeamVO team) {
 		

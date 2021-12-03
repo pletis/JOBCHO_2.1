@@ -4,9 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>register</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="/resources/login/css/register.css">
+	<!-- <link rel="stylesheet" href="register.css"> -->
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<meta name="_csrf" content="${_csrf.token}"/>
 	<script type="text/javascript">
@@ -182,61 +185,42 @@
 <title>Users</title>
 </head>
 <body>
-
+	<div id="wrap" class="job-login">
 		<h1>JOBCHO</h1>
-	
-	<br>
-	<form class="row g-3">
-			<div class="col-md-6">
-  				<div class="col-auto">
-    				<label for="inputPassword2" class="visually-hidden">이름</label>
-    				이름<input type="text" class="form-control" id="user_name" name="user_name" placeholder="ex)홍길동">
-  			</div>
-  	<br>
-  	
-  			<div class="col-auto">
-    			<label for="inputPassword2" class="visually-hidden">생년월일</label>
-    				생년월일<input type="text" class="form-control" id="user_birth" name="user_birth" placeholder="ex)980523">
-  			</div>
- 	 <br>
- 	 
-  			<div class="col-auto">
-    			<label for="inputPassword2" class="visually-hidden">이메일</label>
-    				이메일<input type="text" class="form-control" id="user_email" name="user_email" placeholder="ex)honggildong@gmail.com">
-    				<button class="idCheck" type="button" id="idCheck" onclick="fn_idCheck();" value="N">중복확인</button>
-  			</div>
- 	 <br>
- 	 
-  			<div class="col-auto">
-    			<label for="inputPassword2" class="visually-hidden">비밀번호</label>
-    				비밀번호<input type="password" class="form-control" id="user_pw" name="user_pw" placeholder="비밀번호(영문자+숫자+특수조합(8~25자리 입력))">
-  			</div>
-  	<br>
-  
-  			<div class="col-auto">
-    			<label for="inputPassword2" class="visually-hidden">비밀번호확인</label>
-    				비밀번호확인<input type="password" class="form-control" id="user_pw2" name="user_pw2" placeholder="비밀번호 확인">
-  			</div> 
-  	<br>
-  	
- 			<div class="col-auto">
-    			<label for="inputPassword2" class="visually-hidden">비밀번호 힌트</label>
-    				비밀번호힌트 :  당신의 고등학교는?<input type="text" class="form-control" id="user_pwHint" name="user_pwHint" placeholder="ex)숭실고등학교">
-			</div>
-  	<br>
-  	
-  			<div class="col-auto">
-    			<label for="inputPassword2" class="visually-hidden">전화번호</label>
-    				전화번호<input type="text" class="form-control" id="user_phoneNum" name="user_phoneNum" placeholder="ex)010-1234-5678">
-  			</div>
-  	<br>
-  			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-  			<div class="col-auto">
-    		<button type="button" class="btn btn-primary mb-6" onclick="checkValue();">회원가입</button>
-  			</div>
-		</div>
-	</form>
-
+		<div class="container">
 			
+		<div class="login-input">
+			<p class="id-pass-inp">
+				<br><input type="text" id="user_name" name="user_name"  placeholder="이름  ex)홍길동">
+			</p>
+			<p class="id-pass-inp">
+				<input type="text" id="user_birth" name="user_birth" placeholder="생년월일  ex)980523">
+			</p>
+			<p class="id-pass-inp">
+				<input type="text" id="user_email" name="user_email" placeholder="이메일  ex)honggildong@gmail.com">
+			</p>
+			<button class="idCheck" type="button" id="idCheck" onclick="fn_idCheck();" value="N">중복확인</button>
+			<p class="id-pass-inp">
+				<input type="password" id="user_pw" name="user_pw" placeholder="비밀번호(영문자+숫자+특수조합(8~25자리 입력))">
+			</p>
+			<p class="id-pass-inp">
+				<input type="password" id="user_pw2" name="user_pw2"  placeholder="비밀번호 확인">
+			</p>
+			<p class="id-pass-inp">
+				<input type="text" id="user_pwHint" name="user_pwHint"  placeholder="비밀번호 힌트 ex)숭실고등학교">
+			</p>
+			<p class="id-pass-inp">
+				<input type="text" id="user_phoneNum" name="user_phoneNum"  placeholder="전화번호  ex)010-1234-5678">
+			</p>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		</div>
+	
+		<div class="login-btn">
+			<button type="button" onclick="checkValue();">JobCho 회원가입</button>
+		</div>
+		
+	</div>
+
+	</div>
 </body>
 </html>

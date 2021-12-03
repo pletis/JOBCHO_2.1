@@ -3,7 +3,11 @@ package org.jobcho.controller;
 import java.util.List;
 
 import org.jobcho.domain.MemberVO;
+
+import org.jobcho.domain.UsersVO;
 import org.jobcho.mapper.MemberMapper;
+
+import org.jobcho.service.MembersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.log4j.Log4j;
 
 @RestController
-@RequestMapping("/team/{team_num}")
+@RequestMapping("/team/{team_num}/member")
 @Log4j
 public class MembersController {
 //	get: /team/{team_num}/members=>팀번호에 맞는 멤버리스트 반환
@@ -33,47 +37,55 @@ public class MembersController {
 //
 //			delete: /team/{team_num}/members/{member_num} => 멤버 정보 삭제
 	@Autowired
-	MemberMapper mapper;
+	MembersService service;
 	
-	@CrossOrigin
-	@GetMapping("/members")
-	public ResponseEntity<List<MemberVO>> getListMember(@PathVariable("team_num") int team_num){
-		List<MemberVO> list = mapper.listTeamMembers(team_num);
+	@GetMapping("/")
+	public ResponseEntity<List<MemberVO>> getListMember(@PathVariable("team_num") int team_num
+			){
+		List<MemberVO> list = service.getListMember(team_num);
 		return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
-	@GetMapping("/members/{member_num}")
+	
+	@GetMapping("/{member_num}")
 	public ResponseEntity<MemberVO> getMember(
 			@PathVariable("team_num") int team_num, 
 			@PathVariable("member_num") int member_num){
-		MemberVO member = mapper.getMember(member_num);
+		MemberVO member = service.getMember(member_num);
 		return new ResponseEntity<>(member, HttpStatus.OK);
 	}
 	
-	@PostMapping("/members/invite")
+	@PostMapping("/invite")
 	public ResponseEntity<MemberVO> insertMember(@PathVariable("team_num") int team_num, @RequestBody MemberVO members){
-		int re = mapper.insertMembers(members);
+		int re = service.insertMember(members);
 		log.info(members);
 		return (re==1)? new ResponseEntity<>(members, HttpStatus.OK): new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 	
-	@PutMapping("/members/{member_num}")
+	@PutMapping("/{member_num}")
 	public ResponseEntity<MemberVO> updateMember(@PathVariable("team_num") int team_num, 
 			@PathVariable("member_num") int member_num, @RequestBody MemberVO members){
-		MemberVO updateMember = mapper.getMember(member_num);
+		MemberVO updateMember = service.getMember(member_num);
 		updateMember.setMember_position(members.getMember_position());
-		int re = mapper.updateMemberInfo(updateMember);
+		int re = service.updateMember(updateMember);
 		
 		return (re==1)? new ResponseEntity<>(updateMember, HttpStatus.OK): new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 	
-	@DeleteMapping("/members/{member_num}")
+	
+	@DeleteMapping("/{member_num}")
 	public ResponseEntity<String> deleteMember(@PathVariable("team_num") int team_num,
 			@PathVariable("member_num") int member_num){
-		int re = mapper.deleteMemberInfo(member_num);
+		int re = service.deleteMember(member_num);
 		
 		return (re==1)? new ResponseEntity<>("success", HttpStatus.OK): new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 	
+	@GetMapping("/withoutmember")
+	public ResponseEntity<List<UsersVO>> getListWithoutMembers(@PathVariable("team_num") int team_num){
+		List<UsersVO> searchList = service.getListWithoutMembers(team_num);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(searchList);
+	}
 	
 	
 	

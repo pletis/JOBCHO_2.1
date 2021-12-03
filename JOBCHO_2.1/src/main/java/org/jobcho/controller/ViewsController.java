@@ -9,40 +9,59 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class ViewsController {
 
-	//로그인페이지 
+	//濡쒓렇�씤�럹�씠吏� 
 	@GetMapping("/users/login")
 	public void loginForm(){
 	}
 	
-	//로그인다음페이지
+	//濡쒓렇�씤�떎�쓬�럹�씠吏�
 	@GetMapping("/users/main")
 	public void mainForm(){
 	}
 	
-	//회원가입페이지
+	//�쉶�썝媛��엯�럹�씠吏�
 	@GetMapping("/users/register")
 	public void register(){
 	}
 	
-	//비밀번호 찾기 첫번쨰 페이지
+	//鍮꾨�踰덊샇 李얘린 泥ル쾲夷� �럹�씠吏�
 	@GetMapping("/users/findPw_1")
 	public void findPw_1(){
 	}
 	
-	//비밀번호 찾기 두번째 페이지
+	//鍮꾨�踰덊샇 李얘린 �몢踰덉㎏ �럹�씠吏�
 	@GetMapping("/users/findPw_2")
 	public void findPw_2(){
 	}
 	
-	//비밀번호 찾기 세번째 페이지
+	//鍮꾨�踰덊샇 李얘린 �꽭踰덉㎏ �럹�씠吏�
 	@GetMapping("/users/findPw_3")
 	public void findPw_3(){
 	}
 	
-	//회원가입 수정 페이지 
+	//�쉶�썝媛��엯 �닔�젙 �럹�씠吏� 
 	@GetMapping("/users/update")
 	public void updateForm(){
 	}
 	
+	//이메일로 비밀번호 찾기 
+	@GetMapping("/users/emailFindPw")
+	public void emailFindPw(){
+	}
+	
+	@GetMapping("/team/choose")
+	public String teamChoose(){
+		return "/team/team";
+	}
+	
+	@GetMapping("/team/main")
+	public String teamMain(){
+		return "/main";
+	}
+	
+	@GetMapping("/calendar/test")
+	public String calendar(){
+		return "/calendar/calendar";
+	}
 	
 }

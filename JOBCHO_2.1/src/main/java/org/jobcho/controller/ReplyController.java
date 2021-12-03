@@ -33,7 +33,7 @@ public class ReplyController {
 	
 	
 	// /team/{team_num}/board/{board_num}/post/{post_num}/reply/new
-	//포스트맨 o
+	//�룷�뒪�듃留� o
 	@RequestMapping(value="/new", method = {RequestMethod.GET, RequestMethod.POST})
 	
 	public ResponseEntity<ReplyVO> insertReply(@RequestBody ReplyVO rvo,

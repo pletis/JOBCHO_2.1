@@ -2,6 +2,10 @@ package org.jobcho.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.jobcho.domain.UsersVO;
 import org.jobcho.mapper.UsersMapper;
 
@@ -54,6 +58,13 @@ public class UsersServicelmpl implements UsersService {
 		return re;
 	}
 
+	//비밀번호 뺴고 회원정보수정 
+	@Override
+	public int updateUsers2(UsersVO users) {
+		int re = mapper.updateUsers2(users);
+		return re;
+	}
+	
 	//회원 한명 조회 
 	@Override
 	public UsersVO selectUsers(int user_num) {
@@ -67,6 +78,23 @@ public class UsersServicelmpl implements UsersService {
 		int re = mapper.idCheck(users);
 		return re;
 	}
+
+	//비밀번호 찾기 이메일 
+	@Override
+	public UsersVO emailFindPw(Map<String, String> map) {
+		UsersVO users = mapper.emailFindPw(map);
+		return users;
+	}
+
+	@Override
+	public UsersVO read(String user_email) {
+		UsersVO users = mapper.read(user_email);
+		return null;
+	}
+
+	
+
+	
 
 	
 

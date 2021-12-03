@@ -27,19 +27,21 @@
 						<input type="password" id="password" name="password" placeholder="비밀번호">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					</p>
-			</div>
+				</div>
 	
-		<div class="login-btn">
-			<button type="submit">JOBCHO로그인</button>
-		</div>
+			<div class="login-btn">
+				<button type="submit">JOBCHO로그인</button>
+			</div>
 		</form>
+		<br>
 		<div>
-			<a href="/users/findPw_1">비밀번호 찾기</a>
+			<a href="/users/findPw_1">힌트로 비밀번호 찾기</a>       <a href="/users/emailFindPw">이메일로 비밀번호 찾기</a>
 		</div>
 		
 	</div>
 
 	<p class="job-signup"><span>JOBCHO가 처음이신가요?</span>
+	
 	<a href="/users/register" >회원가입</a>
 
 	

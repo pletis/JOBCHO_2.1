@@ -15,8 +15,8 @@
 
 	<!-- 오라클연결 -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:XE" />
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE" />
 		<property name="username" value="gunsoo" />
 		<property name="password" value="1234" />
 	</bean>
@@ -35,6 +35,23 @@
 	
 	<!-- 서비스 연결 -->
 	<context:component-scan base-package="org.jobcho.service"/>
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+        <property name="port" value="587" />
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="username" value="" />
+        <property name="password" value="" />
+
+		<property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.auth">true</prop>
+               
+               
+            </props>
+        </property>
+	</bean>
 	
 	<!-- 트랜잭션 처리 -->
 		<bean id="transactionManager"
@@ -46,4 +63,14 @@
 	
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
+	<bean id="email" class="spring.board.email.Email"></bean>
+	
+	<bean id="emailSender" class="spring.board.email.EmailSender"></bean>
+		
 </beans>
+
+
+
+
+
+
