@@ -146,7 +146,7 @@
 					</div>
 					<div class="modal-body">
 						
-						<input id="updateTeamNum" type="hidden">
+						<input id="updateTeamNum" type="hidden" >
 						팀이름<input id="updateTeamName" type="text" class="form-control"> 
 						팀내용<input id="updateTeamInfo" type="text" class="form-control">
 						<input id="updateTeamAction" type="button" class="btn btn-success" onclick="updateTeamAction();" value="수정">
@@ -250,6 +250,7 @@ function insertTeamAction(){
 }//end insertTeamAction
 
 
+//회원수정
 function checkValue(){
 	console.log("버튼눌림");
 	var user_name = document.getElementById('user_name').value;
@@ -408,7 +409,7 @@ function deleteTeamAction(){
 		$('#updataTeamInfoModal').modal("hide");
 	}else{
 		$.ajax({
-			url : '/team/'+<sec:authentication property="principal.users.user_num"/>,
+			url : '/team/'+$('#updateTeamNum').val(),
 			type : "delete",
 			contentType : "application/json",
 			success : function(data){
