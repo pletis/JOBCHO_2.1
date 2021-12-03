@@ -40,7 +40,7 @@
                                 aria-haspopup="true" aria-expanded="false">접속하기<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">프로필</a></li>
-                                <li><a href="#">로그아웃</a></li>
+                                <li><a href="#" id="logout1">로그아웃</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -150,7 +150,7 @@
 						팀이름<input id="updateTeamName" type="text" class="form-control"> 
 						팀내용<input id="updateTeamInfo" type="text" class="form-control">
 						<input id="updateTeamAction" type="button" class="btn btn-success" onclick="updateTeamAction();" value="수정">
-						
+						<input id="deleteTeamAction" type="button" class="btn btn-success" onclick="deleteTeamAction();" value="삭제">
 					</div>
 				</div>
 			</div>
@@ -162,7 +162,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						팀 정보 수정
+						팀 생성
 						<button class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body">
@@ -176,6 +176,11 @@
 				</div>
 			</div>
 		</div>
+		
+		<!-- 로그아웃 -->
+		<form action="/customLogout" method="post" id="logoutForm">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		</form>
 		
 		<!-- 외부js에 변수 전달 -->
 		<input id="authUserNum" value="<sec:authentication property="principal.users.user_num"/>"> 
@@ -200,9 +205,6 @@ $(document).on("click",".nav-profile-content-left" ,function(e){
 
 
 
-
-
-
 //팀생성
 function insertTeamAction(){
 	console.log("insertTeamAction 버튼 눌림");
@@ -210,6 +212,17 @@ function insertTeamAction(){
 	 var insertTeamInfo = document.getElementById('insertTeamName').value;
 	 var insertUser_num = document.getElementById('insertTeamName').value;
 	
+	 if(!insertTeamName){
+			alert('팀명을 입력해주세요');
+			return false;
+		}
+	 
+	 if(!insertTeamInfo){
+			alert('팀 정보를 입력해주세요');
+			return false;
+		}
+	 
+	 
 	 $.ajax({
 			url : '/team/'+<sec:authentication property="principal.users.user_num"/>,
 			type : "post",
@@ -343,6 +356,7 @@ function checkValue(){
 		success : function(data){
 				console.log(data);
 				alert("회원정보가 수정되었습니다.");
+				$('#updataUsersModal').modal("hide");
 				//window.location.href = "/team/choose";
 				//window.location.replace("/users/main");
 		},
@@ -366,7 +380,69 @@ $(document).on("click","#createNewTeam" ,function(e){
 	updataMemberNum = this.value
 });
 
+
+//로그아웃 오른쪽 상단 로그아웃 클릭
+$(document).on("click","#logout1" ,function(e){
+	e.preventDefault();
+	console.log("클릭");
+	alert("로그아웃되었습니다.")
+	$('#logoutForm').submit();
+});
+
+
+//로그아웃 왼쪽 하단 로그아웃 클릭 
+$(document).on("click",".nav__name-left" ,function(e){
+	e.preventDefault();
+	console.log("클릭");
+	alert("로그아웃되었습니다.")
+	$('#logoutForm').submit();
+});
+
+
+//팀 삭제하기 
+function deleteTeamAction(){
+	console.log("deleteTeamAction 버튼 눌림");
+	 
+	if(!confirm("정말로 삭제하시겠습니까?")){
+		alert("취소되었습니다.")
+		$('#updataTeamInfoModal').modal("hide");
+	}else{
+		$.ajax({
+			url : '/team/'+<sec:authentication property="principal.users.user_num"/>,
+			type : "delete",
+			contentType : "application/json",
+			success : function(data){
+					console.log(data);
+					alert("팀 삭제가 완료되었습니다.");
+					$('#insertTeamInfoModal').modal("hide");
+					window.location.href = "/team/choose";
+			},
+			error : function(error){
+				alert("실패");
+				return false;
+			}
+		})
+	}
+	
+}//end deleteTeamAction
+
+
+
+
 </script>
 <script src="/resources/team/onteam.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+

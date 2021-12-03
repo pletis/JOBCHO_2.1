@@ -38,6 +38,9 @@
 		<!-- <security:form-login/> -->
 		<security:form-login login-page="/users/login"  authentication-success-handler-ref="customLoginSuccess"/>
 				
+		<!-- 로그아웃 -->
+		<security:logout logout-url="/customLogout" invalidate-session="true"/>		
+				
 		<!-- 접근제한 -->
 		<security:access-denied-handler  ref="customAccessDenied"/>
 		
