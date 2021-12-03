@@ -28,6 +28,8 @@ public class TodoController {
 	//team_num필요
 	@PostMapping("/new")
 	public ResponseEntity<Integer> insertTodo(@PathVariable("team_num") int team_num,@RequestBody TodoVO todo){
+		System.out.println("todo객체" + todo);
+		System.out.println("team_num" + team_num);
 		int re = service.insertTodo(todo);
 		
 		return new ResponseEntity<Integer>(re, HttpStatus.OK);
