@@ -18,5 +18,5 @@ public class TodoListVO {
 	private int member_num;
 	private int isLive;
 	
-	private MembersVO member;
+	private MemberVO member;
 }

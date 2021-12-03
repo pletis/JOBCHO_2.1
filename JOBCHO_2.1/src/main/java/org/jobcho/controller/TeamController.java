@@ -20,14 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.log4j.Log4j;
 
 @RestController
-@RequestMapping("/team/*")
+@RequestMapping("/team")
 @Log4j
 public class TeamController {
 
 	@Autowired
 	private TeamService service;
 	
-	//ÆÀ »ý¼º
+	//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@PostMapping("/{user_num}")
 	public ResponseEntity<TeamVO> insertTeam(@RequestBody TeamVO teamVO, @PathVariable("user_num") int user_num){
 		
@@ -37,7 +37,7 @@ public class TeamController {
 		team.setTeam_name(teamVO.getTeam_name());
 		team.setTeam_info(teamVO.getTeam_info());
 			
-		log.info("ÆÀ»ý¼º È®ÀÎ");
+		log.info("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½");
 		int insertCount = service.insertTeam(team);
 		
 		return insertCount == 1
@@ -45,13 +45,21 @@ public class TeamController {
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	//ÆÀ ¸®½ºÆ® Á¶È¸
+	//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È¸
 	@GetMapping(value = "/{user_num}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<List<TeamVO>> getListTeam(@PathVariable("user_num") int user_num){
-		log.info("ÆÀ ¸ñ·Ï È£Ãâ È®ÀÎ");
+		log.info("ï¿½ï¿½ ï¿½ï¿½ï¿½ È£ï¿½ï¿½ È®ï¿½ï¿½");
 		return new ResponseEntity<>(service.getListTeam(user_num), HttpStatus.OK);
 	}
 	
+	//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
+	@GetMapping(value="/{user_num}/{team_num}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<TeamVO> getTeam(@PathVariable("team_num") int team_num){
+		log.info("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸");
+		return new ResponseEntity<>(service.getTeam(team_num), HttpStatus.OK);
+	}
+	
+	//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@PutMapping(value = "/{team_num}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<TeamVO> getTeam(@PathVariable("team_num") int team_num, @RequestBody TeamVO teamVO){
 		/*int user_num = 
@@ -76,7 +84,7 @@ public class TeamController {
 	}
 	
 	
-	//ÆÀ»èÁ¦
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@DeleteMapping(value = "/{team_num}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<TeamVO> deleteTeam(@PathVariable("team_num") int team_num){
 		int insertCount = service.deleteTeam(team_num);
