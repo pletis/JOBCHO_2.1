@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +30,7 @@ public class CalendarController {
 	
 	// /team/{team_num}/board/{board_num}/post/{post_num}/reply/new
 	// Post Man OK
-	@RequestMapping(value="/new", method = {RequestMethod.POST})
-	
+	@PostMapping(value="/new")
 	public ResponseEntity<CalendarVO> insertCalendar(@RequestBody CalendarVO calendar,
 												//@PathVariable("member_num") int member_num,
 												@PathVariable("team_num") int team_num

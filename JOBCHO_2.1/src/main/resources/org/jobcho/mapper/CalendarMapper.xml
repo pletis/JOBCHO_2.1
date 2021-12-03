@@ -12,12 +12,7 @@
 	<!-- 댓글 목록 -->
 	<select id="getListCalendar" resultType="org.jobcho.domain.CalendarVO">
 		<![CDATA[ 
-			select cal_num, cal_title,
-			cal_writer, cal_contents,
-			TO_char(starts, 'YYYY-MM-DD HH24:MI:SS') starts,
-			TO_char(ends, 'YYYY-MM-DD HH24:MI:SS') ends,
-			allday,
-			islive
+			select *
 			from calendar
 			where islive = 1
 		]]>
@@ -28,15 +23,15 @@
 	<insert id="insertCalendar" parameterType="org.jobcho.domain.CalendarVO"> 
 		<![CDATA[ 
 			insert into calendar(
-			cal_num, 
-			cal_title,
-			cal_contents, 
+			cal_num, cal_title, cal_contents, 
 			starts,
 			ends, 
-			allday, 
-			islive) 
+			allday, islive) 
 				values(
-					cal_num.nextval, #{cal_title}, #{cal_contents}, #{starts}, #{ends}, #{allday}, 1
+					cal_num.nextval, #{cal_title}, #{cal_contents}, 
+					TO_DATE(#{starts}, 'YYYY-MM-DDHH24:MI:SS'), 
+					TO_DATE(#{ends}, 'YYYY-MM-DDHH24:MI:SS'), 
+					1, 1
 				)
 		]]>
 	</insert>
