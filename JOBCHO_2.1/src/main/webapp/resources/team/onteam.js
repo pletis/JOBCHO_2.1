@@ -3,7 +3,7 @@
  */
 $(document).ready(function(){
 	var user_num=$("#authUserNum").val();
-	user_num =1
+	
 	function showTeamList(result){
 		str="";
 		result.forEach(function(item){
@@ -33,13 +33,15 @@ $(document).ready(function(){
 	})
 	
 	function getMemberNum(team_num){
-		console.log(team_num)
-		console.log("aaaa")
+		console.log(team_num);
+		console.log("aaaa");
+	
 		$.ajax({
 			url:"/team/"+team_num+"/member/"+user_num,
 	        type:'Get',
 	        dataType:'json',
 	        success:function(result){
+	        	console.log(result);
 	        	location.href="/team/main?team_num="+team_num+"&member_num="+result.member_num;
 	        }
 		})
@@ -101,6 +103,7 @@ $(document).ready(function(){
 	
 	$(document).on("click",".teamAdminModal", function(){
 		$("#updataTeamInfoModal").modal("show");
+		console.log("this : " + $(this).val());
 		showUpdateTeamInfo($(this).val());
 	})
 	

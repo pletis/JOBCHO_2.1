@@ -15,4 +15,5 @@ public interface MembersService {
 	int updateMember( MemberVO members);
 	int deleteMember( int member_num);
 	List<UsersVO> getListWithoutMembers(int team_num);
+	int insertMember2(MemberVO member);
 }

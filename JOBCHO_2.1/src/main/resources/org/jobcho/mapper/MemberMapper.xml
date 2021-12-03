@@ -34,6 +34,11 @@
 		)
 	</insert>
 	
+	<!-- 건수가함 -->
+	<insert id="insertMember2" parameterType="org.jobcho.domain.MemberVO">
+		insert into member (member_num, team_num, user_num)
+         values(member_num.nextval, #{team_num}, #{user_num})
+	</insert>
 
 	
 	<select id="listTeamMembers" parameterType="int" resultMap="MemberUser">

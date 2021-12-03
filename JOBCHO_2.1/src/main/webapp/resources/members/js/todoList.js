@@ -13,7 +13,7 @@ $(document).ready(function(){
 		str="";
 		result.forEach(function(item){
 			console.log(item)
-			str+=`<div class="nav-search-result active-right">
+			str+=`<div class="nav-search-result active-right todoUpdateModalShow" data-air="`+item.todo_num+`">
                     <div class="result-container">
                         <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
                         <div>
@@ -31,16 +31,20 @@ $(document).ready(function(){
 	}
 	
 	//여러개 불러오는 ajax
-	function showUpdateTodoInfo(){
+	function showUpdateTodoInfo(todo_num){
+		console.log()
+		
 		$.ajax({
 	        url:'/team/' +team_num+'/todo',
 	        type:'Get',
 	        dataType:'json',
 	        success:function(result){
 	        	console.log(result);
+	        
 	        	result.forEach(function(item){
-	        		if(item.member_num== member_num){
+	        		if(item.todo_num== todo_num){
 	        			$("#updateTodoNum").val(item.todo_num)
+	        			$("#updateTodoTitle").val(item.todo_title)
 	        			$("#updateTodoDescription").val(item.todo_description)
 	        			$("#updateTodoEnd").val(item.todo_endDate)
 	        		}
@@ -91,11 +95,12 @@ $(document).ready(function(){
 	
 	
 	//초기화면 출력
-	//getTeamList()
+	getTodoList()
 	
-	$(document).on("click",".team-profile-email", function(){
+	$(document).on("click",".todoUpdateModalShow", function(){
 		$("#updateTodoListInfoModal").modal("show");
-		showUpdateTodoInfo();
+		console.log("this : " + $(this).data('air'));
+		showUpdateTodoInfo($(this).data('air'));
 	})
 	
 	/*$("#updateTeamAction").on("click", function(){
