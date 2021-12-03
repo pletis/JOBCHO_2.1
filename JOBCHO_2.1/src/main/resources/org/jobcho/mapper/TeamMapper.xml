@@ -18,13 +18,13 @@
 	<!-- 팀 리스트 조회 -->
 	<select id="getListTeam" parameterType="int" resultType="org.jobcho.domain.TeamVO">
 		<![CDATA[
-			select * from team where user_num = #{user_num}
+			select * from team where user_num = #{user_num} and islive=1
 		]]>
 	</select>
 	
 	<!-- 팀 조회 -->
 	<select id="getTeam" parameterType = "int" resultType="org.jobcho.domain.TeamVO">
-		<![CDATA[select * from team where team_num = #{team_num}]]>
+		<![CDATA[select * from team where team_num = #{team_num} ]]>
 	</select>
 	
 	<!-- 팀 업데이트 -->

@@ -53,4 +53,15 @@ public class ViewsController {
 	public String teamChoose(){
 		return "/team/team";
 	}
+	
+	@GetMapping("/team/main")
+	public String teamMain(){
+		return "/main";
+	}
+	
+	@GetMapping("/calendar/test")
+	public String calendar(){
+		return "/calendar/calendar";
+	}
+	
 }

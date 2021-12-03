@@ -3,8 +3,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>find_hint</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="/resources/login/css/find.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="_csrf" content="${_csrf.token}"/>
@@ -43,33 +46,27 @@
 	}
 	
 	</script>
-<title>Insert title here</title>
 </head>
 <body>
-		<div>
-				<h1>JOBCHO</h1>
-			</div>
-			<br>
-				<h3>이메일로 비밀번호 찾기 </h3>
-			<br>
+	<div id="wrap" class="job-login">
+		<h1>JOBCHO</h1>
+		<div class="job-container">
 			
-			<form>
-				<div class="col-auto">
-	    			<label for="inputPassword2" class="visually-hidden">이름</label>
-	    				이름<input type="text" class="form-control" id="user_name" name="user_name" placeholder="홍길동">
-	  			</div>
-			
-			
-				<div class="col-auto">
-	    			<label for="inputPassword2" class="visually-hidden">이메일</label>
-	    				이메일<input type="text" class="form-control" id="user_email" name="user_email" placeholder="ex)honggildong@gmail.com">
-	  			</div>
-				
-				<br>
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-				<div class="col-auto">
-	    		<button type="button" class="btn btn-primary mb-6" onclick="find_PwEmail();">확인</button>
-	  			</div>
-			</form>
+		<div class="login-input">
+			<h3>이메일을 통하여 비밀번호 찾기</h3>
+			<p class="id-pass-inp">
+				<input type="text" id="user_name" name="user_name"  placeholder="이름">
+			</p>
+			<p class="id-pass-inp">
+				<input type="text" id="user_email" name="user_email"  placeholder="이메일">
+			</p>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		</div>
+	
+		<div class="login-btn">
+			<button type="button" onclick="find_PwEmail();">확인</button>
+		</div>
+	</div>
+	
 </body>
 </html>

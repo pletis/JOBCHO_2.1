@@ -2,31 +2,35 @@
  * 
  */
 $(document).ready(function(){
-	var user_num=$("#authUserNum").val();
-	function showTeamList(result){
+	var team_num =$("#teamNum").val();
+	var userName = $("#userName").val();
+	console.log("사용자이름  test : " + userName);
+	var user_num= $("#userNum").val();
+	var member_num = 1;
+	function showTodoList(result){
+		console.log("showTodoList 함수실행");
 		str="";
 		result.forEach(function(item){
 			console.log(item)
-			str+=`<div class="job-container">
-            <!--프로필-->
-            
-            <div class="team-profile-image" style="background-image: url('/resources/team/99D279435B3D788602.jfif');"></div>
-            
-            <div>
-                <p class="team-profile-name">`+item.team_name+`</p>
-                <p class="team-profile-email">`+item.team_info+`</p>
-            </div>
-            <!--프로필 끝-->
-            <div class="team-btn">
-                <button class="teamAdminModal" value="`+item.team_num+`">팀관리</button>
-                <button class="enterTeamMain"  onclick="location.href='/team/main?team_num=`+item.team_num+`'">팀으로 가기</button>
-            </div>
-        </div>`
+			str+=`<div class="nav-search-result active-right">
+                    <div class="result-container">
+                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
+                        <div>
+                             <p  class="team-profile-email">시작날짜 : `+item.todo_startDate+`</p>
+                             <p class="team-profile-email">마감날짜 : `+item.todo_endDate+`</p>
+                            <p class="team-profile-email">제목 : `+item.todo_title+`</p>
+                            <p class="team-profile-email">설명 : `+item.todo_description+`</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <hr>`
 		})
-		$(".job-teamlist-wrap").html(str);
+		$(".job-todolist-wrap").html(str);
 	}
 	
-	function showUpdateTeamInfo(){
+	//하나 불러오기 
+	/*function showUpdateTeamInfo(){
 		$.ajax({
 	        url:'/team/'+user_num,
 	        type:'Get',
@@ -41,9 +45,10 @@ $(document).ready(function(){
 	        	})
 	        }
 	    });//$.ajax
-	}
+	}*/
 	
-	function updateTeamAction(){
+	//수정
+	/*function updateTeamAction(){
 		$.ajax({
             url:'/team/'+$("#updateTeamNum").val(),
             type:'put',
@@ -62,22 +67,29 @@ $(document).ready(function(){
 		$("#updataTeamInfoModal").modal("hide");
 		alert("수정완료");
 		getTeamList();
-	}
+	}*/
 	
-	function getTeamList(){
+	//함수실행
+	getTodoList()
+	
+	function getTodoList(){
+		console.log("getTodoList 함수 실행");
+		
 		$.ajax({
-	        url:'/team/'+user_num,
+	        url:'/team/'+team_num+'/todo',
 	        type:'Get',
 	        dataType:'json',
 	        success:function(result){
 	        	console.log(result);
-	        	showTeamList(result);
+	        	showTodoList(result);
 	        }
 	    });//$.ajax
 	}
 	
+	
+	
 	//초기화면 출력
-	getTeamList()
+	/*getTeamList()
 	
 	$(document).on("click",".teamAdminModal", function(){
 		$("#updataTeamInfoModal").modal("show");
@@ -86,10 +98,10 @@ $(document).ready(function(){
 	
 	$("#updateTeamAction").on("click", function(){
 		updateTeamAction();
-	})
+	})*/
 	
 	
-});
+});//end document.ready
 
 
 

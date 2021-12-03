@@ -59,6 +59,14 @@ public class PostServiceImpl implements PostService {
 	}
 
 	
+	@Override
+	public int getTotalCount(Criteria cri) {
+		log.info("전체 게시글 수");
+		
+		return mapper.getTotalCount(cri);
+	}
+
+	
 
 	
 

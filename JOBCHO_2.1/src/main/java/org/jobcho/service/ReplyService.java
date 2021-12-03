@@ -10,6 +10,7 @@ public interface ReplyService {
 	
 	public List<ReplyVO> getListReply(int post_num);
 	
+	
 	public int updateReply(ReplyVO reply);
 	
 	public void deleteReply(int reply_num);

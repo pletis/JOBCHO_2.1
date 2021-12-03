@@ -33,9 +33,9 @@
 				<button type="submit">JOBCHO로그인</button>
 			</div>
 		</form>
+		<br>
 		<div>
-			<a href="/users/findPw_1">힌트로 비밀번호 찾기</a><br>
-			<a href="/users/emailFindPw">이메일로 비밀번호 찾기</a>
+			<a href="/users/findPw_1">힌트로 비밀번호 찾기</a>       <a href="/users/emailFindPw">이메일로 비밀번호 찾기</a>
 		</div>
 		
 	</div>

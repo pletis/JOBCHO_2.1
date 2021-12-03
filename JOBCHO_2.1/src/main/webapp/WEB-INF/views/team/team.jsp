@@ -40,7 +40,7 @@
                                 aria-haspopup="true" aria-expanded="false">접속하기<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">프로필</a></li>
-                                <li><a href="#">로그아웃</a></li>
+                                <li><a href="#" id="logout1">로그아웃</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -70,7 +70,7 @@
         </div>
 
         <div class="job-container-new">
-            <div><a href="#" id="createNewTeam">팀생성하기</a></div>
+            <div><a href="#" id="createNewTeam" >팀생성하기</a></div>
         </div>
 	</div>
 <!--왼쪽 사이드바 시작-->
@@ -87,6 +87,7 @@
                         <h3><sec:authentication property="principal.users.user_email"/></h3>
                     </div>
                 </div>
+                
                 <!--프로필 끝-->
                 
                 
@@ -104,6 +105,7 @@
 <!--왼쪽 사이드바 끝-->
 <!--왼쪽 사이드바 끝-->
 
+	<!-- 사용자정보 수정 -->
 	<div class="modal" id="updataUsersModal" tabindex="-1">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -144,11 +146,11 @@
 					</div>
 					<div class="modal-body">
 						
-						<input id="updateTeamNum" type="hidden">
-						<input id="updateTeamName" type="text" class="form-control"> 
-						<input id="updateTeamInfo" type="text" class="form-control">
-						<input id="updateTeamAction" type="button" class="btn btn-success" onclick="insertTeam();" value="수정">
-						
+						<input id="updateTeamNum" type="hidden" >
+						팀이름<input id="updateTeamName" type="text" class="form-control"> 
+						팀내용<input id="updateTeamInfo" type="text" class="form-control">
+						<input id="updateTeamAction" type="button" class="btn btn-success" onclick="updateTeamAction();" value="수정">
+						<input id="deleteTeamAction" type="button" class="btn btn-success" onclick="deleteTeamAction();" value="삭제">
 					</div>
 				</div>
 			</div>
@@ -160,23 +162,28 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						팀 정보 수정
+						팀 생성
 						<button class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body">
 						
-						<input id="insertTeamName" type="text" class="form-control"> 
-						<input id="insertTeamInfo" type="text" class="form-control">
-						<input id="insertUser_num" type="text" class="form-control" value="<sec:authentication property="principal.users.user_num"/>">
-						<input id="insertTeamAction" type="button" class="btn btn-success" value="팀생성">
+						팀이름<input id="insertTeamName" type="text" class="form-control"> 
+						팀정보<input id="insertTeamInfo" type="text" class="form-control">
+						<input id="insertUser_num" type="hidden" class="form-control" value="<sec:authentication property="principal.users.user_num"/>">
+						<input id="insertTeamAction" type="button" class="btn btn-success" onclick="insertTeamAction()" value="팀생성">
 						
 					</div>
 				</div>
 			</div>
 		</div>
 		
+		<!-- 로그아웃 -->
+		<form action="/customLogout" method="post" id="logoutForm">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		</form>
+		
 		<!-- 외부js에 변수 전달 -->
-		<input id="authUserNum" value="<sec:authentication property="principal.users.user_Num"/>">
+		<input id="authUserNum" value="<sec:authentication property="principal.users.user_num"/>"> 
 <script src="/resources/team/sidebar-left.js"></script>
 <script type="text/javascript">
 
@@ -196,6 +203,54 @@ $(document).on("click",".nav-profile-content-left" ,function(e){
 	updataMemberNum = this.value
 });
 
+
+
+//팀생성
+function insertTeamAction(){
+	console.log("insertTeamAction 버튼 눌림");
+	 var insertTeamName = document.getElementById('insertTeamName').value;
+	 var insertTeamInfo = document.getElementById('insertTeamName').value;
+	 var insertUser_num = document.getElementById('insertTeamName').value;
+	
+	 if(!insertTeamName){
+			alert('팀명을 입력해주세요');
+			return false;
+		}
+	 
+	 if(!insertTeamInfo){
+			alert('팀 정보를 입력해주세요');
+			return false;
+		}
+	 
+	 
+	 $.ajax({
+			url : '/team/'+<sec:authentication property="principal.users.user_num"/>,
+			type : "post",
+			contentType : "application/json",
+			data : JSON.stringify({
+						"team_name" : $("#insertTeamName").val(),			
+						"team_info" : $("#insertTeamInfo").val(),
+						"user_num" : $("#insertUser_num").val()
+			}),
+			success : function(data){
+					console.log(data);
+					alert("팀생성이 완료되었습니다");
+					$('#insertTeamInfoModal').modal("hide");
+					window.location.href = "/team/choose";
+
+
+			},
+			error : function(error){
+				alert("실패");
+				return false;
+			}
+		})
+	
+	
+}//end insertTeamAction
+
+
+//회원수정
 function checkValue(){
 	console.log("버튼눌림");
 	var user_name = document.getElementById('user_name').value;
@@ -302,6 +357,7 @@ function checkValue(){
 		success : function(data){
 				console.log(data);
 				alert("회원정보가 수정되었습니다.");
+				$('#updataUsersModal').modal("hide");
 				//window.location.href = "/team/choose";
 				//window.location.replace("/users/main");
 		},
@@ -311,17 +367,83 @@ function checkValue(){
 		}
 	})
 	
-	//users 정보 추가 모달 호출 
-	$(document).on("click","#createNewTeam" ,function(e){
-		console.log("클릭")
-		$("#insertTeamInfoModal").modal("show");
-		updataMemberNum = this.value
-	});
-	
 	
 }//end checkValue
+
+
+
+
+//users 정보 추가 모달 호출 
+$(document).on("click","#createNewTeam" ,function(e){
+	e.preventDefault();
+	console.log("클릭");
+	$("#insertTeamInfoModal").modal("show");
+	updataMemberNum = this.value
+});
+
+
+//로그아웃 오른쪽 상단 로그아웃 클릭
+$(document).on("click","#logout1" ,function(e){
+	e.preventDefault();
+	console.log("클릭");
+	alert("로그아웃되었습니다.")
+	$('#logoutForm').submit();
+});
+
+
+//로그아웃 왼쪽 하단 로그아웃 클릭 
+$(document).on("click",".nav__name-left" ,function(e){
+	e.preventDefault();
+	console.log("클릭");
+	alert("로그아웃되었습니다.")
+	$('#logoutForm').submit();
+});
+
+
+//팀 삭제하기 
+function deleteTeamAction(){
+	console.log("deleteTeamAction 버튼 눌림");
+	 
+	if(!confirm("정말로 삭제하시겠습니까?")){
+		alert("취소되었습니다.")
+		$('#updataTeamInfoModal').modal("hide");
+	}else{
+		$.ajax({
+			url : '/team/'+$('#updateTeamNum').val(),
+			type : "delete",
+			contentType : "application/json",
+			success : function(data){
+					console.log(data);
+					alert("팀 삭제가 완료되었습니다.");
+					$('#insertTeamInfoModal').modal("hide");
+					window.location.href = "/team/choose";
+			},
+			error : function(error){
+				alert("실패");
+				return false;
+			}
+		})
+	}
+	
+}//end deleteTeamAction
+
+
+
 
 </script>
 <script src="/resources/team/onteam.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
