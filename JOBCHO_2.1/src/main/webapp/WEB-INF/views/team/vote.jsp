@@ -49,23 +49,22 @@
         </div>
         
     </header>
-    <div class="job-team-body">
+    <div class="job-vote-body">
 		<h1>팀리스트</h1>
-		<div class="job-teamlist-wrap">
+		<div class="job-votelist-wrap">
 	        <div class="job-container">
 	            <!--프로필-->
 	            
 	            <div class="team-profile-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
 	            
 	            <div>
-	                <p class="team-profile-name">팀이름</p>
-	                <p class="team-profile-email"> 팀 소유자 이메일</p>
+	                <p class="vote-num"> 투표 번호 </p>
+	                <p class="vote-name"> 투표 제목 </p>
 	            </div>
 	            <!--프로필 끝-->
-	            <div class="team-btn">
-	                <button>팀관리</button>
-	                <button>팀으로 가기</button>
-	            </div>
+	            <div class="vote-btn">
+	                <button>투표 확인</button>
+	             </div>
 	        </div>
         </div>
 
@@ -174,6 +173,26 @@
 				</div>
 			</div>
 		</div>
+		
+	<!-- 투표 진행 모달 -->
+	<div class = "modal" id = "voteResultModal" tabindex = "-1">
+		<div class ="modal-dialog">
+			<div class = "modal-header">
+				투표 내용
+				<button class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<form>	
+					<input id = "vote_result1" type = "radio" class="form-control">
+					<input id = "vote_result2" type = "radio" class="form-control">
+					<input id = "vote_result3" type = "radio" class="form-control">
+					<input id = "vote_result4" type = "radio" class="form-control">
+					<input id = "vote_result5" type = "radio" class="form-control">
+					<button type ="submit" id = "vote-complete-button" >완료</button>
+				</form>
+			</div>
+		</div>
+	</div>
 		
 		<!-- 외부js에 변수 전달 -->
 		<input id="authUserNum" value="<sec:authentication property="principal.users.user_Num"/>">

@@ -45,7 +45,7 @@ public class VoteController {
 	}
 	
 	//투표하기
-	@PostMapping("/{vote_num}")
+	@PostMapping("/{vote_num}/insert")
 	public ResponseEntity<VoteResultVO> insertVoteResult(@RequestBody VoteResultVO voteResult, @PathVariable("vote_num") int vote_num){
 		voteResult.setVote_num(vote_num);
 		
