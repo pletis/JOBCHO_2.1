@@ -1,6 +1,8 @@
 package org.jobcho.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jobcho.domain.MemberVO;
 
@@ -39,23 +41,38 @@ public class MembersController {
 	@Autowired
 	MembersService service;
 	
-	@GetMapping("/")
+	@GetMapping("")
 	public ResponseEntity<List<MemberVO>> getListMember(@PathVariable("team_num") int team_num
 			){
 		List<MemberVO> list = service.getListMember(team_num);
 		return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
 	
-	@GetMapping("/{member_num}")
+	@GetMapping("/{user_num}")
 	public ResponseEntity<MemberVO> getMember(
 			@PathVariable("team_num") int team_num, 
-			@PathVariable("member_num") int member_num){
-		MemberVO member = service.getMember(member_num);
+			@PathVariable("user_num") int user_num){
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("team_num", team_num);
+		map.put("user_num", user_num);
+		MemberVO member = service.getMemberByUserNum(map);
 		return new ResponseEntity<>(member, HttpStatus.OK);
 	}
 	
 	@PostMapping("/invite")
 	public ResponseEntity<MemberVO> insertMember(@PathVariable("team_num") int team_num, @RequestBody MemberVO members){
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("user_num", members.getUser_num());
+		map.put("team_num", members.getTeam_num());
+		System.out.println(map);
+		MemberVO isliveMember = service.getMemberByUserNum(map);
+		System.out.println(isliveMember);
+		if(isliveMember.getIsLive()==0){
+			isliveMember.setIsLive(1);
+			
+			int re = service.updateMember(isliveMember);
+			return (re==1)? new ResponseEntity<>(members, HttpStatus.OK): new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 		int re = service.insertMember(members);
 		log.info(members);
 		return (re==1)? new ResponseEntity<>(members, HttpStatus.OK): new ResponseEntity<>(HttpStatus.BAD_REQUEST);

@@ -3,6 +3,7 @@
  */
 $(document).ready(function(){
 	var user_num=$("#authUserNum").val();
+	user_num =1
 	function showTeamList(result){
 		str="";
 		result.forEach(function(item){
@@ -19,11 +20,29 @@ $(document).ready(function(){
             <!--프로필 끝-->
             <div class="team-btn">
                 <button class="teamAdminModal" value="`+item.team_num+`">팀관리</button>
-                <button class="enterTeamMain"  onclick="location.href='/team/main?team_num=`+item.team_num+`'">팀으로 가기</button>
+                <button class="enterTeamMain"  value='`+item.team_num+`'>팀으로 가기</button>
             </div>
         </div>`
 		})
 		$(".job-teamlist-wrap").html(str);
+	}
+	
+	$(document).on("click",".enterTeamMain",function(){
+		team_num = $(this).val();
+		getMemberNum(team_num);
+	})
+	
+	function getMemberNum(team_num){
+		console.log(team_num)
+		console.log("aaaa")
+		$.ajax({
+			url:"/team/"+team_num+"/member/"+user_num,
+	        type:'Get',
+	        dataType:'json',
+	        success:function(result){
+	        	location.href="/team/main?team_num="+team_num+"&member_num="+result.member_num;
+	        }
+		})
 	}
 	
 	function showUpdateTeamInfo(team_num){
@@ -32,7 +51,7 @@ $(document).ready(function(){
 	        type:'Get',
 	        dataType:'json',
 	        success:function(result){
-	        	console.log(result);
+	        	console.log(result)
 	        	result.forEach(function(item){
 	        		if(item.team_num==team_num){
 	        			$("#updateTeamNum").val(item.team_num)
@@ -82,7 +101,6 @@ $(document).ready(function(){
 	
 	$(document).on("click",".teamAdminModal", function(){
 		$("#updataTeamInfoModal").modal("show");
-		
 		showUpdateTeamInfo($(this).val());
 	})
 	
