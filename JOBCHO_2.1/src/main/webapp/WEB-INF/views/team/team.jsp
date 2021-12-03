@@ -146,7 +146,7 @@
 					</div>
 					<div class="modal-body">
 						
-						<input id="updateTeamNum" type="hidden" >
+						<input id="updateTeamNum" type="text" >
 						팀이름<input id="updateTeamName" type="text" class="form-control"> 
 						팀내용<input id="updateTeamInfo" type="text" class="form-control">
 						<input id="updateTeamAction" type="button" class="btn btn-success" onclick="updateTeamAction();" value="수정">
@@ -176,7 +176,6 @@
 				</div>
 			</div>
 		</div>
-		
 		<!-- 로그아웃 -->
 		<form action="/customLogout" method="post" id="logoutForm">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
