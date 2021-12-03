@@ -29,7 +29,7 @@ public class CalendarController {
 	
 	// /team/{team_num}/board/{board_num}/post/{post_num}/reply/new
 	// Post Man OK
-	@RequestMapping(value="/new", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/new", method = {RequestMethod.POST})
 	
 	public ResponseEntity<CalendarVO> insertCalendar(@RequestBody CalendarVO calendar,
 												//@PathVariable("member_num") int member_num,
@@ -47,7 +47,7 @@ public class CalendarController {
 	}
 	
 	//�룷�뒪�듃留� o 
-	@GetMapping(value = "",
+	@GetMapping(value = "/getListCalendar",
 			produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<List<CalendarVO>> getListCalendar(CalendarVO cal_num,
 															@PathVariable("team_num") int team_num){

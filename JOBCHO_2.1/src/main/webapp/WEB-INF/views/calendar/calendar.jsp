@@ -47,12 +47,14 @@
             center: "title",
             right: "dayGridMonth,timeGridWeek,timeGridDay",
           },
+          locale:"ko",
           initialDate: "2021-04-12", // 초기 로딩 날짜.
           navLinks: true, // can click day/week names to navigate views
           selectable: true,
           selectMirror: true, // 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용..
           select: function (arg) {
             console.log(arg);
+            console.log(arg.start);
             var title = prompt("입력할 일정:"); // title 값이 있을때, 화면에 calendar.addEvent() json형식으로 일정을 추가
             if (title) {
               calendar.addEvent({
@@ -75,17 +77,33 @@
           editable: true,
           dayMaxEvents: true, // allow "more" link when too many events
         //================ ajax데이터 불러올 부분 =====================//
-          events: function(info, successCallback, failureCallback){ // ajax 처리로 데이터를 로딩 시킨다. 
+          events: function(info, successcallback, failecallback){ // ajax 처리로 데이터를 로딩 시킨다. 
         	  $.ajax({ 
-        		  		type:"get", 
-        		  		url:"${path}/calendar.do?method=data", 
-        				  dataType:"json" 
+        		  		type:"post", 
+        		  		url:"${path}/getListCalendar?method=data", 
+        				  dataType:"application/json",
+        				  
+        				  success: function(){
+        					  var events = [];
+        					  $.each(arg, function(idx, item){
+        						  var title = arg[idx].title;
+        						  var start = arg[idx].start;
+        						  var end = arg[idx].start;
+        						  events.push({
+        							  
+        						  });
+        							  
+        						  
+        					  });
+        					  
+        				  }
         		}); 
+        	  
         	  }
-        	  }
-          }
+          } //events end
 
-        });
+        }
+  		);
         calendar.render();
       });
     </script>

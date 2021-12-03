@@ -6,18 +6,16 @@
 
 <mapper namespace="org.jobcho.mapper.CalendarMapper">
 	<cache />
-	<resultMap type="Calendar" id="calMap">
-		<result property="start" column="starts"/>
-		<result property="end" column="ends"></result>
-	</resultMap>
+
 	
 	
 	<!-- 댓글 목록 -->
-	<select id="getListCalendar" resultMap="calMap" resultType="org.jobcho.domain.CalendarVO">
+	<select id="getListCalendar" resultType="org.jobcho.domain.CalendarVO">
 		<![CDATA[ 
 			select cal_num, cal_title,
 			cal_writer, cal_contents,
-			TO_char(starts, 'YYYY-MM-DD"T"HH24:MI:SS') starts,
+			TO_char(starts, 'YYYY-MM-DD HH24:MI:SS') starts,
+			TO_char(ends, 'YYYY-MM-DD HH24:MI:SS') ends,
 			allday,
 			islive
 			from calendar
@@ -25,13 +23,20 @@
 		]]>
 	</select>
 	
-	
+	<!-- TO_char(starts,"YYYY-MM-DD HH24:MI:SS")  -->
 	<!-- 댓글 생성 -->
 	<insert id="insertCalendar" parameterType="org.jobcho.domain.CalendarVO"> 
 		<![CDATA[ 
-			insert into calendar(cal_num, cal_title,cal_contents, starts, ends, allday, islive) 
+			insert into calendar(
+			cal_num, 
+			cal_title,
+			cal_contents, 
+			starts,
+			ends, 
+			allday, 
+			islive) 
 				values(
-					Reply_num.nextval, #{cal_title}, #{cal_contents}, default, default, 1, 1
+					cal_num.nextval, #{cal_title}, #{cal_contents}, #{starts}, #{ends}, #{allday}, 1
 				)
 		]]>
 	</insert>

@@ -7,6 +7,7 @@ import org.jobcho.mapper.BoardMapper;
 import org.jobcho.mapper.CalendarMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -29,7 +30,7 @@ public class CalendarServiceImpl implements CalendarService{
 	}
 
 	@Override
-	public List<CalendarVO> getListCalendar(CalendarVO cal_num) {
+	public List<CalendarVO> getListCalendar(@RequestParam("method=date") CalendarVO cal_num) {
 		
 		log.info("캘린더 일정 조회=============" + cal_num);
 		
