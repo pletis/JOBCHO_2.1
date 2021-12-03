@@ -30,7 +30,7 @@ public class ReplyController {
 	private ReplyService service;
 	
 	// /team/{team_num}/board/{board_num}/post/{post_num}/reply/new
-	//포스트맨 o
+	//�룷�뒪�듃留� o
 	@RequestMapping(value="/new", method = {RequestMethod.GET, RequestMethod.POST})
 	
 	public ResponseEntity<ReplyVO> insertReply(@RequestBody ReplyVO rvo,
@@ -47,7 +47,7 @@ public class ReplyController {
 				:  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	//포스트맨 o 
+	//�룷�뒪�듃留� o 
 	@GetMapping(value = "",
 			produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<List<ReplyVO>> getListReply(@PathVariable("post_num") int post_num){
@@ -56,7 +56,7 @@ public class ReplyController {
 		
 	}
 	
-	//포스트맨 o
+	//�룷�뒪�듃留� o
 	@PutMapping(value = "/{reply_num}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ReplyVO> updateReply(@PathVariable("reply_num") int reply_num,
 																				@RequestBody ReplyVO reply){
@@ -70,7 +70,7 @@ public class ReplyController {
 				:  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	//포스트맨 o
+	//�룷�뒪�듃留� o
 	@DeleteMapping(value = "/{reply_num}",
 			produces = {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> deleteReply(@PathVariable int reply_num){
