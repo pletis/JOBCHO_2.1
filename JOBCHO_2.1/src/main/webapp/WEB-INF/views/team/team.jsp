@@ -176,6 +176,9 @@
 				</div>
 			</div>
 		</div>
+		
+		<!-- 외부js에 변수 전달 -->
+		<input id="authUserNum" value="<sec:authentication property="principal.users.user_Num"/>">
 <script src="/resources/team/sidebar-left.js"></script>
 <script type="text/javascript">
 

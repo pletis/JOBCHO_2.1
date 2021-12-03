@@ -52,6 +52,14 @@ public class TeamController {
 		return new ResponseEntity<>(service.getListTeam(user_num), HttpStatus.OK);
 	}
 	
+	//ÆÀ Á¤º¸ Á¶È¸
+	@GetMapping(value="/{user_num}/{team_num}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<TeamVO> getTeam(@PathVariable("team_num") int team_num){
+		log.info("ÆÀ Á¤º¸ Á¶È¸");
+		return new ResponseEntity<>(service.getTeam(team_num), HttpStatus.OK);
+	}
+	
+	//ÆÀ Á¤º¸ ¼öÁ¤
 	@PutMapping(value = "/{team_num}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<TeamVO> getTeam(@PathVariable("team_num") int team_num, @RequestBody TeamVO teamVO){
 		/*int user_num = 
