@@ -59,5 +59,9 @@ public class ViewsController {
 		return "/main";
 	}
 	
+	@GetMapping("/calendar/test")
+	public String calendar(){
+		return "/calendar/calendar";
+	}
 	
 }

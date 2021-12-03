@@ -3,7 +3,6 @@ package org.jobcho.controller;
 import java.util.List;
 
 import org.jobcho.domain.BoardVO;
-import org.jobcho.domain.MemberVO;
 import org.jobcho.domain.ReplyVO;
 import org.jobcho.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +25,19 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/team/{team_num}/board/{board_num}/post/{post_num}/reply")
 @Log4j
 public class ReplyController {
+	
+	
+	
 	@Autowired
 	private ReplyService service;
 	
+	
 	// /team/{team_num}/board/{board_num}/post/{post_num}/reply/new
-	//포스트맨 o
+	//�룷�뒪�듃留� o
 	@RequestMapping(value="/new", method = {RequestMethod.GET, RequestMethod.POST})
 	
 	public ResponseEntity<ReplyVO> insertReply(@RequestBody ReplyVO rvo,
-																				@PathVariable("post_num") int post_num
-																				){
-		
+																				@PathVariable("post_num") int post_num){
 		
 		rvo.setPost_num(post_num);
 		log.info("insertReply ==================" + rvo);
@@ -47,14 +48,18 @@ public class ReplyController {
 				:  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
+	
+	
 	//포스트맨 o 
 	@GetMapping(value = "",
 			produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<List<ReplyVO>> getListReply(@PathVariable("post_num") int post_num){
 		log.info("getListReply ================== " + post_num);
 		return new ResponseEntity<>(service.getListReply(post_num), HttpStatus.OK);
-		
 	}
+	
+	
+	
 	
 	//포스트맨 o
 	@PutMapping(value = "/{reply_num}", produces = { MediaType.APPLICATION_JSON_VALUE })
@@ -69,6 +74,8 @@ public class ReplyController {
 				? new ResponseEntity<>(HttpStatus.OK)
 				:  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	
 	
 	//포스트맨 o
 	@DeleteMapping(value = "/{reply_num}",
