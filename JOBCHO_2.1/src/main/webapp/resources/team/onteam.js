@@ -1,6 +1,7 @@
 /**
  * 
  */
+
 $(document).ready(function(){
 	var user_num=$("#authUserNum").val();
 	function showTeamList(result){
