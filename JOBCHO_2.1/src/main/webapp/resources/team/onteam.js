@@ -1,7 +1,6 @@
 /**
  * 
  */
-
 $(document).ready(function(){
 	var user_num=$("#authUserNum").val();
 	function showTeamList(result){
@@ -19,8 +18,8 @@ $(document).ready(function(){
             </div>
             <!--프로필 끝-->
             <div class="team-btn">
-                <button id="teamAdminModal" value="`+item.team_num+`">팀관리</button>
-                <button id="enterTeamMain" value="`+item.team_num+`">팀으로 가기</button>
+                <button class="teamAdminModal" value="`+item.team_num+`">팀관리</button>
+                <button class="enterTeamMain"  onclick="location.href='/team/main?team_num=`+item.team_num+`'">팀으로 가기</button>
             </div>
         </div>`
 		})
@@ -80,7 +79,7 @@ $(document).ready(function(){
 	//초기화면 출력
 	getTeamList()
 	
-	$(document).on("click","#teamAdminModal", function(){
+	$(document).on("click",".teamAdminModal", function(){
 		$("#updataTeamInfoModal").modal("show");
 		showUpdateTeamInfo();
 	})
@@ -88,6 +87,7 @@ $(document).ready(function(){
 	$("#updateTeamAction").on("click", function(){
 		updateTeamAction();
 	})
+	
 	
 });
 
