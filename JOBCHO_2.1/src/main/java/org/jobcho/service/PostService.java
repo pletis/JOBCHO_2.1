@@ -18,4 +18,6 @@ public interface PostService {
 	public int updateBoard(PostVO post); //게시글 수정
 	public void deletePost(int post_num); //게시글 삭제
 	
+	public int getTotalCount(Criteria cri); //전체 게시글 수
+	
 }
