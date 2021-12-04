@@ -696,7 +696,7 @@
 		updataMemberNum = this.value
 	});
 	
-	//할일 추가 ajax
+/*  	//할일 추가 ajax
 function insertTodoListAction(){
 	console.log("insertTodoListAction 버튼 눌림");
 	 	
@@ -740,9 +740,10 @@ function insertTodoListAction(){
 			alert("실패");
 			return false;
 		}
-	})
+	});
+	getTodoList();
 	
-}//end insertTodoListAction
+}//end insertTodoListAction  */
 		
 	</script>
 

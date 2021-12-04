@@ -8,6 +8,24 @@ $(document).ready(function(){
 	var user_num= $("#userNum").val();
 	var member_num = $("#memberNum").val();
 	
+
+	function getTodoList(){
+		console.log("getTodoList 함수 실행");
+		
+		$.ajax({
+	        url:'/team/'+team_num+'/todo/list/'+member_num,
+	        type:'Get',
+	        dataType:'json',
+	        success:function(result){
+	        	console.log(result);
+	        	showTodoList(result);
+	        }
+	    });//$.ajax
+	}
+	
+	//초기화면 출력
+	getTodoList();
+	
 	function showTodoList(result){
 		console.log("showTodoList 함수실행");
 		str="";
@@ -76,25 +94,8 @@ $(document).ready(function(){
 		getTodoList();
 	}
 	
-	//함수실행
-	getTodoList();
 	
-	function getTodoList(){
-		console.log("getTodoList 함수 실행");
-		
-		$.ajax({
-	        url:'/team/'+team_num+'/todo/list/'+member_num,
-	        type:'Get',
-	        dataType:'json',
-	        success:function(result){
-	        	console.log(result);
-	        	showTodoList(result);
-	        }
-	    });//$.ajax
-	}
 	
-	//초기화면 출력
-	getTodoList();
 	
 	//오늘의 할일 삭제하기 
 	function deleteTodoAction(){
@@ -111,17 +112,68 @@ $(document).ready(function(){
 				success : function(data){
 						console.log(data);
 						alert("삭제가 완료되었습니다.");
+						$('#updateTodoListInfoModal').modal("hide");
+						getTodoList();
 				},
 				error : function(error){
 					alert("실패");
 					return false;
 				}
 			});
-			$('#updateTodoListInfoModal').modal("hide");
-			getTodoList();
+			
+			
 		}
 		
 	}//end deleteTeamAction
+	
+	//할일 추가 ajax
+	function insertTodoListAction(){
+		console.log("insertTodoListAction 버튼 눌림");
+		 	
+		var todo_title = document.getElementById('todo_title').value;
+		var todo_description = document.getElementById('todo_description').value;
+		var todo_endDate = document.getElementById('todo_endDate').value;
+		var member_num = document.getElementById('member_num').value;
+		var team_num = document.getElementById('team_num').value;
+			
+		if(!todo_title){
+			alert('오늘의 할일을 입력해주세요');
+			return false;
+		}
+		if(!todo_description){
+			alert('내용을 입력해주세요');
+			return false;
+		}
+		if(!todo_endDate){
+			alert('마감날짜를 선택해주세요');
+			return false;
+		}
+			
+		$.ajax({
+			url : '/team/'+team_num+'/todo/new',
+			type : "post",
+			contentType : "application/json",
+			data : JSON.stringify({"todo_title" : $("#todo_title").val(),
+						"todo_description" : $("#todo_description").val(),			
+						"todo_endDate" : $("#todo_endDate").val(),
+						"member_num" : $("#member_num").val(),
+						"team_num" : $("#team_num").val(),
+			}),
+			success : function(data){
+					console.log(data);
+					alert("오늘의 할일이 추가되었습니다.");
+					$('#insertTodoListInfoModal').modal("hide");
+					getTodoList();
+					//window.location.href = "/team/main?team_num="${param.team_num}";
+					//window.location.replace("/users/main");
+			},
+			error : function(error){
+				alert("실패");
+				return false;
+			}
+		});
+		
+	}//end insertTodoListAction
 	
 	
 	//수정모달 띄우기 
@@ -139,6 +191,12 @@ $(document).ready(function(){
 	//오늘의 할일 삭제 버튼을 눌렀을 때 삭제시키는 함수 실행 
 	$("#deleteTodoAction").on("click", function(){
 		deleteTodoAction();
+		getTodoList();
+	})
+	
+	//오늘의 할일 생성버튼 눌렀을 때 수정시키는 함수 실행
+	$("#insertTeamAction").on("click", function(){
+		insertTodoListAction();
 		getTodoList();
 	})
 	

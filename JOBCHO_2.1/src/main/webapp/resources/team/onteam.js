@@ -117,13 +117,14 @@ $(document).ready(function(){
 						console.log(data);
 						$('#updataTeamInfoModal').modal("hide");
 						alert("팀 삭제가 완료되었습니다.");
+						getTeamList();
 				},
 				error : function(error){
 					alert("실패");
 					return false;
 				}
 			});
-			getTeamList();
+			
 		}
 		
 	}//end deleteTeamAction
