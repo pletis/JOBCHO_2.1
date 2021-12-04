@@ -56,6 +56,7 @@ public class ViewsController {
 	
 	@GetMapping("/team/main")
 	public String teamMain(){
+		
 		return "/main";
 	}
 	

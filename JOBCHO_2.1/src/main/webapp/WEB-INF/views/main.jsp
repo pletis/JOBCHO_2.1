@@ -624,7 +624,7 @@
 						오늘의 할일<input id="todo_title" type="text" class="form-control"> 
 						내용<input id="todo_description" type="text" class="form-control">
 						마감날짜<input id="todo_endDate" type="date" class="form-control">
-						member_num<input id="member_num" type="text" class="form-control" value="1">
+						member_num<input id="member_num" type="text" class="form-control" value="${param.member_num}">
 						team_num<input id="team_num" type="text" class="form-control" value="${param.team_num}">
 						<input id="insertTeamAction" type="button" class="btn btn-success" onclick="insertTodoListAction();" value="오늘의 할일 생성">
 						
@@ -644,12 +644,12 @@
 					</div>
 					<div class="modal-body">
 					
-						<input id="updateTodoNum" type="text" >
+						<input id="updateTodoNum" type="hidden" >
 						오늘의 할일<input id="updateTodoTitle" type="text" class="form-control"> 
 						내용<input id="updateTodoDescription" type="text" class="form-control">
 						마감날짜<input id="updateTodoEnd" type="date" class="form-control">
-						<input id="insertTeamAction" type="button" class="btn btn-success" onclick="updateTodoLAction();" value="수정">
-						
+						<input id="updateTodoAction" type="button" class="btn btn-success" value="수정">
+						<input id="deleteTodoAction" type="button" class="btn btn-success" value="삭제">
 					</div>
 				</div>
 			</div>
@@ -673,6 +673,8 @@
 
 	<input type="hidden" id="teamNum" value=${param.team_num }>
 	
+	<input type="hidden" id="memberNum" value=${param.member_num }>
+	
 	<script type="text/javascript">
 	
 	
@@ -694,7 +696,7 @@
 		updataMemberNum = this.value
 	});
 	
-	//할일 추가 ajax
+/*  	//할일 추가 ajax
 function insertTodoListAction(){
 	console.log("insertTodoListAction 버튼 눌림");
 	 	
@@ -738,9 +740,10 @@ function insertTodoListAction(){
 			alert("실패");
 			return false;
 		}
-	})
+	});
+	getTodoList();
 	
-}//end insertTodoListAction
+}//end insertTodoListAction  */
 		
 	</script>
 

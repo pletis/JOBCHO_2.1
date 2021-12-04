@@ -3,7 +3,7 @@
  */
 $(document).ready(function(){
 	var user_num=$("#authUserNum").val();
-	user_num =1
+	
 	function showTeamList(result){
 		str="";
 		result.forEach(function(item){
@@ -33,13 +33,15 @@ $(document).ready(function(){
 	})
 	
 	function getMemberNum(team_num){
-		console.log(team_num)
-		console.log("aaaa")
+		console.log(team_num);
+		console.log("aaaa");
+	
 		$.ajax({
 			url:"/team/"+team_num+"/member/"+user_num,
 	        type:'Get',
 	        dataType:'json',
 	        success:function(result){
+	        	console.log(result);
 	        	location.href="/team/main?team_num="+team_num+"&member_num="+result.member_num;
 	        }
 		})
@@ -97,10 +99,40 @@ $(document).ready(function(){
 	}
 	
 	//초기화면 출력
-	getTeamList()
+	getTeamList();
+	
+	//팀 삭제하기 
+	function deleteTeamAction(){
+		console.log("deleteTeamAction 버튼 눌림");
+		 
+		if(!confirm("정말로 삭제하시겠습니까?")){
+			alert("취소되었습니다.")
+			$('#updataTeamInfoModal').modal("hide");
+		}else{
+			$.ajax({
+				url : '/team/'+$('#updateTeamNum').val(),
+				type : "delete",
+				contentType : "application/json",
+				success : function(data){
+						console.log(data);
+						$('#updataTeamInfoModal').modal("hide");
+						alert("팀 삭제가 완료되었습니다.");
+						getTeamList();
+				},
+				error : function(error){
+					alert("실패");
+					return false;
+				}
+			});
+			
+		}
+		
+	}//end deleteTeamAction
+	
 	
 	$(document).on("click",".teamAdminModal", function(){
 		$("#updataTeamInfoModal").modal("show");
+		console.log("this : " + $(this).val());
 		showUpdateTeamInfo($(this).val());
 	})
 	
@@ -108,6 +140,10 @@ $(document).ready(function(){
 		updateTeamAction();
 	})
 	
+	$("#deleteTeamAction").on("click", function(){
+		deleteTeamAction();
+		getTeamList();
+	})
 	
 });
 

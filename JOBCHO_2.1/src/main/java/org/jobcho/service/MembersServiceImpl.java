@@ -58,4 +58,12 @@ public class MembersServiceImpl implements MembersService {
 		return mapper.getUsersWithoutMembersList(team_num);
 	}
 
+	@Override
+	public int insertMember2(MemberVO member) {
+		int re = mapper.insertMember2(member);
+		return re;
+	}
+
+	
+
 }

@@ -1,6 +1,7 @@
 package org.jobcho.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.jobcho.domain.TeamVO;
 import org.jobcho.mapper.TeamMapper;
@@ -46,6 +47,13 @@ public class TeamServiceImpl implements TeamService {
 	public int deleteTeam(int team_num) {
 		
 		return mapper.deleteTeam(team_num);
+	}
+
+
+	@Override
+	public TeamVO selectTeam(Map<String, String> map) {
+		TeamVO team = mapper.selectTeam(map);
+		return team;
 	}
 
 }

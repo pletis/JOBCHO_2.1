@@ -1,6 +1,7 @@
 package org.jobcho.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.jobcho.domain.TodoVO;
 import org.jobcho.mapper.TodoMapper;
@@ -46,6 +47,13 @@ public class TodoServiceImpl implements TodoService {
 	public int deleteTodo(int todo_num) {
 		int re = mapper.deleteTodo(todo_num);
 		return re;
+	}
+
+	//할일리스트 두번째 방법
+	@Override
+	public List<TodoVO> selectTodoList2(Map<String, Integer> map) {
+		List<TodoVO> todoList = mapper.selectTodoList2(map);
+		return todoList;
 	}
 
 }
