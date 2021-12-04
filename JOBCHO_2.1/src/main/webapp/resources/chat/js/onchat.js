@@ -8,15 +8,15 @@ function onChatting(e){
 $(document).ready(function(){
 	var search = location.search 
 	var params = new URLSearchParams(search); 
-	var member_num= params.get('member_num');
+	var member_num= $("#MemberNum").val();
 	console.log("member_num:"+member_num)
-	var team_num = 1;
+	var team_num = $("#teamNum").val();
 	var chatRoom_num=0;
 	var chatMember_num = 0;
 	var searchTeamMemberList = null;
 	var inviteChatMemberList = [];
 	var webSocket = null;
-	
+	var chatRoomList = null;
 	//채팅방 초대를 위한 팀 멤버리스트 호출
 	function getInviteChatMemberList(){
 		//멤버리스트 호출
@@ -52,21 +52,40 @@ $(document).ready(function(){
 		</div>`
 			
 			
-		$("#body-pd-left").html(str);
-	    
+		$(".job-team-body").html(str);
+	    $(document).find(".job-chat").scrollTop($(document).find(".job-chat")[0].scrollHeight);
 	}
 	
 	//채팅방 목록 왼쪽 사이드바에 출력
-	function showChatRoomList(result){
-		var str = "";
-		result.forEach(function(item){
-			str +=`<a href="#" class="nav__link-left onChatting" onclick="onChatting(event)" data-value="`+item.chatRoom_num+`"> <ion-icon
-								name="chatbubbles-outline" class="nav__icon-left"></ion-icon> <span
-							class="nav__name-left">`+item.chatRoom_name+`</span>
-						</a>`
-			
-			$("#chatRoomList").html(str);
-		});		
+	function showChatRoomList(){
+		
+		$.ajax({
+            url:'/team/'+team_num+'/chatroom/1/chatmember/'+member_num,
+            type:'Get',
+            dataType:'json',
+            success:function(result){
+            	console.log(result);
+            	var str = "";
+            	chatRoomList.forEach(function(room){
+            		result.forEach(function(item){
+                		
+                		console.log(room.chatRoom_num)
+                		console.log(item.chatRoom_num)
+            			if(room.chatRoom_num == item.chatRoom_num){
+            				str +=`<a href="#" class="nav__link-left onChatting" onclick="onChatting(event)" data-value="`+item.chatRoom_num+`"> <ion-icon
+    						name="chatbubbles-outline" class="nav__icon-left"></ion-icon> <span
+    					class="nav__name-left">`+room.chatRoom_name+`</span>
+    				</a>`
+            			}
+            	})
+            	
+
+        			$("#chatRoomList").html(str);
+        		});		
+            }
+        });//$.ajax
+		
+		
 	}
 	
 	//채팅방 초대 모달에서 멤버 리스트 출력
@@ -173,17 +192,22 @@ $(document).ready(function(){
         dataType:'json',
         success:function(result){
         	showChatRoomList(result);
+        	chatRoomList = result;
         }
     });//$.ajax
 	
+	//채팅방 생성 모달
 	$("#createChatRoom").on("click", function(){
 		$("#insertChatRoomModal").modal("show");
+		inviteChatMemberList=[]
+		inviteChatMemberList.push(member_num);
 		getInviteChatMemberList();
 		
 	})
 
 	//채팅방 생성 모달의 검색바에서 검색어와 일치하는 팀멤버 검색
     $('#inviteChatMemberSearchbar').keyup(function(){
+    	console.log(searchTeamMemberList);
 		var keyword = $(this).val()
 		var str=""
 		searchTeamMemberList.forEach(function(member,index){
@@ -268,6 +292,8 @@ $(document).ready(function(){
 		$(document).find("#commentParentText").val("")
 		str =`<p class="send">`+message+`</p>`
 		$(document).find(".job-chat").append(str);
+		$(document).find(".job-chat").scrollTop($(document).find(".job-chat")[0].scrollHeight);
+
 		$.ajax({
 	        url:'/team/'+team_num+'/chatroom/'+chatRoom_num+'/chat/new',
 	        type:'Post',
@@ -293,6 +319,7 @@ $(document).ready(function(){
 		$(document).find("#commentParentText").val("")
 		str =`<p class="send">`+message+`</p>`
 		$(document).find(".job-chat").append(str);
+		$(document).find(".job-chat").scrollTop($(document).find(".job-chat")[0].scrollHeight);
 		$.ajax({
 	        url:'/team/'+team_num+'/chatroom/'+chatRoom_num+'/chat/new',
 	        type:'Post',

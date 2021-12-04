@@ -61,9 +61,9 @@ public class ChatController {
 				: new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
-	@GetMapping("/{chatRoom_num}/chatmember/{chatmember_num}")
-	public ResponseEntity<ChatMemberVO> getChatMember(@PathVariable("chatmember_num") int chatMember_num){
-		ChatMemberVO chatMember = service.getChatMember(chatMember_num);
+	@GetMapping("/{chatRoom_num}/chatmember/{member_num}")
+	public ResponseEntity<List<ChatMemberVO>> getChatMember(@PathVariable("member_num") int member_num){
+		List<ChatMemberVO> chatMember = service.getChatMember(member_num);
 		return (chatMember == null)? new ResponseEntity<>(HttpStatus.NO_CONTENT)
 				: new ResponseEntity<>(chatMember, HttpStatus.OK);
 	}

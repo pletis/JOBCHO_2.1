@@ -46,7 +46,7 @@ public class ChatServiceImpl implements ChatService{
 	}
 
 	@Override
-	public ChatMemberVO getChatMember(int chatMember_num) {
+	public List<ChatMemberVO> getChatMember(int chatMember_num) {
 		// TODO Auto-generated method stub
 		return mapper.getChatMember(chatMember_num);
 	}

@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta charset='utf-8'>
-<meta name="_csrf" content="${_csrf.token}"/>
 <title>Page Title</title>
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -23,6 +22,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/main/css/sidebar-left.css" >
 <link rel="stylesheet" type="text/css" href="/resources/main/css/content.css" >
 <link rel="stylesheet" type="text/css" href="/resources/main/css/team.css" >
+<link rel="stylesheet" type="text/css" href="/resources/chat/css/chat.css">
 
 
 
@@ -89,8 +89,6 @@
 					<div class="nav-profile-content-left">
 						<p>cjhun0516@gmail.com</p>
 						<p>2팀 팀장</p>
-						팀넘버 : ${param.team_num }<br>
-						사용자 이름 : <sec:authentication property="principal.users.user_name"/>
 					</div>
 				</div>
 				<!--프로필 끝-->
@@ -156,36 +154,11 @@
 					<!-- 풀커뮤니티 스크롤-->
 					<!-- 풀커뮤니티 스크롤-->
 					<h3>
-						채팅 <a href="#" class="collapse__sublink-left"><ion-icon
+						채팅 <a href="#" id="createChatRoom" class="collapse__sublink-left" onclick="onChatting(event)"><ion-icon
 								name="add-outline"></ion-icon></a>
 					</h3>
-					<div class="nav__list-left nav__scroll-left">
-
-						<a href="#" class="nav__link-left"> <ion-icon
-								name="chatbubbles-outline" class="nav__icon-left"></ion-icon> <span
-							class="nav__name-left">Messenger</span>
-						</a> <a href="#" class="nav__link-left"> <ion-icon
-								name="chatbubbles-outline" class="nav__icon-left"></ion-icon> <span
-							class="nav__name-left">Messenger</span>
-						</a> <a href="#" class="nav__link-left"> <ion-icon
-								name="chatbubbles-outline" class="nav__icon-left"></ion-icon> <span
-							class="nav__name-left">Messenger</span>
-						</a> <a href="#" class="nav__link-left"> <ion-icon
-								name="chatbubbles-outline" class="nav__icon-left"></ion-icon> <span
-							class="nav__name-left">Messenger</span>
-						</a> <a href="#" class="nav__link-left"> <ion-icon
-								name="chatbubbles-outline" class="nav__icon-left"></ion-icon> <span
-							class="nav__name-left">Messenger</span>
-						</a> <a href="#" class="nav__link-left"> <ion-icon
-								name="chatbubbles-outline" class="nav__icon-left"></ion-icon> <span
-							class="nav__name-left">Messenger</span>
-						</a> <a href="#" class="nav__link-left"> <ion-icon
-								name="chatbubbles-outline" class="nav__icon-left"></ion-icon> <span
-							class="nav__name-left">Messenger</span>
-						</a> <a href="#" class="nav__link-left"> <ion-icon
-								name="chatbubbles-outline" class="nav__icon-left"></ion-icon> <span
-							class="nav__name-left">Messenger</span>
-						</a>
+					<div id="chatRoomList" class="nav__list-left nav__scroll-left">
+						
 					</div>
 					<!-- 풀커뮤니티 스크롤 끝-->
 					<!-- 풀커뮤니티 스크롤 끝-->
@@ -319,8 +292,45 @@
                     </div>
                 </div>
                 <hr>
-               
-             
+                <div class="nav-search-result ">
+                    <div class="result-container">
+                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
+                        <div>
+                            <p  class="team-profile-name">최지훈</p>
+                            <p class="team-profile-email">2015/21/505</p>
+                            <p class="team-profile-email">이건또 어떻게</p>
+                            <p class="team-profile-email">공지사항</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="nav-search-result ">
+                    <div class="result-container">
+                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
+                        <div>
+                            <p  class="team-profile-name">최지훈</p>
+                            <p class="team-profile-email">2015/21/505</p>
+                            <p class="team-profile-email">이건또 어떻게</p>
+                            <p class="team-profile-email">공지사항</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="nav-search-result ">
+                    <div class="result-container">
+                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
+                        <div>
+                            <p  class="team-profile-name">최지훈</p>
+                            <p class="team-profile-email">2015/21/505</p>
+                            <p class="team-profile-email">이건또 어떻게</p>
+                            <p class="team-profile-email">공지사항</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <hr>
                 <div class="nav-search-result active-right">
                     <div class="result-container">
                         <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
@@ -371,7 +381,6 @@
                     
                 </ul>
                 <div class="nav-search-result-scroll">
-                <div class="job-todolist-wrap">
                 <div class="nav-search-result active-right">
                     <div class="result-container">
                         <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
@@ -385,8 +394,70 @@
                     </div>
                 </div>
                 <hr>
-               
-             
+                <div class="nav-search-result active-right">
+                    <div class="result-container">
+                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
+                        <div>
+                            <p  class="team-profile-name">최지훈</p>
+                            <p class="team-profile-email">2015/21/505</p>
+                            <p class="team-profile-email">이건또 어떻게</p>
+                            <p class="team-profile-email">공지사항</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="nav-search-result ">
+                    <div class="result-container">
+                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
+                        <div>
+                            <p  class="team-profile-name">최지훈</p>
+                            <p class="team-profile-email">2015/21/505</p>
+                            <p class="team-profile-email">이건또 어떻게</p>
+                            <p class="team-profile-email">공지사항</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="nav-search-result ">
+                    <div class="result-container">
+                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
+                        <div>
+                            <p  class="team-profile-name">최지훈</p>
+                            <p class="team-profile-email">2015/21/505</p>
+                            <p class="team-profile-email">이건또 어떻게</p>
+                            <p class="team-profile-email">공지사항</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="nav-search-result ">
+                    <div class="result-container">
+                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
+                        <div>
+                            <p  class="team-profile-name">최지훈</p>
+                            <p class="team-profile-email">2015/21/505</p>
+                            <p class="team-profile-email">이건또 어떻게</p>
+                            <p class="team-profile-email">공지사항</p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="nav-search-result active-right">
+                    <div class="result-container">
+                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
+                        <div>
+                            <p  class="team-profile-name">최지훈</p>
+                            <p class="team-profile-email">2015/21/505</p>
+                            <p class="team-profile-email">이건또 어떻게</p>
+                            <p class="team-profile-email">공지사항</p>
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
             </div>
         </nav>
@@ -633,13 +704,12 @@
 			</div>
 		</div>
 		
-		
-		<!-- 오늘의 할일 수정 모달 -->
-	<div class="modal" id="updateTodoListInfoModal" tabindex="-1">
+		<!-- 채팅방 추가 모달 -->
+		<div class="modal" id="insertChatRoomModal" tabindex="-1">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						오늘의 할일 수정
+						채팅방 생성
 						<button class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body">
@@ -654,17 +724,9 @@
 				</div>
 			</div>
 		</div>
-		
-		
-		
-		
-		
+		<!-- 채팅방 추가 모달 끝-->
+
 	</div>
-	
-	<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
-	<script src="/resources/main/css/sidebar-right.js"></script>
-	<script src="/resources/main/css/sidebar-left.js"></script>
-	<script src="/resources/members/js/todoList.js"></script>
 	
 	<!-- 외부js에 변수 전달 -->
 	<input type="hidden" id="userName" value="<sec:authentication property="principal.users.user_name"/>"> 
@@ -758,8 +820,8 @@ function insertTodoListAction(){
         	var team_num=${param.team_num};
         	
         	//로그인한 유저 넘버
-        	var user_num=${param.user_num};
-        	
+        	var user_num=$("#authUserNum").val();
+        	user_num=3;
         	//컨텐츠바디에 현재팀의 멤버리스트 출력
         	function showMemberList(result){
         		str=""
@@ -887,70 +949,6 @@ function insertTodoListAction(){
             	reloadMemberList();
             })
             
-            function setHome(){
-            	var str=`<style>table.type07 {
-          		  border-collapse: collapse;
-          		  text-align: left;
-          		  line-height: 1.5;
-          		  border: 1px solid #ccc;
-          		  margin: 20px 10px;
-          		}
-          		table.type07 thead {
-          		  border-right: 1px solid #ccc;
-          		  border-left: 1px solid #ccc;
-          		  background: #e7708d;
-          		}
-          		table.type07 thead th {
-          		  padding: 10px;
-          		  font-weight: bold;
-          		  vertical-align: top;
-          		  color: #fff;
-          		}
-          		table.type07 tbody th {
-          		  width: 150px;
-          		  padding: 10px;
-          		  font-weight: bold;
-          		  vertical-align: top;
-          		  border-bottom: 1px solid #ccc;
-          		  background: #fcf1f4;
-          		}
-          		table.type07 td {
-          		  width: 350px;
-          		  padding: 10px;
-          		  vertical-align: top;
-          		  border-bottom: 1px solid #ccc;
-          		}</style>
-          	<table class="type07">
-          		  <thead>
-          		  <tr>
-          		    <th scope="cols">타이틀</th>
-          		    <th scope="cols">내용</th>
-          		  </tr>
-          		  </thead>
-          		  <tbody>
-          		  <tr>
-          		    <th scope="row">항목명</th>
-          		    <td>내용이 들어갑니다.</td>
-          		  </tr>
-          		  <tr>
-          		    <th scope="row">항목명</th>
-          		    <td>내용이 들어갑니다.</td>
-          		  </tr>
-          		  <tr>
-          		    <th scope="row">항목명</th>
-          		    <td>내용이 들어갑니다.</td>
-          		  </tr>
-          		  </tbody>
-          		</table>`
-          	$(".job-team-body").html(str);
-            }
-            
-            //홈버튼 클릭했을때 홈으로 돌아옴
-            $("#toggle-key-home").on("click", function(){setHome()})
-            
-            //초기 홈화면 세팅
-            setHome()
-            
             
             //수정하고싶은 멤버의 번호 초기화
             var updataMemberNum=0;
@@ -1008,7 +1006,7 @@ function insertTodoListAction(){
                     type:'Post',
                     processData:false,
                     contentType:'application/json',
-                    data:JSON.stringify({"member_position": "가자",
+                    data:JSON.stringify({"member_position": "",
                         "team_num": team_num,
                         "user_num": this.value}),
                     dataType:'json',
@@ -1068,14 +1066,14 @@ function insertTodoListAction(){
                         }
                     });//$.ajax
             	}
-
+            	
             	
             	
             });
             
         });//끝
     </script>
-	
+
 
 
 </body>
