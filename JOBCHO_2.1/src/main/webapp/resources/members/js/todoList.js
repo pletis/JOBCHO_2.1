@@ -83,7 +83,7 @@ $(document).ready(function(){
 		console.log("getTodoList 함수 실행");
 		
 		$.ajax({
-	        url:'/team/'+team_num+'/todo',
+	        url:'/team/'+team_num+'/todo/list/'+member_num,
 	        type:'Get',
 	        dataType:'json',
 	        success:function(result){

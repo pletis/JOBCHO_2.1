@@ -34,8 +34,8 @@
   				where todo.member_num = m.member_num  
   							and  m.team_num = t.team_num  
   								and todo.islive = 1
-     								 and m.member_num = 15 and t.team_num = 36 
-     								 	order by todo.todo_num asc;
+     								 and m.member_num = #{member_num} and t.team_num = #{team_num} 
+     								 	order by todo.todo_num asc
 	</select> 
 	
 	<!-- 할일 수정 -->
