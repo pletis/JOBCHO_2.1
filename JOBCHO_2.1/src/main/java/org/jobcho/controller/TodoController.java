@@ -51,7 +51,7 @@ public class TodoController {
 	//팀번호에 맞는 할일 리스트 반환 -> postMan확인완료 -> json으로 반환함 
 	//team_num필요
 	@GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<List<TodoVO>>selectTodoList(@PathVariable("team_num") int team_num ){
+	public ResponseEntity<List<TodoVO>>selectTodoList(@PathVariable("team_num") int team_num){
 		List<TodoVO> list = service.selectTodoList();
 				
 		return new ResponseEntity<>(list, HttpStatus.OK);
