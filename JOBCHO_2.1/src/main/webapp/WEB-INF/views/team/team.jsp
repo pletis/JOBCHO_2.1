@@ -399,7 +399,7 @@ $(document).on("click",".nav__name-left" ,function(e){
 });
 
 
-//팀 삭제하기 
+/* //팀 삭제하기 
 function deleteTeamAction(){
 	console.log("deleteTeamAction 버튼 눌림");
 	 
@@ -424,7 +424,7 @@ function deleteTeamAction(){
 		})
 	}
 	
-}//end deleteTeamAction
+}//end deleteTeamAction */
 
 
 

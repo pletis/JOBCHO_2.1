@@ -21,13 +21,11 @@
 			]]>
 	</insert>
 	
-	<!-- 팀 리스트 조회 -->
+	<!-- 팀 리스트 조회 --> <!-- /*+ index_AES(team team_num)*/ -->
 	<select id="getListTeam" parameterType="int" resultType="org.jobcho.domain.TeamVO">
 		<![CDATA[
-			select /*+ index_AES(team team_num)*/
-			
-			
-			* from team where user_num = #{user_num} and islive=1
+			select 
+			* from team where user_num = #{user_num} and islive=1 order by team_num asc
 		]]>
 	</select>
 	

@@ -6,7 +6,7 @@ $(document).ready(function(){
 	var userName = $("#userName").val();
 	console.log("사용자이름  test : " + userName);
 	var user_num= $("#userNum").val();
-	var member_num = 1;
+	var member_num = $("#memberNum").val();
 	
 	function showTodoList(result){
 		console.log("showTodoList 함수실행");
@@ -28,7 +28,7 @@ $(document).ready(function(){
                 <hr>`
 		})
 		$(".job-todolist-wrap").html(str);
-	}
+	}//showTodoList
 	
 	//여러개 불러오는 ajax
 	function showUpdateTodoInfo(todo_num){
@@ -54,29 +54,30 @@ $(document).ready(function(){
 	}
 	
 	//수정
-	/*function updateTeamAction(){
+	function updateTodoAction(){
 		$.ajax({
-            url:'/team/'+$("#updateTeamNum").val(),
+            url:'/team/'+team_num+'/todo/'+$("#updateTodoNum").val(),
             type:'put',
             contentType:'application/json',
             data: JSON.stringify(
             		{
-            			"team_num":$("#updateTeamNum").val(),
-            			"team_name":$("#updateTeamName").val(),
-            			"team_info":$("#updateTeamInfo").val()
+            			"todo_num":$("#updateTodoNum").val(),
+            			"todo_title":$("#updateTodoTitle").val(),
+            			"todo_description":$("#updateTodoDescription").val(),
+            			"todo_endDate":$("#updateTodoEnd").val()
             		}),
             dataType: 'json',
             success:function(result){
             	console.log(result);
             }
         });
-		$("#updataTeamInfoModal").modal("hide");
-		alert("수정완료");
-		getTeamList();
-	}*/
+		$("#updateTodoListInfoModal").modal("hide");
+		alert("수정이 완료되었습니다.");
+		getTodoList();
+	}
 	
 	//함수실행
-	getTodoList()
+	getTodoList();
 	
 	function getTodoList(){
 		console.log("getTodoList 함수 실행");
@@ -92,21 +93,54 @@ $(document).ready(function(){
 	    });//$.ajax
 	}
 	
-	
-	
 	//초기화면 출력
-	getTodoList()
+	getTodoList();
 	
+	//오늘의 할일 삭제하기 
+	function deleteTodoAction(){
+		console.log("오늘의 할일 삭제버튼 눌림");
+		 
+		if(!confirm("정말로 삭제하시겠습니까?")){
+			alert("취소되었습니다.")
+			$('#updateTodoListInfoModal').modal("hide");
+		}else{
+			$.ajax({
+				url : '/team/'+team_num+'/todo/'+$("#updateTodoNum").val(),
+				type : "delete",
+				contentType : "application/json",
+				success : function(data){
+						console.log(data);
+						alert("삭제가 완료되었습니다.");
+				},
+				error : function(error){
+					alert("실패");
+					return false;
+				}
+			});
+			$('#updateTodoListInfoModal').modal("hide");
+			getTodoList();
+		}
+		
+	}//end deleteTeamAction
+	
+	
+	//수정모달 띄우기 
 	$(document).on("click",".todoUpdateModalShow", function(){
 		$("#updateTodoListInfoModal").modal("show");
 		console.log("this : " + $(this).data('air'));
 		showUpdateTodoInfo($(this).data('air'));
 	})
 	
-	/*$("#updateTeamAction").on("click", function(){
-		updateTeamAction();
-	})*/
+	//오늘의 할일 수정버튼 눌렀을 때 수정시키는 함수 실행
+	$("#updateTodoAction").on("click", function(){
+		updateTodoAction();
+	})
 	
+	//오늘의 할일 삭제 버튼을 눌렀을 때 삭제시키는 함수 실행 
+	$("#deleteTodoAction").on("click", function(){
+		deleteTodoAction();
+		getTodoList();
+	})
 	
 });//end document.ready
 

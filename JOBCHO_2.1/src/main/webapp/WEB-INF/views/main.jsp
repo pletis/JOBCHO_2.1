@@ -648,8 +648,8 @@
 						오늘의 할일<input id="updateTodoTitle" type="text" class="form-control"> 
 						내용<input id="updateTodoDescription" type="text" class="form-control">
 						마감날짜<input id="updateTodoEnd" type="date" class="form-control">
-						<input id="insertTeamAction" type="button" class="btn btn-success" onclick="updateTodoLAction();" value="수정">
-						
+						<input id="updateTodoAction" type="button" class="btn btn-success" value="수정">
+						<input id="deleteTodoAction" type="button" class="btn btn-success" value="삭제">
 					</div>
 				</div>
 			</div>
@@ -672,6 +672,8 @@
 	<input type="hidden" id="userNum" value="<sec:authentication property="principal.users.user_num"/>"> 
 
 	<input type="hidden" id="teamNum" value=${param.team_num }>
+	
+	<input type="hidden" id="memberNum" value=${param.member_num }>
 	
 	<script type="text/javascript">
 	

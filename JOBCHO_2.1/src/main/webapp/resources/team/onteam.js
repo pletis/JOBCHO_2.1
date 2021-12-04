@@ -99,7 +99,35 @@ $(document).ready(function(){
 	}
 	
 	//초기화면 출력
-	getTeamList()
+	getTeamList();
+	
+	//팀 삭제하기 
+	function deleteTeamAction(){
+		console.log("deleteTeamAction 버튼 눌림");
+		 
+		if(!confirm("정말로 삭제하시겠습니까?")){
+			alert("취소되었습니다.")
+			$('#updataTeamInfoModal').modal("hide");
+		}else{
+			$.ajax({
+				url : '/team/'+$('#updateTeamNum').val(),
+				type : "delete",
+				contentType : "application/json",
+				success : function(data){
+						console.log(data);
+						$('#updataTeamInfoModal').modal("hide");
+						alert("팀 삭제가 완료되었습니다.");
+				},
+				error : function(error){
+					alert("실패");
+					return false;
+				}
+			});
+			getTeamList();
+		}
+		
+	}//end deleteTeamAction
+	
 	
 	$(document).on("click",".teamAdminModal", function(){
 		$("#updataTeamInfoModal").modal("show");
@@ -111,6 +139,10 @@ $(document).ready(function(){
 		updateTeamAction();
 	})
 	
+	$("#deleteTeamAction").on("click", function(){
+		deleteTeamAction();
+		getTeamList();
+	})
 	
 });
 
