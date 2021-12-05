@@ -31,7 +31,8 @@
 	href="/resources/main/css/team.css">
 <link rel="stylesheet" type="text/css"
 	href="/resources/chat/css/chat.css">
-
+<link rel="stylesheet" type="text/css"
+	href="/resources/chat/css/dragableChat.css">
 
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
@@ -770,6 +771,8 @@
 	<script src="/resources/main/css/sidebar-right.js"></script>
 	<script src="/resources/main/css/sidebar-left.js"></script>
 	<script src="/resources/members/js/todoList.js"></script>
+	<script src="/resources/chat/js/onchat.js"></script>
+	<script src="/resources/chat/js/dragable.js"></script>
 	
 	<!-- 외부js에 변수 전달 -->
 	<input type="hidden" id="userName"
