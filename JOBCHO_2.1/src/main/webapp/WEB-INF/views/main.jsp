@@ -85,8 +85,9 @@
 					<div class="nav-profile-image-left"
 						style="background-image: url('/resources/css/99D279435B3D788602.jfif');"></div>
 					<div class="nav-profile-content-left">
-						<p>cjhun0516@gmail.com</p>
-						<p>2팀 팀장</p>
+						<p>${team.team_name }</p>
+						<p><sec:authentication property="principal.users.user_email"/></p>
+						<p><sec:authentication property="principal.users.user_name"/></p>
 					</div>
 				</div>
 				<!--프로필 끝-->
@@ -164,7 +165,7 @@
 
 			</div>
 
-			<a href="#" class="nav__link-left"> <ion-icon
+			<a href="#" class="nav__link-left"  id="LogOutAction"> <ion-icon
 					name="log-out-outline" class="nav__icon-left"></ion-icon> <span
 				class="nav__name-left">Log Out</span>
 			</a>
@@ -207,7 +208,7 @@
 				</div>
 			</div>
 
-			<a href="#" class="nav__link-right"> <ion-icon
+			<a href="#" class="nav__link-right" id="LogOutAction"> <ion-icon
 					name="log-out-outline" class="nav__icon-right"></ion-icon> <span
 				class="nav__name-right">Log Out</span>
 			</a>
@@ -355,7 +356,7 @@
 		<nav class="nav-search">
 			<div class="nav-search-title">할일</div>
 			<div class="nav-search-content">
-				<div id="createToDo">➕할일생성</div>
+				<div id="createToDo" style="cursor:pointer">➕할일생성</div>
 				<ul class="nav-todo-option">
 					<SELECT NAME=sltSample SIZE=1> 토픽
 						<OPTION VALUE=1>1번 보기입니다.</OPTION>
@@ -376,8 +377,9 @@
 					</SELECT>
 
 				</ul>
-				<div class="job-todolist-wrap">
+				
 				<div class="nav-search-result-scroll">
+					<div class="job-todolist-wrap" style="cursor:pointer">
 					<div class="nav-search-result active-right">
 						<div class="result-container">
 							<div class="result-image"
@@ -529,6 +531,12 @@
 	</div>
 	<!-- 컨텐츠 끝-->
 	<!-- 컨텐츠 끝-->
+
+	<!-- 로그아웃 -->
+	<form action="/customLogout" method="post" id="logoutForm">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	</form>
+
 
 	<!-- modal 모음-->
 	<div class="row">
@@ -740,54 +748,13 @@
 		updataMemberNum = this.value
 	});
 	
-/*  	//할일 추가 ajax
-function insertTodoListAction(){
-	console.log("insertTodoListAction 버튼 눌림");
-	 	
-	var todo_title = document.getElementById('todo_title').value;
-	var todo_description = document.getElementById('todo_description').value;
-	var todo_endDate = document.getElementById('todo_endDate').value;
-	var member_num = document.getElementById('member_num').value;
-	var team_num = document.getElementById('team_num').value;
-		
-	if(!todo_title){
-		alert('오늘의 할일을 입력해주세요');
-		return false;
-	}
-	if(!todo_description){
-		alert('내용을 입력해주세요');
-		return false;
-	}
-	if(!todo_endDate){
-		alert('마감날짜를 선택해주세요');
-		return false;
-	}
-		
-	$.ajax({
-		url : '/team/'+team_num+'/todo/new',
-		type : "post",
-		contentType : "application/json",
-		data : JSON.stringify({"todo_title" : $("#todo_title").val(),
-					"todo_description" : $("#todo_description").val(),			
-					"todo_endDate" : $("#todo_endDate").val(),
-					"member_num" : $("#member_num").val(),
-					"team_num" : $("#team_num").val(),
-		}),
-		success : function(data){
-				console.log(data);
-				alert("오늘의 할일이 추가되었습니다.");
-				$('#insertTodoListInfoModal').modal("hide");
-				//window.location.href = "/team/main?team_num="${param.team_num}";
-				//window.location.replace("/users/main");
-		},
-		error : function(error){
-			alert("실패");
-			return false;
-		}
+	//로그아웃 클릭시 로그아웃 되도록  
+	$(document).on("click","#LogOutAction" ,function(e){
+		e.preventDefault();
+		console.log("클릭");
+		alert("로그아웃되었습니다.")
+		$('#logoutForm').submit();
 	});
-	getTodoList();
-	
-}//end insertTodoListAction  */
 		
 	</script>
 

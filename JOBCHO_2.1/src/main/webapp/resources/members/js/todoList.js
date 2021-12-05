@@ -8,10 +8,9 @@ $(document).ready(function(){
 	var user_num= $("#userNum").val();
 	var member_num = $("#memberNum").val();
 	
-
+	//오늘의 할일 리스트 뽑아오는 ajax
 	function getTodoList(){
 		console.log("getTodoList 함수 실행");
-		
 		$.ajax({
 	        url:'/team/'+team_num+'/todo/list/'+member_num,
 	        type:'Get',
@@ -22,9 +21,6 @@ $(document).ready(function(){
 	        }
 	    });//$.ajax
 	}
-	
-	
-	
 	
 	//초기화면 출력
 	getTodoList();

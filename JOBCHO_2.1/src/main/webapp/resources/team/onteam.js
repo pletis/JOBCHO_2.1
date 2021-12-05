@@ -129,19 +129,70 @@ $(document).ready(function(){
 		
 	}//end deleteTeamAction
 	
+	 //팀생성
+	function insertTeamAction(){
+		console.log("insertTeamAction 버튼 눌림");
+		 var insertTeamName = document.getElementById('insertTeamName').value;
+		 var insertTeamInfo = document.getElementById('insertTeamName').value;
+		 var insertUser_num = document.getElementById('insertTeamName').value;
+		
+		 if(!insertTeamName){
+				alert('팀명을 입력해주세요');
+				return false;
+			}
+		 
+		 if(!insertTeamInfo){
+				alert('팀 정보를 입력해주세요');
+				return false;
+			}
+		 
+		 $.ajax({
+				url : '/team/'+user_num,
+				type : "post",
+				contentType : "application/json",
+				data : JSON.stringify({
+							"team_name" : $("#insertTeamName").val(),			
+							"team_info" : $("#insertTeamInfo").val(),
+							"user_num" : $("#insertUser_num").val()
+				}),
+				success : function(data){
+						console.log(data);
+						alert("팀생성이 완료되었습니다");
+						$('#insertTeamInfoModal').modal("hide");
+						//window.location.href = "/team/choose";
+						getTeamList();
+
+				},
+				error : function(error){
+					alert("실패");
+					return false;
+				}
+			})
+		
+		
+	}//end insertTeamAction 
 	
+	
+	
+	
+	//팀수정 모달창 띠우기
 	$(document).on("click",".teamAdminModal", function(){
 		$("#updataTeamInfoModal").modal("show");
 		console.log("this : " + $(this).val());
 		showUpdateTeamInfo($(this).val());
 	})
-	
+	//팀수정 실행
 	$("#updateTeamAction").on("click", function(){
 		updateTeamAction();
 	})
-	
+	//팀삭제 실행
 	$("#deleteTeamAction").on("click", function(){
 		deleteTeamAction();
+		getTeamList();
+	})
+	//팀추가 실행 
+	$("#insertTeamAction").on("click", function(){
+		insertTeamAction();
 		getTeamList();
 	})
 	
