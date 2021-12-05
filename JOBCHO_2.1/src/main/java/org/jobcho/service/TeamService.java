@@ -13,4 +13,5 @@ public interface TeamService {
 	public int updateTeam(TeamVO team);
 	public int deleteTeam(int team_num);
 	TeamVO selectTeam(Map<String, String> map);
+	List<TeamVO> getListTeamByMemberJoin(int user_num);
 }

@@ -55,5 +55,10 @@ public class TeamServiceImpl implements TeamService {
 		TeamVO team = mapper.selectTeam(map);
 		return team;
 	}
+	
+	@Override
+	public List<TeamVO> getListTeamByMemberJoin(int user_num){
+		return mapper.getListTeamByMemberJoin(user_num);
+	}
 
 }

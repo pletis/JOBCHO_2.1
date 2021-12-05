@@ -114,4 +114,12 @@ public class TeamController {
 				? new ResponseEntity<>(HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	
+	@GetMapping(value = "/getlist/{user_num}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<List<TeamVO>> getListTeamByMemberJoin(@PathVariable("user_num") int user_num){
+		log.info("�� ��� ȣ�� Ȯ��");
+		return new ResponseEntity<>(service.getListTeamByMemberJoin(user_num), HttpStatus.OK);
+	}
+	
 }
