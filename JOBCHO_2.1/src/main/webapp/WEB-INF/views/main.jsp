@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <%@ page session="false"%>
 <html>
 <head>
@@ -16,20 +17,27 @@
 <!-- 부가적인 테마 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     -->
-<link rel="stylesheet" type="text/css" href="/resources/main/css/codingBoostr.css">
-<link rel="stylesheet" type="text/css" href="/resources/main/css/sidebar-right.css" >
-<link rel="stylesheet" type="text/css" href="/resources/main/css/sidebar-search.css" >
-<link rel="stylesheet" type="text/css" href="/resources/main/css/sidebar-left.css" >
-<link rel="stylesheet" type="text/css" href="/resources/main/css/content.css" >
-<link rel="stylesheet" type="text/css" href="/resources/main/css/team.css" >
-<link rel="stylesheet" type="text/css" href="/resources/chat/css/chat.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/main/css/codingBoostr.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/main/css/sidebar-right.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/main/css/sidebar-search.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/main/css/sidebar-left.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/main/css/content.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/main/css/team.css">
+<link rel="stylesheet" type="text/css"
+	href="/resources/chat/css/chat.css">
 
 
 
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	<script src="/resources/main/css/sidebar-search.js"></script>
+<script src="/resources/main/css/sidebar-search.js"></script>
 </head>
 <body>
 	<header>
@@ -45,18 +53,7 @@
 				</div>
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">소개<span class="sr-only"></span></a></li>
-						<li><a href="#">강사진<span class="sr-only"></span></a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown" role="button" aria-haspopup="true"
-							aria-expanded="false">강의 <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">c언어</a></li>
-								<li><a href="#">c언어</a></li>
-								<li><a href="#">c언어</a></li>
-							</ul></li>
-					</ul>
+					
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown"><a id="inviteSearch" href="#"
 							role="button" data-target="#modal" data-toggle="modal"
@@ -154,11 +151,11 @@
 					<!-- 풀커뮤니티 스크롤-->
 					<!-- 풀커뮤니티 스크롤-->
 					<h3>
-						채팅 <a href="#" id="createChatRoom" class="collapse__sublink-left" onclick="onChatting(event)"><ion-icon
-								name="add-outline"></ion-icon></a>
+						채팅 <a href="#" id="createChatRoom" class="collapse__sublink-left"
+							onclick="onChatting(event)"><ion-icon name="add-outline"></ion-icon></a>
 					</h3>
 					<div id="chatRoomList" class="nav__list-left nav__scroll-left">
-						
+
 					</div>
 					<!-- 풀커뮤니티 스크롤 끝-->
 					<!-- 풀커뮤니티 스크롤 끝-->
@@ -178,413 +175,421 @@
 	<!--왼쪽 사이드바 끝-->
 
 	<!--오른쪽 사이드바-->
-    <!--오른쪽 사이드바-->
-    <!--오른쪽 사이드바-->
+	<!--오른쪽 사이드바-->
+	<!--오른쪽 사이드바-->
 
-    <div class="l-navbar-right navbar-font-right" id="navbar-right">
-        <nav class="nav-right">
-            <div>
-                <div class="nav__brand-right">
-                    <ion-icon name="menu-outline" class="nav__toggle-right" id="nav-toggle-right"></ion-icon>
-                </div>
-                <div class="nav__list-right">
-                    <a href="#" id="toggle-key-home" class="nav__link-right active-right">
-                        <ion-icon name="home-outline" class="nav__icon-right"></ion-icon>
-                        <span class="nav__name-right">Dashboard</span>
-                    </a>
-                    <a href="#" id="toggle-key" class="nav__link-right">
-                        <ion-icon name="search-outline" class="nav__icon-right" ></ion-icon>
-                        <span class="nav__name-right">Search</span>
-                    </a>
+	<div class="l-navbar-right navbar-font-right" id="navbar-right">
+		<nav class="nav-right">
+			<div>
+				<div class="nav__brand-right">
+					<ion-icon name="menu-outline" class="nav__toggle-right"
+						id="nav-toggle-right"></ion-icon>
+				</div>
+				<div class="nav__list-right">
+					<a href="#" id="toggle-key-home"
+						class="nav__link-right active-right"> <ion-icon
+							name="home-outline" class="nav__icon-right"></ion-icon> <span
+						class="nav__name-right">Dashboard</span>
+					</a> <a href="#" id="toggle-key" class="nav__link-right"> <ion-icon
+							name="search-outline" class="nav__icon-right"></ion-icon> <span
+						class="nav__name-right">Search</span>
+					</a> <a href="#" id="toggle-key2" class="nav__link-right"> <ion-icon
+							name="calendar-outline" class="nav__icon-right"></ion-icon> <span
+						class="nav__name-right">ToDoList</span>
+					</a> <a href="#" id="toggle-key3" class="nav__link-right"> <ion-icon
+							name="document-outline" class="nav__icon-right"></ion-icon> <span
+						class="nav__name-right">Files</span>
+					</a> <a href="#" id="toggle-key-member" class="nav__link-right"> <ion-icon
+							name="people-outline" class="nav__icon-right"></ion-icon> <span
+						class="nav__name-right">Members</span>
+					</a>
+				</div>
+			</div>
 
-                    <a href="#" id="toggle-key2" class="nav__link-right">
-                        <ion-icon name="calendar-outline" class="nav__icon-right" ></ion-icon>
-                        <span class="nav__name-right">ToDoList</span>
-                    </a>
+			<a href="#" class="nav__link-right"> <ion-icon
+					name="log-out-outline" class="nav__icon-right"></ion-icon> <span
+				class="nav__name-right">Log Out</span>
+			</a>
+		</nav>
+	</div>
 
-                    <a href="#" id="toggle-key3" class="nav__link-right">
-                        <ion-icon name="document-outline" class="nav__icon-right"></ion-icon>
-                        <span class="nav__name-right">Files</span>
-                    </a>
-                    <a href="#" id="toggle-key-member"class="nav__link-right">
-                        <ion-icon name="people-outline" class="nav__icon-right"></ion-icon>
-                        <span class="nav__name-right">Members</span>
-                    </a>
-                </div>
-            </div>
+	<!--오른쪽 사이드바 끝-->
+	<!--오른쪽 사이드바 끝-->
 
-            <a href="#" class="nav__link-right">
-                <ion-icon name="log-out-outline" class="nav__icon-right"></ion-icon>
-                <span class="nav__name-right">Log Out</span>
-            </a>
-        </nav>
-    </div>
-
-    <!--오른쪽 사이드바 끝-->
-    <!--오른쪽 사이드바 끝-->
-
-    <!--오른쪽 사이드서치바-->
 	<!--오른쪽 사이드서치바-->
 	<!--오른쪽 사이드서치바-->
-    <div class="search-navbar-right navbar-font-search" id="navbar-search">
-        <nav class="nav-search">
-            <div class="nav-search-title">검색</div>
-            <div class="nav-search-content">
-                <input type="text" class="form-control" placeholder="검색어 입력">
-                <ul class="nav-search-category">
-                    <li>전체</li>
-                    <li>메시지</li>
-                    <li>할일</li>
-                    <li>투표</li>
-                    <li>파일</li>
-                </ul>
-                <ul class="nav-search-option">
-                    <SELECT NAME=sltSample SIZE=1>
-                        토픽
-                        <OPTION VALUE=1>1번 보기입니다.</OPTION>
-                        <OPTION VALUE=2>2번 보기입니다.</OPTION>
-                        <OPTION VALUE=3>3번 보기입니다.</OPTION>
-                        <OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION>
-                        채팅
-                        <OPTION VALUE=1>1번 보기입니다.</OPTION>
-                        <OPTION VALUE=2>2번 보기입니다.</OPTION>
-                        <OPTION VALUE=3>3번 보기입니다.</OPTION>
-                        <OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION>
+	<!--오른쪽 사이드서치바-->
+	<div class="search-navbar-right navbar-font-search" id="navbar-search">
+		<nav class="nav-search">
+			<div class="nav-search-title">검색</div>
+			<div class="nav-search-content">
+				<input type="text" class="form-control" placeholder="검색어 입력">
+				<ul class="nav-search-category">
+					<li>전체</li>
+					<li>메시지</li>
+					<li>할일</li>
+					<li>투표</li>
+					<li>파일</li>
+				</ul>
+				<ul class="nav-search-option">
+					<SELECT NAME=sltSample SIZE=1> 토픽
+						<OPTION VALUE=1>1번 보기입니다.</OPTION>
+						<OPTION VALUE=2>2번 보기입니다.</OPTION>
+						<OPTION VALUE=3>3번 보기입니다.</OPTION>
+						<OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION> 채팅
+						<OPTION VALUE=1>1번 보기입니다.</OPTION>
+						<OPTION VALUE=2>2번 보기입니다.</OPTION>
+						<OPTION VALUE=3>3번 보기입니다.</OPTION>
+						<OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION>
 
-                    </SELECT>
-                    <SELECT NAME=sltSample SIZE=1>
-                        <OPTION VALUE=1>1번 보기입니다.</OPTION>
-                        <OPTION VALUE=2>2번 보기입니다.</OPTION>
-                        <OPTION VALUE=3>3번 보기입니다.</OPTION>
-                        <OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION>
-                    </SELECT>
-                    <SELECT NAME=sltSample SIZE=1>
-                        <OPTION VALUE=1>1번 보기입니다.</OPTION>
-                        <OPTION VALUE=2>2번 보기입니다.</OPTION>
-                        <OPTION VALUE=3>3번 보기입니다.</OPTION>
-                        <OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION>
-                    </SELECT>
-                </ul>
-                <div class="nav-search-result-scroll">
-                <div class="nav-search-result active-right">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result active-right">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result active-right">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </nav>
-    </div>
-    <!--오른쪽 사이드서치바 끝-->
-    <!--오른쪽 사이드서치바 끝-->
+					</SELECT>
+					<SELECT NAME=sltSample SIZE=1>
+						<OPTION VALUE=1>1번 보기입니다.</OPTION>
+						<OPTION VALUE=2>2번 보기입니다.</OPTION>
+						<OPTION VALUE=3>3번 보기입니다.</OPTION>
+						<OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION>
+					</SELECT>
+					<SELECT NAME=sltSample SIZE=1>
+						<OPTION VALUE=1>1번 보기입니다.</OPTION>
+						<OPTION VALUE=2>2번 보기입니다.</OPTION>
+						<OPTION VALUE=3>3번 보기입니다.</OPTION>
+						<OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION>
+					</SELECT>
+				</ul>
+				<div class="nav-search-result-scroll">
+					<div class="nav-search-result active-right">
+						<div class="result-container">
+							<div class="result-image"
+								style="background-image: url('99D279435B3D788602.jfif');"></div>
+							<div>
+								<p class="team-profile-name">최지훈</p>
+								<p class="team-profile-email">2015/21/505</p>
+								<p class="team-profile-email">이건또 어떻게</p>
+								<p class="team-profile-email">공지사항</p>
 
-    <!--오른쪽 사이드서치바2-->
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="nav-search-result active-right">
+						<div class="result-container">
+							<div class="result-image"
+								style="background-image: url('99D279435B3D788602.jfif');"></div>
+							<div>
+								<p class="team-profile-name">최지훈</p>
+								<p class="team-profile-email">2015/21/505</p>
+								<p class="team-profile-email">이건또 어떻게</p>
+								<p class="team-profile-email">공지사항</p>
+
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="nav-search-result ">
+						<div class="result-container">
+							<div class="result-image"
+								style="background-image: url('99D279435B3D788602.jfif');"></div>
+							<div>
+								<p class="team-profile-name">최지훈</p>
+								<p class="team-profile-email">2015/21/505</p>
+								<p class="team-profile-email">이건또 어떻게</p>
+								<p class="team-profile-email">공지사항</p>
+
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="nav-search-result ">
+						<div class="result-container">
+							<div class="result-image"
+								style="background-image: url('99D279435B3D788602.jfif');"></div>
+							<div>
+								<p class="team-profile-name">최지훈</p>
+								<p class="team-profile-email">2015/21/505</p>
+								<p class="team-profile-email">이건또 어떻게</p>
+								<p class="team-profile-email">공지사항</p>
+
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="nav-search-result ">
+						<div class="result-container">
+							<div class="result-image"
+								style="background-image: url('99D279435B3D788602.jfif');"></div>
+							<div>
+								<p class="team-profile-name">최지훈</p>
+								<p class="team-profile-email">2015/21/505</p>
+								<p class="team-profile-email">이건또 어떻게</p>
+								<p class="team-profile-email">공지사항</p>
+
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="nav-search-result active-right">
+						<div class="result-container">
+							<div class="result-image"
+								style="background-image: url('99D279435B3D788602.jfif');"></div>
+							<div>
+								<p class="team-profile-name">최지훈</p>
+								<p class="team-profile-email">2015/21/505</p>
+								<p class="team-profile-email">이건또 어떻게</p>
+								<p class="team-profile-email">공지사항</p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<!--오른쪽 사이드서치바 끝-->
+	<!--오른쪽 사이드서치바 끝-->
+
 	<!--오른쪽 사이드서치바2-->
 	<!--오른쪽 사이드서치바2-->
-    <div class="search-navbar-right navbar-font-search" id="navbar-search2">
-        <nav class="nav-search">
-            <div class="nav-search-title">할일</div>
-            <div class="nav-search-content">
-                <div id="createToDo">➕할일생성</div>
-                <ul class="nav-todo-option">
-                    <SELECT NAME=sltSample SIZE=1>
-                        토픽
-                        <OPTION VALUE=1>1번 보기입니다.</OPTION>
-                        <OPTION VALUE=2>2번 보기입니다.</OPTION>
-                        <OPTION VALUE=3>3번 보기입니다.</OPTION>
-                        <OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION>
-                        채팅
-                        <OPTION VALUE=1>1번 보기입니다.</OPTION>
-                        <OPTION VALUE=2>2번 보기입니다.</OPTION>
-                        <OPTION VALUE=3>3번 보기입니다.</OPTION>
-                        <OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION>
+	<!--오른쪽 사이드서치바2-->
+	<div class="search-navbar-right navbar-font-search" id="navbar-search2">
+		<nav class="nav-search">
+			<div class="nav-search-title">할일</div>
+			<div class="nav-search-content">
+				<div id="createToDo">➕할일생성</div>
+				<ul class="nav-todo-option">
+					<SELECT NAME=sltSample SIZE=1> 토픽
+						<OPTION VALUE=1>1번 보기입니다.</OPTION>
+						<OPTION VALUE=2>2번 보기입니다.</OPTION>
+						<OPTION VALUE=3>3번 보기입니다.</OPTION>
+						<OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION> 채팅
+						<OPTION VALUE=1>1번 보기입니다.</OPTION>
+						<OPTION VALUE=2>2번 보기입니다.</OPTION>
+						<OPTION VALUE=3>3번 보기입니다.</OPTION>
+						<OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION>
 
-                    </SELECT>
-                    <SELECT NAME=sltSample SIZE=1>
-                        <OPTION VALUE=1>1번 보기입니다.</OPTION>
-                        <OPTION VALUE=2>2번 보기입니다.</OPTION>
-                        <OPTION VALUE=3>3번 보기입니다.</OPTION>
-                        <OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION>
-                    </SELECT>
-                    
-                </ul>
-                <div class="nav-search-result-scroll">
-                <div class="nav-search-result active-right">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result active-right">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result active-right">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </nav>
-    </div>
-    <!--오른쪽 사이드서치바2 끝-->
-    <!--오른쪽 사이드서치바2 끝-->
+					</SELECT>
+					<SELECT NAME=sltSample SIZE=1>
+						<OPTION VALUE=1>1번 보기입니다.</OPTION>
+						<OPTION VALUE=2>2번 보기입니다.</OPTION>
+						<OPTION VALUE=3>3번 보기입니다.</OPTION>
+						<OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION>
+					</SELECT>
 
-    <!--오른쪽 사이드서치바3-->
-    <!--오른쪽 사이드서치바3-->
-    <!--오른쪽 사이드서치바3-->
-    <div class="search-navbar-right navbar-font-search" id="navbar-search3">
-        <nav class="nav-search">
-            <div class="nav-search-title">할일</div>
-            <div class="nav-search-content">
-                <div id="createToDo">➕할일생성</div>
-                <ul class="nav-todo-option">
-                    <SELECT NAME=sltSample SIZE=1>
-                        토픽
-                        <OPTION VALUE=1>1번 보기입니다.</OPTION>
-                        <OPTION VALUE=2>2번 보기입니다.</OPTION>
-                        <OPTION VALUE=3>3번 보기입니다.</OPTION>
-                        <OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION>
-                        채팅
-                        <OPTION VALUE=1>1번 보기입니다.</OPTION>
-                        <OPTION VALUE=2>2번 보기입니다.</OPTION>
-                        <OPTION VALUE=3>3번 보기입니다.</OPTION>
-                        <OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION>
+				</ul>
+				<div class="nav-search-result-scroll">
+					<div class="nav-search-result active-right">
+						<div class="result-container">
+							<div class="result-image"
+								style="background-image: url('99D279435B3D788602.jfif');"></div>
+							<div>
+								<p class="team-profile-name">최지훈</p>
+								<p class="team-profile-email">2015/21/505</p>
+								<p class="team-profile-email">이건또 어떻게</p>
+								<p class="team-profile-email">공지사항</p>
 
-                    </SELECT>
-                    <SELECT NAME=sltSample SIZE=1>
-                        <OPTION VALUE=1>1번 보기입니다.</OPTION>
-                        <OPTION VALUE=2>2번 보기입니다.</OPTION>
-                        <OPTION VALUE=3>3번 보기입니다.</OPTION>
-                        <OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION>
-                    </SELECT>
-                    
-                </ul>
-                <div class="nav-search-result-scroll">
-                <div class="nav-search-result active-right">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result active-right">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result active-right">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </nav>
-    </div>
-    <!--오른쪽 사이드서치바3 끝-->
-    <!--오른쪽 사이드서치바3 끝-->
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="nav-search-result active-right">
+						<div class="result-container">
+							<div class="result-image"
+								style="background-image: url('99D279435B3D788602.jfif');"></div>
+							<div>
+								<p class="team-profile-name">최지훈</p>
+								<p class="team-profile-email">2015/21/505</p>
+								<p class="team-profile-email">이건또 어떻게</p>
+								<p class="team-profile-email">공지사항</p>
+
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="nav-search-result ">
+						<div class="result-container">
+							<div class="result-image"
+								style="background-image: url('99D279435B3D788602.jfif');"></div>
+							<div>
+								<p class="team-profile-name">최지훈</p>
+								<p class="team-profile-email">2015/21/505</p>
+								<p class="team-profile-email">이건또 어떻게</p>
+								<p class="team-profile-email">공지사항</p>
+
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="nav-search-result ">
+						<div class="result-container">
+							<div class="result-image"
+								style="background-image: url('99D279435B3D788602.jfif');"></div>
+							<div>
+								<p class="team-profile-name">최지훈</p>
+								<p class="team-profile-email">2015/21/505</p>
+								<p class="team-profile-email">이건또 어떻게</p>
+								<p class="team-profile-email">공지사항</p>
+
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="nav-search-result ">
+						<div class="result-container">
+							<div class="result-image"
+								style="background-image: url('99D279435B3D788602.jfif');"></div>
+							<div>
+								<p class="team-profile-name">최지훈</p>
+								<p class="team-profile-email">2015/21/505</p>
+								<p class="team-profile-email">이건또 어떻게</p>
+								<p class="team-profile-email">공지사항</p>
+
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="nav-search-result active-right">
+						<div class="result-container">
+							<div class="result-image"
+								style="background-image: url('99D279435B3D788602.jfif');"></div>
+							<div>
+								<p class="team-profile-name">최지훈</p>
+								<p class="team-profile-email">2015/21/505</p>
+								<p class="team-profile-email">이건또 어떻게</p>
+								<p class="team-profile-email">공지사항</p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<!--오른쪽 사이드서치바2 끝-->
+	<!--오른쪽 사이드서치바2 끝-->
+
+	<!--오른쪽 사이드서치바3-->
+	<!--오른쪽 사이드서치바3-->
+	<!--오른쪽 사이드서치바3-->
+	<div class="search-navbar-right navbar-font-search" id="navbar-search3">
+		<nav class="nav-search">
+			<div class="nav-search-title">할일</div>
+			<div class="nav-search-content">
+				<div id="createToDo">➕할일생성</div>
+				<ul class="nav-todo-option">
+					<SELECT NAME=sltSample SIZE=1> 토픽
+						<OPTION VALUE=1>1번 보기입니다.</OPTION>
+						<OPTION VALUE=2>2번 보기입니다.</OPTION>
+						<OPTION VALUE=3>3번 보기입니다.</OPTION>
+						<OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION> 채팅
+						<OPTION VALUE=1>1번 보기입니다.</OPTION>
+						<OPTION VALUE=2>2번 보기입니다.</OPTION>
+						<OPTION VALUE=3>3번 보기입니다.</OPTION>
+						<OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION>
+
+					</SELECT>
+					<SELECT NAME=sltSample SIZE=1>
+						<OPTION VALUE=1>1번 보기입니다.</OPTION>
+						<OPTION VALUE=2>2번 보기입니다.</OPTION>
+						<OPTION VALUE=3>3번 보기입니다.</OPTION>
+						<OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION>
+					</SELECT>
+
+				</ul>
+				<div class="nav-search-result-scroll">
+					<div class="nav-search-result active-right">
+						<div class="result-container">
+							<div class="result-image"
+								style="background-image: url('99D279435B3D788602.jfif');"></div>
+							<div>
+								<p class="team-profile-name">최지훈</p>
+								<p class="team-profile-email">2015/21/505</p>
+								<p class="team-profile-email">이건또 어떻게</p>
+								<p class="team-profile-email">공지사항</p>
+
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="nav-search-result active-right">
+						<div class="result-container">
+							<div class="result-image"
+								style="background-image: url('99D279435B3D788602.jfif');"></div>
+							<div>
+								<p class="team-profile-name">최지훈</p>
+								<p class="team-profile-email">2015/21/505</p>
+								<p class="team-profile-email">이건또 어떻게</p>
+								<p class="team-profile-email">공지사항</p>
+
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="nav-search-result ">
+						<div class="result-container">
+							<div class="result-image"
+								style="background-image: url('99D279435B3D788602.jfif');"></div>
+							<div>
+								<p class="team-profile-name">최지훈</p>
+								<p class="team-profile-email">2015/21/505</p>
+								<p class="team-profile-email">이건또 어떻게</p>
+								<p class="team-profile-email">공지사항</p>
+
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="nav-search-result ">
+						<div class="result-container">
+							<div class="result-image"
+								style="background-image: url('99D279435B3D788602.jfif');"></div>
+							<div>
+								<p class="team-profile-name">최지훈</p>
+								<p class="team-profile-email">2015/21/505</p>
+								<p class="team-profile-email">이건또 어떻게</p>
+								<p class="team-profile-email">공지사항</p>
+
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="nav-search-result ">
+						<div class="result-container">
+							<div class="result-image"
+								style="background-image: url('99D279435B3D788602.jfif');"></div>
+							<div>
+								<p class="team-profile-name">최지훈</p>
+								<p class="team-profile-email">2015/21/505</p>
+								<p class="team-profile-email">이건또 어떻게</p>
+								<p class="team-profile-email">공지사항</p>
+
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="nav-search-result active-right">
+						<div class="result-container">
+							<div class="result-image"
+								style="background-image: url('99D279435B3D788602.jfif');"></div>
+							<div>
+								<p class="team-profile-name">최지훈</p>
+								<p class="team-profile-email">2015/21/505</p>
+								<p class="team-profile-email">이건또 어떻게</p>
+								<p class="team-profile-email">공지사항</p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<!--오른쪽 사이드서치바3 끝-->
+	<!--오른쪽 사이드서치바3 끝-->
 
 
 	<!-- 컨텐츠 시작-->
 	<!-- 컨텐츠 시작-->
 	<div class="body-content" id="body-pd-left">
-		
+
 		<div class="job-team-body"></div>
 	</div>
 	<!-- 컨텐츠 끝-->
@@ -626,7 +631,7 @@
 						<button class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body">
-						<input  type="text" class="form-control updatePosition"
+						<input type="text" class="form-control updatePosition"
 							placeholder="직책 입력"> <input id="updateMemberAction"
 							type="button" class="btn btn-success" value="수정">
 						<div class="modal-scroll">
@@ -683,7 +688,7 @@
 		</div>
 
 		<!-- 오늘의 할일 생성 모달 -->
-	<div class="modal" id="insertTodoListInfoModal" tabindex="-1">
+		<div class="modal" id="insertTodoListInfoModal" tabindex="-1">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -691,19 +696,42 @@
 						<button class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body">
-						
-						오늘의 할일<input id="todo_title" type="text" class="form-control"> 
+
+						오늘의 할일<input id="todo_title" type="text" class="form-control">
 						내용<input id="todo_description" type="text" class="form-control">
 						마감날짜<input id="todo_endDate" type="date" class="form-control">
-						member_num<input id="member_num" type="text" class="form-control" value="${param.member_num}">
-						team_num<input id="team_num" type="text" class="form-control" value="${param.team_num}">
-						<input id="insertTeamAction" type="button" class="btn btn-success" onclick="insertTodoListAction();" value="오늘의 할일 생성">
-						
+						member_num<input id="member_num" type="text" class="form-control"
+							value="${param.member_num}"> team_num<input id="team_num"
+							type="text" class="form-control" value="${param.team_num}">
+						<input id="insertTeamAction" type="button" class="btn btn-success"
+							onclick="insertTodoListAction();" value="오늘의 할일 생성">
+
 					</div>
 				</div>
 			</div>
 		</div>
-		
+		<!-- 오늘의 할일 수정 모달 -->
+		<div class="modal" id="updateTodoListInfoModal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						오늘의 할일 수정
+						<button class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+
+						<input id="updateTodoNum" type="hidden"> 오늘의 할일<input
+							id="updateTodoTitle" type="text" class="form-control"> 내용<input
+							id="updateTodoDescription" type="text" class="form-control">
+						마감날짜<input id="updateTodoEnd" type="date" class="form-control">
+						<input id="updateTodoAction" type="button" class="btn btn-success"
+							value="수정"> <input id="deleteTodoAction" type="button"
+							class="btn btn-success" value="삭제">
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<!-- 채팅방 추가 모달 -->
 		<div class="modal" id="insertChatRoomModal" tabindex="-1">
 			<div class="modal-dialog">
@@ -713,13 +741,23 @@
 						<button class="close" data-dismiss="modal">&times;</button>
 					</div>
 					<div class="modal-body">
-					
-						<input id="updateTodoNum" type="hidden" >
-						오늘의 할일<input id="updateTodoTitle" type="text" class="form-control"> 
-						내용<input id="updateTodoDescription" type="text" class="form-control">
-						마감날짜<input id="updateTodoEnd" type="date" class="form-control">
-						<input id="updateTodoAction" type="button" class="btn btn-success" value="수정">
-						<input id="deleteTodoAction" type="button" class="btn btn-success" value="삭제">
+						<input id="insertChatRoomName" type="text" class="form-control"
+							placeholder="채팅방이름">
+						<hr>
+						<input type="text" id="inviteChatMemberSearchbar"
+							class="form-control" placeholder="초대할 멤버 이름 또는 이메일 입력">
+						<div class="modal-scroll">
+							<ul id="invite-chat-list" class="list-group">
+							</ul>
+						</div>
+						<hr>
+						초대멤버
+						<div class="modal-scroll">
+							<ul id="invite-wait-list" class="list-group">
+							</ul>
+						</div>
+						<input id="createRoomAction" type="button" class="btn btn-success"
+							value="생성">
 					</div>
 				</div>
 			</div>
@@ -728,15 +766,22 @@
 
 	</div>
 	
-	<!-- 외부js에 변수 전달 -->
-	<input type="hidden" id="userName" value="<sec:authentication property="principal.users.user_name"/>"> 
+	<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+	<script src="/resources/main/css/sidebar-right.js"></script>
+	<script src="/resources/main/css/sidebar-left.js"></script>
+	<script src="/resources/members/js/todoList.js"></script>
 	
-	<input type="hidden" id="userNum" value="<sec:authentication property="principal.users.user_num"/>"> 
+	<!-- 외부js에 변수 전달 -->
+	<input type="hidden" id="userName"
+		value="<sec:authentication property="principal.users.user_name"/>">
+
+	<input type="hidden" id="userNum"
+		value="<sec:authentication property="principal.users.user_num"/>">
 
 	<input type="hidden" id="teamNum" value=${param.team_num }>
-	
+
 	<input type="hidden" id="memberNum" value=${param.member_num }>
-	
+
 	<script type="text/javascript">
 	
 	
