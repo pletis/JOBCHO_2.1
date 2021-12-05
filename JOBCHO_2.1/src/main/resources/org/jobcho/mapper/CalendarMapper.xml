@@ -9,7 +9,7 @@
 
 	
 	
-	<!-- 댓글 목록 -->
+	<!-- 일정 목록 -->
 	<select id="getListCalendar" resultType="org.jobcho.domain.CalendarVO">
 		<![CDATA[ 
 			select *
@@ -20,36 +20,34 @@
 	
 	<!-- TO_char(starts,"YYYY-MM-DD HH24:MI:SS")  -->
 	<!-- 댓글 생성 -->
-	<insert id="insertCalendar" parameterType="org.jobcho.domain.CalendarVO"> 
-		<![CDATA[ 
-			insert into calendar(
-			cal_num, cal_title, cal_contents, 
-			starts,
-			ends, 
-			allday, islive) 
+	<insert id="insertCalendar" parameterType="org.jobcho.domain.CalendarVO"> 		 
+			insert into calendar(cal_num, cal_title, starts, ends, allday) 
 				values(
-					cal_num.nextval, #{cal_title}, #{cal_contents}, 
-					TO_DATE(#{starts}, 'YYYY-MM-DDHH24:MI:SS'), 
-					TO_DATE(#{ends}, 'YYYY-MM-DDHH24:MI:SS'), 
-					1, 1
+					calendar_num.nextval,
+					#{cal_title},  
+					#{starts}, 
+					#{ends}, 
+					#{allday}
 				)
-		]]>
 	</insert>
 	
-	<!-- 댓글 수정 -->
+	<!-- 일정 수정 -->
 	<update id="updateCalendar" parameterType="org.jobcho.domain.CalendarVO">
-		update calendar set cal_contents= #{cal_contents}
+		update calendar set 
+		cal_title= #{cal_titel},
+		starts = #{starts},
+		ends = #{ends}
 		where cal_num= #{cal_num}
 	</update>
 	
-	<!-- 댓글 삭제 -->
+	<!-- 일정 삭제 -->
 	<select id="deleteCalendar" parameterType="int">
 		update calendar set islive = 0
 		where cal_num = #{cal_num}
 	</select> 
 	
-	<!-- 댓글 조회 -->
-	<select id="readCalendar" resultType="org.jobcho.domain.CalendarVO">
+	<!-- 일정 반환 -->
+	<select id="getCalendar" resultType="org.jobcho.domain.CalendarVO">
 		select * from calendar where cal_num = #{cal_num}
 		</select>
 	

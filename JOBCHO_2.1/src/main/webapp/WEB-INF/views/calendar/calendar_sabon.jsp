@@ -24,10 +24,11 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <!-- Date picker -->
-
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 <!-- fullcalendar CDN======================= -->
 <meta name="_csrf" content="${_csrf.token}" />
-
 <link
 	href="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css"
 	rel="stylesheet" />
@@ -36,9 +37,6 @@
 <!-- fullcalendar locale CDN==================== -->
 <script
 	src="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js"></script>
-<!-- ajxa CDN -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <style>
 /* body ì¤íì¼ */
 html, body {
@@ -64,7 +62,7 @@ html, body {
 <title>공유 달력 </title>
 </head>
 <body style="padding: 30px">
-	<form action="/calendar">
+	<form>
 		<!-- calendar  -->
 		<div id="calendar"></div>
 		<!-- Calendar Modal -->
@@ -83,9 +81,9 @@ html, body {
 							id="starts" name="일정시작시간" value=""> 일정 종료 시간<input
 							type="date" class="form-control" id="ends" name="일정 종료 시간"
 							value=""> 하루종일<input type="text" class="form-control"
-							id="allday" name="하루종일 true = 1 or false = 0" value=""> <br>
-						<input type="button" class="btn btn-success" onclick="newEvent()"
-							value="생성" id="saveBtn">
+							id="allday" name="하루종일 true = 1 or false = 0" value="">
+						<br> <input type="button" class="btn btn-success"
+							onclick="newEvent()" value="생성" id="saveBtn">
 						<div class="modal-scroll">
 							<ul class="list-group">
 
@@ -98,11 +96,6 @@ html, body {
 	</form>
 	<script>
 		var csrfToken = $("meta[name='_csrf']").attr("content");
-		//달력 일정 데이터 ID값 변수
-		var cal_title = document.getElementById('cal_title').value;
-		var starts = document.getElementById('starts').value;
-		var ends = document.getElementById('ends').value;
-		var allday = document.getElementById('allday').value;
 
 		$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
 			if (options['type'].toLowerCase() === "post") {
@@ -112,9 +105,8 @@ html, body {
 
 		document.addEventListener("DOMContentLoaded", function() {
 			var calendarEl = document.getElementById("calendar");
-			
+
 			var calendar = new FullCalendar.Calendar(calendarEl, {
-				themeSystem : 'themeSystem',
 				headerToolbar : {
 					left : "prev,next today",
 					center : "title",
@@ -131,36 +123,13 @@ html, body {
 					// You could fill in the start and end fields based on the parameters
 					$('.modal').modal('show');
 
-				},//select end
-				events : function() {
-					$.ajax({
-						url : "/calendar/getListCalendar",
-						type : "get",
-						dataType : "json",
-						contentType : "application/json",
-						success : function(arg) {
-							console.log("여기 출력되니?");
-							/* result = arg.result
-							for (i = 0; i < result.length; i++) {
-								calendar.addEvent({
-									title : result[i]['title'],
-									start : result[i]['starts'],
-									end : result[i]['ends']
-								})
-							} */
-						},
-						error : function() {
-
-						}
-					})
-				},
+				},//select end  
 				eventClick : function(event, arg) {
-					//console.log("여기 출력되니?");
-					/* $('.modal').modal('show');
-					$('.modal').find('#title').val(arg.title);
-					$('.modal').find('#starts').val(arg.start);
-					$('.modal').find('#ends').val(arg.end);
-					$('.modal').find('#allday').val(arg.allday); */
+					console.log("일정등록 이벤트 삭제");
+					console.log(arg.event);
+					if (confirm("일정을 삭제하시겠습니까?")) {
+						arg.event.remove();
+					}
 				},
 				editable : true,
 				dayMaxEvents : true,
@@ -170,63 +139,38 @@ html, body {
 
 		//일정 추가
 		function newEvent() {
-			var cal_title = document.getElementById('cal_title').value;
-			var starts = document.getElementById('starts').value;
-			var ends = document.getElementById('ends').value;
-			var allday = document.getElementById('allday').value;
-			// hide modal
-			//$('.modal').modal('hide');
+				var cal_title = document.getElementById('cal_title').value;
+				var starts = document.getElementById('starts').value;
+				var ends = document.getElementById('ends').value;
+				var allday = document.getElementById('allday').value;
+				
+				
+				
+				// hide modal
+				//$('.modal').modal('hide');
 
-			$.ajax({
-				url : "/calendar/new",
-				type : "post",
-				dataType : "json",
-				contentType : "application/json",
-				data : JSON.stringify({
-					"cal_title" : cal_title,
-					"starts" : starts,
-					"ends" : ends,
-					"allday" : allday
-				}),
-				success : function(data) {
-					alert("등록 완료");
-					$('.modal').modal('hide');
-				},
-				error : function() {
-					alert("실패");
-					//$('.modal').modal('hide');
-				}
-			});
-
-		}; //newEvent end
-
-		function getListCalendar() {
-			var cal_title = document.getElementById('cal_title').value;
-			var starts = document.getElementById('starts').value;
-			var ends = document.getElementById('ends').value;
-			var allday = document.getElementById('allday').value;
-			$.ajax({
-				url : "/calendar/getListCalendar",
-				type : "get",
-				dataType : "json",
-				contentType : "application/json",
-				data : "{}",
-				success : function(arg) {
-					result = arg.result
-					for (i = 0; i < result.length; i++) {
-						calendar.addEvent({
-							title : arg[i]['title'],
-							start : arg[i]['starts'],
-							end : arg[i]['ends']
-						})
+				$.ajax({
+					url : "/calendar/new",
+					type : "post",
+					dataType : "json",
+					contentType: "application/json",
+					data : JSON.stringify({
+						"cal_title" : cal_title,
+						"starts" : starts,
+						"ends" : ends,
+						"allday" : allday
+					}),
+					success : function(data) {
+						alert("등록 완료");
+						$('.modal').modal('hide');
+					},
+					error : function() {
+						alert("실패");
+						$('.modal').modal('hide');
 					}
-				},
-				error : function() {
-					alert("실패");
-					$('.modal').modal('hide');
-				}
-			});
-		}
+				});
+			
+		}; //newEvent end
 	</script>
 </body>
 </html>

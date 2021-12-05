@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: 1
+Bundle-SymbolicName: JOBCHO_2.1
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: 1.jar,
+ Java/jre1.8.0_45/lib/ext/ojdbc6.jar
+Export-Package: org.jobcho.controller,
+ org.jobcho.domain,
+ org.jobcho.mapper,
+ org.jobcho.security,
+ org.jobcho.service,
+ spring.board.email
+Require-Bundle: org.aspectj.runtime
