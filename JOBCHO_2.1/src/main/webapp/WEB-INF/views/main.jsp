@@ -769,8 +769,8 @@
         	var team_num=${param.team_num};
         	
         	//로그인한 유저 넘버
-        	var user_num=$("#authUserNum").val();
-        	user_num=3;
+        	var user_num=$("#userNum").val();
+        	
         	//컨텐츠바디에 현재팀의 멤버리스트 출력
         	function showMemberList(result){
         		str=""

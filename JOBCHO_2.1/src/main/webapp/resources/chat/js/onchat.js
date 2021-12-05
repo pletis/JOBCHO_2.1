@@ -37,7 +37,10 @@ $(document).ready(function(){
 	//채팅 보여주기
 	function showChatting(result){
 		var str=`<div class="dragablediv" id="room`+chatRoom_num+`">
-			<div class="dragabledivheader" id="room`+chatRoom_num+`header"><h3>`+chatRoom_name+`</h3></div>
+			<div class="dragabledivheader" id="room`+chatRoom_num+`header"><h3>`+chatRoom_name+`
+			<ion-icon name="person-add-outline"></ion-icon>
+			<ion-icon name="close-outline" class="chat-off"></ion-icon></h3>
+			</div>
 		<div class="job-chat-body">
 			
 	        <div class="job-chat"> 
@@ -301,8 +304,8 @@ $(document).ready(function(){
 	//채팅 전송
 	$(document).on("click", "#sendMessage",function(e){
 		console.log($(this).parent().children('.job-chat'))
-		var message = $(this).val()
-		$(this).val("")
+		var message = $(this).parent().parent().find(".commentParentText").val()
+		
 		str =`<p class="send">`+message+`</p>`
 		$(this).parent().children('.job-chat').append(str);
 		$(this).parent().children('.job-chat').scrollTop($(this).parent().children('.job-chat')[0].scrollHeight);
@@ -396,5 +399,10 @@ $(document).ready(function(){
     document.onmouseup = null;
     document.onmousemove = null;
   }
+  
+  $(document).on("click",".chat-off", function(){
+	  $(this).parent().parent().parent().remove();
+	  
+  })
 }
 });

@@ -80,7 +80,7 @@
 	</select>
 	
 	<select id = "getMember" resultType = "org.jobcho.domain.MemberVO">
-		select * from member where member_num= #{member_num)
+		select * from member where member_num= #{member_num}
 	</select>
 	
 	<select id="getUsersWithoutMembersList" resultType="org.jobcho.domain.UsersVO">
