@@ -67,6 +67,12 @@ public class MembersController {
 		System.out.println(map);
 		MemberVO isliveMember = service.getMemberByUserNum(map);
 		System.out.println(isliveMember);
+		
+		if(isliveMember==null){
+			int re = service.insertMember(members);
+			log.info(members);
+			return (re==1)? new ResponseEntity<>(members, HttpStatus.OK): new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 		if(isliveMember.getIsLive()==0){
 			isliveMember.setIsLive(1);
 			
