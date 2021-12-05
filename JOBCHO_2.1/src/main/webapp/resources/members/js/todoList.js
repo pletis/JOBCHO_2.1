@@ -23,6 +23,9 @@ $(document).ready(function(){
 	    });//$.ajax
 	}
 	
+	
+	
+	
 	//초기화면 출력
 	getTodoList();
 	
