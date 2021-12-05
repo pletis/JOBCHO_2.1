@@ -204,51 +204,6 @@ $(document).on("click",".nav-profile-content-left" ,function(e){
 
 
 
-//팀생성
-function insertTeamAction(){
-	console.log("insertTeamAction 버튼 눌림");
-	 var insertTeamName = document.getElementById('insertTeamName').value;
-	 var insertTeamInfo = document.getElementById('insertTeamName').value;
-	 var insertUser_num = document.getElementById('insertTeamName').value;
-	
-	 if(!insertTeamName){
-			alert('팀명을 입력해주세요');
-			return false;
-		}
-	 
-	 if(!insertTeamInfo){
-			alert('팀 정보를 입력해주세요');
-			return false;
-		}
-	 
-	 
-	 $.ajax({
-			url : '/team/'+<sec:authentication property="principal.users.user_num"/>,
-			type : "post",
-			contentType : "application/json",
-			data : JSON.stringify({
-						"team_name" : $("#insertTeamName").val(),			
-						"team_info" : $("#insertTeamInfo").val(),
-						"user_num" : $("#insertUser_num").val()
-			}),
-			success : function(data){
-					console.log(data);
-					alert("팀생성이 완료되었습니다");
-					$('#insertTeamInfoModal').modal("hide");
-					window.location.href = "/team/choose";
-
-
-			},
-			error : function(error){
-				alert("실패");
-				return false;
-			}
-		})
-	
-	
-}//end insertTeamAction
-
-
 //회원수정
 function checkValue(){
 	console.log("버튼눌림");
@@ -357,8 +312,6 @@ function checkValue(){
 				console.log(data);
 				alert("회원정보가 수정되었습니다.");
 				$('#updataUsersModal').modal("hide");
-				//window.location.href = "/team/choose";
-				//window.location.replace("/users/main");
 		},
 		error : function(error){
 			alert("알맞은 정보를 입력해주세요");
@@ -397,36 +350,6 @@ $(document).on("click",".nav__name-left" ,function(e){
 	alert("로그아웃되었습니다.")
 	$('#logoutForm').submit();
 });
-
-
-/* //팀 삭제하기 
-function deleteTeamAction(){
-	console.log("deleteTeamAction 버튼 눌림");
-	 
-	if(!confirm("정말로 삭제하시겠습니까?")){
-		alert("취소되었습니다.")
-		$('#updataTeamInfoModal').modal("hide");
-	}else{
-		$.ajax({
-			url : '/team/'+$('#updateTeamNum').val(),
-			type : "delete",
-			contentType : "application/json",
-			success : function(data){
-					console.log(data);
-					alert("팀 삭제가 완료되었습니다.");
-					$('#insertTeamInfoModal').modal("hide");
-					window.location.href = "/team/choose";
-			},
-			error : function(error){
-				alert("실패");
-				return false;
-			}
-		})
-	}
-	
-}//end deleteTeamAction */
-
-
 
 
 </script>
