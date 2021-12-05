@@ -50,7 +50,7 @@
 		<![CDATA[
 			select t.TEAM_NUM, t.TEAM_NAME, t.TEAM_INFO, t.USER_NUM, t.ISLIVE, t.TEAM_DATE from team t, member m
 			where t.TEAM_NUM = m.TEAM_NUM
-			and m.user_num = 1
+			and m.user_num = #{user_num}
 			and t.islive=1 order by t.team_num asc
 		]]>
 	</select>
