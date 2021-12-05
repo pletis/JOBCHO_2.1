@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -120,47 +117,21 @@ html, body {
 					center : "title",
 					right : "dayGridMonth,timeGridWeek,timeGridDay",
 				},
-				locale : "ko",
-				timeZone : "local",
-				initialDate : "2021-12-04",
-				navLinks : true, // can click day/week names to navigate views
+				locale : "ko", //한국어
+				timeZone : "local", //한국시간
+				initialDate : "2021-12-04", //디폴트 날짜
+				navLinks : true, 
 				selectable : true,
 				selectMirror : true,
+				//날짜 선택시 이벤트 추가 부분
 				select : function(start, end) {
-					// Display the modal.
-					// You could fill in the start and end fields based on the parameters
+					
 					$('.modal').modal('show');
 
 				},//select end
-				events : function() {
-					$.ajax({
-						url : "/calendar/getListCalendar",
-						type : "get",
-						dataType : "json",
-						contentType : "application/json",
-						success : function(arg) {
-							console.log("여기 출력되니?");
-							/* result = arg.result
-							for (i = 0; i < result.length; i++) {
-								calendar.addEvent({
-									title : result[i]['title'],
-									start : result[i]['starts'],
-									end : result[i]['ends']
-								})
-							} */
-						},
-						error : function() {
 
-						}
-					})
-				},
+				//일정 클릭시 발생할 이벤트
 				eventClick : function(event, arg) {
-					//console.log("여기 출력되니?");
-					/* $('.modal').modal('show');
-					$('.modal').find('#title').val(arg.title);
-					$('.modal').find('#starts').val(arg.start);
-					$('.modal').find('#ends').val(arg.end);
-					$('.modal').find('#allday').val(arg.allday); */
 				},
 				editable : true,
 				dayMaxEvents : true,
@@ -188,7 +159,7 @@ html, body {
 					"ends" : ends,
 					"allday" : allday
 				}),
-				success : function(data) {
+				success : function(arg) {
 					alert("등록 완료");
 					$('.modal').modal('hide');
 				},
