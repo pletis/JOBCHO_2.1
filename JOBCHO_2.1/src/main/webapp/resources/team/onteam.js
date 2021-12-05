@@ -88,7 +88,7 @@ $(document).ready(function(){
 	
 	function getTeamList(){
 		$.ajax({
-	        url:'/team/'+user_num,
+	        url:'/team/getlist/'+user_num,
 	        type:'Get',
 	        dataType:'json',
 	        success:function(result){
