@@ -9,11 +9,9 @@ import lombok.Data;
 public class CalendarVO implements Serializable{
 	private int cal_num;
 	private String cal_title;
-	private int member_num;
-	private String cal_contents;
-	private String starts;
-	private String ends;
-	private boolean allday;
+	private Date starts;
+	private Date ends;
+	private int allday;
 	private int isLive;
 	
 	
