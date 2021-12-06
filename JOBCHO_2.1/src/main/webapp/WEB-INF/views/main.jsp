@@ -390,100 +390,6 @@
 								<p class="team-profile-email">이건또 어떻게</p>
 								<p class="team-profile-email">공지사항</p>
 
-                    </SELECT>
-                    <SELECT NAME=sltSample SIZE=1>
-                        <OPTION VALUE=1>1번 보기입니다.</OPTION>
-                        <OPTION VALUE=2>2번 보기입니다.</OPTION>
-                        <OPTION VALUE=3>3번 보기입니다.</OPTION>
-                        <OPTION VALUE=4 SELECTED>4번 보기입니다.</OPTION>
-                    </SELECT>
-                    
-                </ul>
-                <div id="createVote">+투표생성</div>
-                <div class="nav-search-result-scroll">
-                <div class="nav-search-result active-right">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result active-right">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result active-right">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </nav>
-    </div>
-    <!--오른쪽 사이드서치바3 끝-->
-    <!--오른쪽 사이드서치바3 끝-->
 							</div>
 						</div>
 					</div>
@@ -745,67 +651,6 @@
 				</div>
 			</div>
 		</div>
-		
-		<!-- 투표 목록 모달 -->
-	<div class ="modal" id ="voteListModal" tabindex = "-1">
-		<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						투표
-						<button class="close" data-dismiss="modal">&times;</button>
-					</div>
-					<div class="modal-body">
-						<div class="job-vote-wrap"></div>
-						
- 						<input id="insertVote" type="button" class="btn btn-success" onclick="insertVote();" value="투표 생성가기">
-						
-					</div>
-				</div>
-			</div>
-	
-	</div>
-		
-		
-		<!-- 투표 생성 모달 -->
-	<div class = "modal" id ="insertVoteModal" tabindex = "-1">
-		<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						투표 생성
-						<button class="close" data-dismiss="modal">&times;</button>
-					</div>
-					<div class="modal-body">
-						
-						투표 제목<input id="vote_name" type="text" class="form-control"> 
-						투표 내용1<input id="vote_content1" type="text" class="form-control">
-						투표 내용2<input id="vote_content2" type="text" class="form-control">
-						투표 내용3<input id="vote_content3" type="text" class="form-control">
-						투표 내용4<input id="vote_content4" type="text" class="form-control">
-						투표 내용5<input id="vote_content5" type="text" class="form-control">
-						member_num<input id="member_num" type="text" class="form-control" value="1">
-						team_num<input id="team_num" type="text" class="form-control" value="${param.team_num}">
- 						<input id="insertVoteAction" type="button" class="btn btn-success" onclick="insertVoteAction();" value="투표 생성">
-						
-					</div>
-				</div>
-			</div>
-	</div>	
-	
-	<!-- 투표 하기 모달 -->
-	<div class = "modal" id = "voting" tabindex = "-1">
-	<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						투표 하기
-						<button class="close" data-dismiss="modal">&times;</button>
-					</div>
-					<div class="modal-body">
-						<div class = "job-vote-wrap"></div>
-					</div>
-				</div>
-			</div>
-	</div>		
-		
 		<!-- 오늘의 할일 수정 모달 -->
 		<div class="modal" id="updateTodoListInfoModal" tabindex="-1">
 			<div class="modal-dialog">
@@ -868,7 +713,6 @@
 	<script src="/resources/chat/js/onchat.js"></script>
 	<script src="/resources/chat/js/dragable.js"></script>
 	
-	
 	<!-- 외부js에 변수 전달 -->
 	<input type="hidden" id="userName"
 		value="<sec:authentication property="principal.users.user_name"/>">
@@ -877,9 +721,6 @@
 		value="<sec:authentication property="principal.users.user_num"/>">
 
 	<input type="hidden" id="teamNum" value=${param.team_num }>
-	
-	<input type = "hidden" id="memberNum" value =${param.member_num }>
-	
 
 	<input type="hidden" id="memberNum" value=${param.member_num }>
 
@@ -912,154 +753,6 @@
 		$('#logoutForm').submit();
 	});
 		
-	if(!todo_title){
-		alert('오늘의 할일을 입력해주세요');
-		return false;
-	}
-	if(!todo_description){
-		alert('내용을 입력해주세요');
-		return false;
-	}
-	if(!todo_endDate){
-		alert('마감날짜를 선택해주세요');
-		return false;
-	}
-		
-	$.ajax({
-		url : '/team/'+team_num+'/todo/new',
-		type : "post",
-		contentType : "application/json",
-		data : JSON.stringify({"todo_title" : $("#todo_title").val(),
-					"todo_description" : $("#todo_description").val(),			
-					"todo_endDate" : $("#todo_endDate").val(),
-					"member_num" : $("#member_num").val(),
-					"team_num" : $("#team_num").val(),
-		}),
-		success : function(data){
-				console.log(data);
-				alert("오늘의 할일이 추가되었습니다.");
-				$('#insertTodoListInfoModal').modal("hide");
-				//window.location.href = "/team/choose";
-				//window.location.replace("/users/main");
-		},
-		error : function(error){
-			alert("실패");
-			return false;
-		}
-	})
-	
-}//endi nsertTodoListAction
-	//투표 클릭 이벤트
-	$(document).on("click", "#createVote", function(e){
-		e.preventDefault();
-		$("#voteListModal").modal("show");
-		getVoteList();
-	})
-	
-	//투표 목록 불러오기
-	function getVoteList(){
-		var team_num = ${param.team_num};
-		
-		$.ajax({
-			url:'team/'+team_num+'vote/list',
-			type:"Get",
-			dataType:"json",
-			success:function(result){
-				showVoteList(result);
-			}
-		})
-	}//end function getVoteList
-	
-	//투표 목록 모달창에 출력하기
-	function showVoteList(result){
-		str = ""
-		result.forEach(function(item){
-			str += '<div class="job-container">'
-	        str += '<!--투표 목록-->'
-	        str += '<div class="team-profile-image" style="background-image: url(/resources/team/99D279435B3D788602.jfif);"></div>'
-	        str += '<div>'
-	        str += '<p class="vote-num" id="vote_num'+item.vote_num+'" value = "'+iteam.vote_num+'" onclick = "voting(this)">'+item.vote_num+'</p>'
-	        str += '<p class="vote-name" id = "'item.vote_name'" >'+item.vote_name+'</p>'
-	        str += '</div>'
-	        str += '<!--투표목록 끝-->'
-	        str += '</div>'
-		})
-		$(".job-vote-wrap").html(str);
-	}
-	
-	
-	//투표 추가 모달 이벤트
-	$(document).on("click","#insertVote", function(e){
-		e.preventDefault();
-		console.log("투표 클릭");
-		$("#insertVoteModal").modal("show");
-		updataMemberNum = this.value
-	});
-	
-	//투표추가 ajax
-	function insertVoteAction(){
-		console.log("insertVoteAction() 버튼 눌림")
-		var vote_name = document.getElementById('vote_name').value;
-		var vote_result1 = document.getElementById('vote_result1').value;
-		var vote_result2 = document.getElementById('vote_result2').value;
-		var vote_result3 = document.getElementById('vote_result3').value;
-		var vote_result4 = document.getElementById('vote_result4').value;
-		var vote_result5 = document.getElementById('vote_result5').value;
-		var member_num = document.getElementById('member_num').value;
-		var team_num = document.getElementById('team_num').value;
-		
-		$.ajax({
-			url:'/team/'+team_num+'/vote/new',
-			type:"post",
-			contentType : "application/json",
-			data:JSON.stringify({
-				"vote_name":$("#vote_name").val(),
-				"vote_content1":$("#vote_content1").val(),
-				"vote_content2":$("#vote_content2").val(),
-				"vote_content3":$("#vote_content3").val(),
-				"vote_content4":$("#vote_content4").val(),
-				"vote_content5":$("#vote_content5").val(),
-				"member_num":$("#member_num").val(),
-				"team_num":$("#team_num").val()
-			}),
-			success : function(data){
-				alert("투표생성 완료");
-				$('#insertVoteModal').modal("hide");
-			}
-		})
-	}
-	
-	//투표 내용 확인
-	function voting(this){
-		
-		var team_num = ${param.team_num};
-		var vote_num = this.value;
-		
-		$("#voteListModal").modal("hide");
-		
-		$("#voting").modal("show");
-		$.ajax({
-			url:'team/'+team_num+'vote/'+vote_num,
-			type : "Get",
-			dataType : "json",
-			success : function(result){
-				showVoting(result);
-			}
-		})
-	}//end voting
-	
-	function showVoting(result){
-		str = "";
-		result.forEach(item){
-			str += '<div class ="job-container">'
-			str += '<form action = "post">'
-			str += '<div class="team-profile-image" style="background-image: url(/resources/team/99D279435B3D788602.jfif);"></div>'
-			
-		
-		}
-	}
-	
-	
 	</script>
 
 
