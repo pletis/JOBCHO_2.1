@@ -67,35 +67,13 @@ public class PostController {
 	 * */
 	@GetMapping(value = "",
 							produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<HashMap<Object , Object>> getListPost(@PathVariable("board_num") int board_num,
-																											@RequestParam(value = "type",required = false) String type,
-																											@RequestParam(value = "keyword", required = false) String keyword){
-		
-		Criteria cri = new Criteria(1, 10);
-		
-		if(type != null && keyword != null) {
-			cri.setType(type);
-			cri.setKeyword(keyword);
-		}
-		
-		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("board_num", board_num);
-		map.put("cri", cri);
-		List<PostVO> getListPost = service.getListPost(map);
+	public ResponseEntity<List<PostVO>> getListPost(@PathVariable("board_num") int board_num){
+
+		List<PostVO> getListPost = service.getListPost(board_num);
 		
 		log.info("게시글 리스트 : " + board_num);
-		log.info("게시판, 페이지 수: " + map);
 		
-		int total = service.getTotalCount(cri);  //전체 게시글 수+페이지정보
-		PageInfo page = new PageInfo(cri, total);
-		
-		
-		HashMap<Object, Object> getListPostWithPage = new HashMap<Object, Object>();
-		getListPostWithPage.put("getListPost", getListPost);
-		getListPostWithPage.put("pageMaker", page);
-		
-		return new ResponseEntity<>(getListPostWithPage, HttpStatus.OK);
+		return new ResponseEntity<>(getListPost, HttpStatus.OK);
 	}
 	
 	
@@ -129,7 +107,6 @@ public class PostController {
 		return updateCount == 1
 				? new ResponseEntity<>(HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		
 	}
 	
 	

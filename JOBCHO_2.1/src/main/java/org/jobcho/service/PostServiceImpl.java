@@ -32,10 +32,10 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<PostVO> getListPost(HashMap<String, Object> map) {
-		log.info("서비스 게시글 리스트: " + map);
+	public List<PostVO> getListPost(int board_num) {
+		log.info("서비스 게시글 리스트: " + board_num);
 		
-		return mapper.getListPost(map);
+		return mapper.getListPost(board_num);
 	}
 	
 	@Override

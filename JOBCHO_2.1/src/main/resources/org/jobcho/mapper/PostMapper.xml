@@ -4,8 +4,34 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.jobcho.mapper.PostMapper">
 
-<!-- 검색조건 -->
+	<resultMap type="org.jobcho.domain.PostVO" id="PostMember">
+		<result property="post_num" column="post_num"/>
+		<result property="post_title" column="post_title"/>
+		<result property="post_contents" column="post_contents"/>
+		<result property="board_num" column="board_num"/>
+		<result property="member_num" column="member_num"/>
+		<result property="isLive" column="islive"/>
+		<association property="member" javaType="org.jobcho.domain.MemberVO">
+			<id property="member_num" column="member_num"/>
+			<result property="member_position" column="member_position"/>
+			<result property="team_num" column="team_num"/>
+			<result property="user_num" column="user_num"/>
+		</association>
+	</resultMap>
 	
+	
+	<!-- 게시글 리스트 조회 -->
+	<select id="getListPost" parameterType="int" resultMap="PostMember">
+		<![CDATA[ 
+				select *
+				from post p, member m 
+				where p.member_num = m.member_num
+				and p.board_num = #{board_num}
+				and p.islive =1
+
+		]]>	
+	</select>
+
 
 
 	<!-- 게시글 생성 -->
@@ -16,38 +42,7 @@
 			values(post_num.nextval, #{post_title}, #{post_contents}, #{board_num}, #{member_num}, default, default)
 	</insert>
 	
-	
-	<!-- 게시글 리스트 조회 + 페이지, 검색 -->
-	<select id="getListPost" parameterType="hashMap" resultType="org.jobcho.domain.PostVO">
-		<![CDATA[ 
-				select *
-				from post
-				where  board_num = #{board_num}
-		]]>	
-		 	<trim prefix="(" suffix=") AND " prefixOverrides="OR">
-			<foreach item='type' collection="#{cri.getTypeArr}">
-				<trim prefix="OR">
-				<choose>
-						<when test="type == 'T'.toString()">
-							post_title like '%'||#{cri.keyword}||'%'
-						</when>
-						<when test="type == 'C'.toString()">
-							post_contents like '%'||#{cri.keyword}||'%'
-						</when>
-						 <when test="type == 'W'.toString()">
-							post_contents like '%'||#{cri.keyword}||'%'
-						</when>
-					</choose>
-					</trim>
-				</foreach>
-			</trim>
-		 	
-		<![CDATA[ 		
-				and islive = 1
-		]]>	
-	</select>
-	
-	
+
 	<!-- 게시글 상세조회 -->
 	<select id="getPost" parameterType="int" resultType="org.jobcho.domain.PostVO">
 		<![CDATA[ 
