@@ -26,6 +26,7 @@ public class ChatController {
 	@Autowired
 	ChatService service;
 	
+	//채팅 생성
 	@PostMapping("/{chatRoom_num}/chat/new")
 	public ResponseEntity<ChatVO> insertChat(@RequestBody ChatVO chat){
 		int re = service.insertChat(chat);
@@ -33,6 +34,7 @@ public class ChatController {
 				:new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 	
+	//채팅리스트 가져오기
 	@GetMapping("/{chatRoom_num}/chat")
 	public ResponseEntity<List<ChatVO>> getListChat(@PathVariable("chatRoom_num") int chatRoom_num){
 		List<ChatVO> list = service.getListChat(chatRoom_num);
@@ -40,6 +42,7 @@ public class ChatController {
 				: new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
+	//채팅삭제
 	@DeleteMapping("/{chatRoom_num}/chat/{chat_num}")
 	public ResponseEntity<String> deleteChat(@PathVariable("chat_num") int chat_num){
 		int re = service.deleteChat(chat_num);
@@ -47,6 +50,7 @@ public class ChatController {
 				:new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 	
+	//채팅멤버 초대
 	@PostMapping("/{chatRoom_num}/chatmember/new")
 	public ResponseEntity<ChatMemberVO> insertChatMember(@RequestBody ChatMemberVO chatMember){
 		int re = service.insertChatMember(chatMember);
@@ -54,6 +58,7 @@ public class ChatController {
 				:new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 	
+	//채팅멤버리스트 불러오기
 	@GetMapping("/{chatRoom_num}/chatmember")
 	public ResponseEntity<List<ChatMemberVO>> getListChatMember(@PathVariable("chatRoom_num") int chatRoom_num){
 		List<ChatMemberVO> list = service.getListChatMember(chatRoom_num);
@@ -61,6 +66,7 @@ public class ChatController {
 				: new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
+	//채팅멤버가져오기
 	@GetMapping("/{chatRoom_num}/chatmember/{member_num}")
 	public ResponseEntity<List<ChatMemberVO>> getChatMember(@PathVariable("member_num") int member_num){
 		List<ChatMemberVO> chatMember = service.getChatMember(member_num);
@@ -68,6 +74,7 @@ public class ChatController {
 				: new ResponseEntity<>(chatMember, HttpStatus.OK);
 	}
 	
+	//멤버삭제
 	@DeleteMapping("/chatmember/{chatmember_num}")
 	public ResponseEntity<String> deleteChatMember(@PathVariable("chatmember_num") int chatMember_num){
 		int re = service.deleteChatMember(chatMember_num);
@@ -75,6 +82,7 @@ public class ChatController {
 				:new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 	
+	//채팅방 생성
 	@PostMapping("/new")
 	public ResponseEntity<ChatRoomVO> insertChatRoom(@RequestBody ChatRoomVO chatRoom){
 		System.out.println(chatRoom);
@@ -83,6 +91,7 @@ public class ChatController {
 				:new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 	
+	//채팅방리스트가져오기
 	@GetMapping("/")
 	public ResponseEntity<List<ChatRoomVO>> getListChatRoom(@PathVariable("team_num") int team_num){
 		List<ChatRoomVO> list = service.getListChatRoom(team_num);
@@ -90,6 +99,7 @@ public class ChatController {
 				: new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
+	//채팅방하나 가져오기
 	@GetMapping("/{chatRoom_num}")
 	public ResponseEntity<ChatRoomVO> getChatRoom(@PathVariable("chatRoom_num") int chatRoom_num){
 		ChatRoomVO chatRoom = service.getChatRoom(chatRoom_num);
@@ -97,6 +107,7 @@ public class ChatController {
 				: new ResponseEntity<>(chatRoom, HttpStatus.OK);
 	}
 	
+	//채팅방 정보 수정
 	@PutMapping("/{chatRoom_num}")
 	public ResponseEntity<ChatRoomVO> updateChatRoom(
 			@PathVariable("chatRoom_num")int chatRoom_num,
@@ -108,6 +119,7 @@ public class ChatController {
 				:new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 	
+	//채팅방 삭제
 	@DeleteMapping("/{chatRoom_num}")
 	public ResponseEntity<String> deleteChatRoom(@PathVariable("chatRoom_num") int chatRoom_num){
 		int re = service.deleteChatRoom(chatRoom_num);
