@@ -1,6 +1,7 @@
 package org.jobcho.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.jobcho.domain.TodoVO;
 
@@ -10,4 +11,5 @@ public interface TodoMapper {
 	public List<TodoVO> selectTodoList();
 	public int updateTodo(TodoVO todo);
 	public int deleteTodo(int todo_num);
+	public List<TodoVO> selectTodoList2(Map<String, Integer> map);
 }

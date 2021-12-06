@@ -9,8 +9,9 @@
 	<!-- 게시판 목록 가져오기 -->
 	<select id="getListBoard" parameterType="int" resultType="org.jobcho.domain.BoardVO">
 		<![CDATA[ 
-			select board_name from board
+			select * from board
 			where team_num = #{team_num}
+			and islive = 1
 		]]>
 	</select>
 	

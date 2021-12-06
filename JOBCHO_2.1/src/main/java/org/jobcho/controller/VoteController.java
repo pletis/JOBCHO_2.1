@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.log4j.Log4j;
 
 @RestController
-@RequestMapping("/team/{team_num}/vote")
+@RequestMapping("/team/{team_num}/vote/*")
 @Log4j
 public class VoteController {
 
@@ -45,7 +45,7 @@ public class VoteController {
 	}
 	
 	//투표하기
-	@PostMapping("/{vote_num}")
+	@PostMapping("/{vote_num}/insert")
 	public ResponseEntity<VoteResultVO> insertVoteResult(@RequestBody VoteResultVO voteResult, @PathVariable("vote_num") int vote_num){
 		voteResult.setVote_num(vote_num);
 		
@@ -58,14 +58,20 @@ public class VoteController {
 	}
 	
 	//투표 목록보기
-	@GetMapping(value = "", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+	@GetMapping(value = "/list", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<List<VoteVO>> listVote(@PathVariable("team_num") int team_num){
 		return new ResponseEntity<List<VoteVO>>(service.listVote(team_num), HttpStatus.OK);
 	}
 	
-	//특정 투표 결과 보기
+	//특정 투표 가져오기
 	@GetMapping(value = "/{vote_num}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<VoteResultVO> getVote(@PathVariable("vote_num") int vote_num){
+	public ResponseEntity<VoteVO> getVote(@PathVariable("vote_num") int vote_num){
+		return new ResponseEntity<VoteVO>(service.getVote(vote_num), HttpStatus.OK);
+	}
+	
+	//특정 투표 결과 보기
+	@GetMapping(value = "/{vote_num}/result", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<VoteResultVO> getVoteResult(@PathVariable("vote_num") int vote_num){
 				
 		return new ResponseEntity<VoteResultVO>(voteResultService.getVoteResult(vote_num), HttpStatus.OK);
 	}
