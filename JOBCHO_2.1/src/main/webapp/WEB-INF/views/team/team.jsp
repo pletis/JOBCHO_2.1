@@ -146,7 +146,7 @@
 					</div>
 					<div class="modal-body">
 						
-						<input id="updateTeamNum" type="text" >
+						<input id="updateTeamNum" type="hidden" >
 						팀이름<input id="updateTeamName" type="text" class="form-control"> 
 						팀내용<input id="updateTeamInfo" type="text" class="form-control">
 						<input id="updateTeamAction" type="button" class="btn btn-success" onclick="updateTeamAction();" value="수정">
