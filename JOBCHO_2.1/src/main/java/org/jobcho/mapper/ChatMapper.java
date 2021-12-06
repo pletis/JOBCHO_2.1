@@ -13,7 +13,7 @@ public interface ChatMapper {
 	
 	int insertChatMember(ChatMemberVO chatMember);
 	List<ChatMemberVO> getListChatMember(int chatRoom_num);
-	ChatMemberVO getChatMember(int chatMember_num);
+	List<ChatMemberVO> getChatMember(int chatMember_num);
 	int deleteChatMember(int chatMember_num);
 	
 	int insertChatRoom(ChatRoomVO chatRoom);

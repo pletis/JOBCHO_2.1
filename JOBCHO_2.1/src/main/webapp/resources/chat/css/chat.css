@@ -7,7 +7,7 @@
   --receive-text: black;
 }
 
-p {
+.job-chat p {
   max-width: 500px;
   width:300;
   min-width: 255px;
@@ -26,7 +26,7 @@ p {
 }
 
 .job-chat{
-	height: 65rem;
+	height: 45rem;
 	overflow: auto;
 }
 

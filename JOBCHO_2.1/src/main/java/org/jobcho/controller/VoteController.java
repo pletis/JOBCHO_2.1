@@ -63,9 +63,15 @@ public class VoteController {
 		return new ResponseEntity<List<VoteVO>>(service.listVote(team_num), HttpStatus.OK);
 	}
 	
-	//특정 투표 결과 보기
+	//특정 투표 가져오기
 	@GetMapping(value = "/{vote_num}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<VoteResultVO> getVote(@PathVariable("vote_num") int vote_num){
+	public ResponseEntity<VoteVO> getVote(@PathVariable("vote_num") int vote_num){
+		return new ResponseEntity<VoteVO>(service.getVote(vote_num), HttpStatus.OK);
+	}
+	
+	//특정 투표 결과 보기
+	@GetMapping(value = "/{vote_num}/result", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<VoteResultVO> getVoteResult(@PathVariable("vote_num") int vote_num){
 				
 		return new ResponseEntity<VoteResultVO>(voteResultService.getVoteResult(vote_num), HttpStatus.OK);
 	}
