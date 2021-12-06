@@ -1,6 +1,7 @@
 package org.jobcho.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.jobcho.domain.MemberVO;
 import org.jobcho.domain.UsersVO;
@@ -20,6 +21,13 @@ public class MembersServiceImpl implements MembersService {
 		return mapper.listTeamMembers(team_num);
 	}
 
+	@Override
+	public MemberVO getMemberByUserNum(Map<String, Integer> map) {
+		// TODO Auto-generated method stub
+		System.out.println(map);
+		return mapper.getMemberByUserNum(map);
+	}
+	
 	@Override
 	public MemberVO getMember(int member_num) {
 		// TODO Auto-generated method stub
@@ -49,5 +57,13 @@ public class MembersServiceImpl implements MembersService {
 		// TODO Auto-generated method stub
 		return mapper.getUsersWithoutMembersList(team_num);
 	}
+
+	@Override
+	public int insertMember2(MemberVO member) {
+		int re = mapper.insertMember2(member);
+		return re;
+	}
+
+	
 
 }

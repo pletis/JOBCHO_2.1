@@ -5,6 +5,12 @@
 <mapper namespace="org.jobcho.mapper.TeamMapper">
 	
 	
+	<!-- 건수가함 -->
+	<select id="selectTeam" parameterType="HashMap" resultType="org.jobcho.domain.TeamVO">
+		select * from team 
+				where team_name = #{team_name} and team_info = #{team_info}
+	</select>
+	
 	<!-- 팀 생성 -->	
 	<insert id="insertTeam" parameterType="org.jobcho.domain.TeamVO">
 		<![CDATA[ 
@@ -15,10 +21,11 @@
 			]]>
 	</insert>
 	
-	<!-- 팀 리스트 조회 -->
+	<!-- 팀 리스트 조회 --> <!-- /*+ index_AES(team team_num)*/ -->
 	<select id="getListTeam" parameterType="int" resultType="org.jobcho.domain.TeamVO">
 		<![CDATA[
-			select * from team where user_num = #{user_num} and islive=1
+			select
+			* from team where user_num = #{user_num} and islive=1 order by team_num asc
 		]]>
 	</select>
 	
@@ -37,5 +44,18 @@
 	<update id="deleteTeam" parameterType="int">
 		update team set islive = 0 where team_num = #{team_num}
 	</update>
+	
+	<!-- 팀 리스트 조회 --> <!-- /*+ index_AES(team team_num)*/ -->
+	<select id="getListTeamByMemberJoin" parameterType="int" resultType="org.jobcho.domain.TeamVO">
+		<![CDATA[
+			select t.TEAM_NUM, t.TEAM_NAME, t.TEAM_INFO, t.USER_NUM, t.ISLIVE, t.TEAM_DATE from team t, member m
+			where t.TEAM_NUM = m.TEAM_NUM
+			and m.user_num = #{user_num}
+			and t.islive=1 order by t.team_num asc
+		]]>
+	</select>
+
+	
+	
 	
 	</mapper>

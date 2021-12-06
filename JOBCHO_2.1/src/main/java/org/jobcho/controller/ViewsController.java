@@ -1,7 +1,12 @@
 package org.jobcho.controller;
 
+import org.jobcho.domain.TeamVO;
+import org.jobcho.service.TeamService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.log4j.Log4j;
 
@@ -9,7 +14,11 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class ViewsController {
 
-	//濡쒓렇�씤�럹�씠吏� 
+	@Autowired
+	private TeamService teamService;
+	
+	
+	//로그인페이지
 	@GetMapping("/users/login")
 	public void loginForm(){
 	}
@@ -19,22 +28,22 @@ public class ViewsController {
 	public void mainForm(){
 	}
 	
-	//�쉶�썝媛��엯�럹�씠吏�
+	//회원가입 페이지
 	@GetMapping("/users/register")
 	public void register(){
 	}
 	
-	//鍮꾨�踰덊샇 李얘린 泥ル쾲夷� �럹�씠吏�
+	//비밀번호 찾기 첫번째 페이지
 	@GetMapping("/users/findPw_1")
 	public void findPw_1(){
 	}
 	
-	//鍮꾨�踰덊샇 李얘린 �몢踰덉㎏ �럹�씠吏�
+	//비밀번호 찾기 두번째 페이지
 	@GetMapping("/users/findPw_2")
 	public void findPw_2(){
 	}
 	
-	//鍮꾨�踰덊샇 李얘린 �꽭踰덉㎏ �럹�씠吏�
+	//비밀번호 찾기 세번째 페이지
 	@GetMapping("/users/findPw_3")
 	public void findPw_3(){
 	}
@@ -49,19 +58,27 @@ public class ViewsController {
 	public void emailFindPw(){
 	}
 	
+	//로그인 다음 페이지 -> 팀고르기 및 회원수정 
 	@GetMapping("/team/choose")
 	public String teamChoose(){
 		return "/team/team";
 	}
 	
+	//팀고르기 다음페이지 -> 메인페이지 
 	@GetMapping("/team/main")
-	public String teamMain(){
+	public String teamMain(@RequestParam("team_num") int team_num, Model model){
+		//전에 페이지에 받은 team_num으로 부터 팀객체를 생성하여 main페이지에 팀객체 전송하기 
+		TeamVO team = teamService.getTeam(team_num);
+		model.addAttribute("team", team);
+		
+		
 		return "/main";
 	}
 	
-	@GetMapping("/calendar/test")
+	@GetMapping("/calendar/calendar")
 	public String calendar(){
 		return "/calendar/calendar";
+		//return "/calendar/fullcalendar-3.0.1/demos/test";
 	}
 	
 }

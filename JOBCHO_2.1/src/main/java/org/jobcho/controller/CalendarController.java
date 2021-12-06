@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.log4j.Log4j;
 
 @RestController
-@RequestMapping("/team/{team_num}/calendar")
+@RequestMapping("/calendar/*")
 @Log4j
 public class CalendarController {
 	@Autowired
@@ -29,30 +30,29 @@ public class CalendarController {
 	
 	// /team/{team_num}/board/{board_num}/post/{post_num}/reply/new
 	// Post Man OK
-	@RequestMapping(value="/new", method = {RequestMethod.POST})
-	
-	public ResponseEntity<CalendarVO> insertCalendar(@RequestBody CalendarVO calendar,
+	@RequestMapping(value="/new", method = RequestMethod.POST)
+	public ResponseEntity<Integer> insertCalendar(@RequestBody CalendarVO calendar
 												//@PathVariable("member_num") int member_num,
-												@PathVariable("team_num") int team_num
+												//@PathVariable("team_num") int team_num
 																				){
-		
+		System.out.println(calendar);
 		
 		//calendar.setMember_num(member_num);
 		log.info("insertCalendar ==================" + calendar);
 		int insertCount = service.insertCalendar(calendar);
 		
 		return insertCount == 1
-				? new ResponseEntity<>(HttpStatus.OK)
-				:  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+				? new ResponseEntity<>(insertCount, HttpStatus.OK)
+				:  new ResponseEntity<>(insertCount, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	//�룷�뒪�듃留� o 
-	@GetMapping(value = "/getListCalendar",
+	@GetMapping(value = "",
 			produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<List<CalendarVO>> getListCalendar(CalendarVO cal_num,
-															@PathVariable("team_num") int team_num){
-		log.info("getListCalendar ================== " + cal_num);
-		return new ResponseEntity<>(service.getListCalendar(cal_num), HttpStatus.OK);
+	public ResponseEntity<List<CalendarVO>> getListCalendar(CalendarVO cal_num){
+		List<CalendarVO> list = service.getListCalendar(cal_num);
+		
+		return new ResponseEntity<>(list, HttpStatus.OK);
 		
 	}
 	

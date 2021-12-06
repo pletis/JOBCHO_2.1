@@ -49,7 +49,8 @@ public class ChatSocketController {
 	@OnMessage
 	public void handleMessage(String message, Session userSession, 
 			@PathParam("chatroom_num") int chatroom_num) throws IOException {
-		
+		System.out.println(chatroom_num);
+		System.out.println(message);
 		// session관리 리스트에서 Session을 취득한다.
 		sessionMap.get(chatroom_num).forEach(session -> {
 			// 리스트에 있는 세션과 메시지를 보낸 세션이 같으면 메시지 송신할 필요없다.

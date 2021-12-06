@@ -9,7 +9,7 @@
 		<result property="member_position" column="member_position"/>
 		<result property="team_num" column="team_num"/>
 		<result property="user_num" column="user_num"/>
-		
+		<result property="isLive" column="islive"/>
 		<association property="user" javaType="org.jobcho.domain.UsersVO">
 			<id property="user_num" column="user_num"/>
 			<result property="user_name" column="user_name"/>
@@ -34,6 +34,11 @@
 		)
 	</insert>
 	
+	<!-- 건수가함 -->
+	<insert id="insertMember2" parameterType="org.jobcho.domain.MemberVO">
+		insert into member (member_num, team_num, user_num)
+         values(member_num.nextval, #{team_num}, #{user_num})
+	</insert>
 
 	
 	<select id="listTeamMembers" parameterType="int" resultMap="MemberUser">
@@ -46,7 +51,12 @@
 	</select>
 	
 	<update id="updateMemberInfo" parameterType="org.jobcho.domain.MemberVO">
-		update member set member_position=#{member_position} where member_num=#{member_num}
+		update member set member_position=#{member_position} ,
+		<if test='#{isLive} !=null'>
+			islive = #{isLive}
+		</if>
+		
+		where member_num=#{member_num}
 	</update>
 	
 	<update id="deleteMemberInfo" parameterType="int">
@@ -65,8 +75,12 @@
 		select team_num from member where user_num = #{user_num} and islive=1
 	</select>
 
+	<select id = "getMemberByUserNum" parameterType="HashMap" resultType = "org.jobcho.domain.MemberVO">
+		select * from member where user_num = #{user_num} and team_num = #{team_num}
+	</select>
+	
 	<select id = "getMember" resultType = "org.jobcho.domain.MemberVO">
-		select * from member where member_num = #{member_num}
+		select * from member where member_num= #{member_num}
 	</select>
 	
 	<select id="getUsersWithoutMembersList" resultType="org.jobcho.domain.UsersVO">
