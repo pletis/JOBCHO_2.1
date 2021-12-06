@@ -21,11 +21,8 @@
 	<select id="getListPost" parameterType="hashMap" resultType="org.jobcho.domain.PostVO">
 		<![CDATA[ 
 				select *
-				from(
-					select /*+INDEX_DESC(post SYS_C007525) */
-						 rownum rn, post_num, post_title, post_contents, board_num, member_num, post_date, replycnt
-					from post
-					where 
+				from post
+				where  board_num = #{board_num}
 		]]>	
 		 	<trim prefix="(" suffix=") AND " prefixOverrides="OR">
 			<foreach item='type' collection="#{cri.getTypeArr}">
@@ -46,11 +43,7 @@
 			</trim>
 		 	
 		<![CDATA[ 		
-					rownum <= #{cri.pageNum} * #{cri.amount}
-					and board_num = #{board_num}
-				)
-				where rn > (#{cri.pageNum} -1) * #{cri.amount}
-				and board_num = #{board_num}
+				and islive = 1
 		]]>	
 	</select>
 	
