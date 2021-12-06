@@ -75,9 +75,10 @@ public class ViewsController {
 		return "/main";
 	}
 	
-	@GetMapping("/calendar/test")
+	@GetMapping("/calendar/calendar")
 	public String calendar(){
 		return "/calendar/calendar";
+		//return "/calendar/fullcalendar-3.0.1/demos/test";
 	}
 	
 }
