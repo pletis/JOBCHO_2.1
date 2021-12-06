@@ -30,7 +30,7 @@ public class CalendarServiceImpl implements CalendarService{
 	}
 
 	@Override
-	public List<CalendarVO> getListCalendar(@RequestParam("method=date") CalendarVO cal_num) {
+	public List<CalendarVO> getListCalendar(CalendarVO cal_num) {
 		
 		log.info("캘린더 일정 조회=============" + cal_num);
 		
