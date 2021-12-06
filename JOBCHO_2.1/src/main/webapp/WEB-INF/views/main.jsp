@@ -424,86 +424,7 @@
                     </SELECT>
                     
                 </ul>
-                <div id="createVote">+투표생성</div>
-                <div class="nav-search-result-scroll">
-                <div class="nav-search-result active-right">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result active-right">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result ">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="nav-search-result active-right">
-                    <div class="result-container">
-                        <div class="result-image" style="background-image: url('99D279435B3D788602.jfif');"></div>
-                        <div>
-                            <p  class="team-profile-name">최지훈</p>
-                            <p class="team-profile-email">2015/21/505</p>
-                            <p class="team-profile-email">이건또 어떻게</p>
-                            <p class="team-profile-email">공지사항</p>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
+                
             </div>
         </nav>
     </div>
@@ -778,7 +699,8 @@ function insertTodoListAction(){
 		}
 	})
 	
-}//endi nsertTodoListAction
+}//end insertTodoListAction
+	
 	//투표 클릭 이벤트
 	$(document).on("click", "#createVote", function(e){
 		e.preventDefault();
