@@ -51,9 +51,7 @@
           navLinks: true, // can click day/week names to navigate views
           selectable: true,
           selectMirror: true, // 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용..
-          select: function (arg) {
-            console.log(arg);
-            var title = prompt("입력할 일정:"); // title 값이 있을때, 화면에 calendar.addEvent() json형식으로 일정을 추가
+          select: function (arg) {�
             if (title) {
               calendar.addEvent({
                 title: title,

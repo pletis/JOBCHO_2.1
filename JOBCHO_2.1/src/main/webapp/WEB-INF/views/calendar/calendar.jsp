@@ -23,8 +23,6 @@
 <!-- Date picker -->
 
 <!-- fullcalendar CDN======================= -->
-<meta name="_csrf" content="${_csrf.token}" />
-
 <link
 	href="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css"
 	rel="stylesheet" />
@@ -124,14 +122,24 @@ html, body {
 				selectable : true,
 				selectMirror : true,
 				//날짜 선택시 이벤트 추가 부분
-				select : function(start, end) {
-					
+				select: function(arg){
 					$('.modal').modal('show');
-
-				},//select end
-
+					if(title){
+						calendar.addEvent({
+							title: arg.title,
+							start: arg.start,
+							end: arg.start,
+							allday: arg.allday
+						});
+					}
+				},
 				//일정 클릭시 발생할 이벤트
-				eventClick : function(event, arg) {
+				eventClick : function(arg, element) {
+		            console.log("등록 이벤트");
+		            console.log(arg.event);
+		            if (confirm("모달 삭제하시겠습니까?")) {
+		              arg.event.remove();
+		            }
 				},
 				editable : true,
 				dayMaxEvents : true,
@@ -160,6 +168,7 @@ html, body {
 					"allday" : allday
 				}),
 				success : function(arg) {
+					console.log(arg);
 					alert("등록 완료");
 					$('.modal').modal('hide');
 				},

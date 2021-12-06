@@ -31,7 +31,7 @@ public class CalendarController {
 	// /team/{team_num}/board/{board_num}/post/{post_num}/reply/new
 	// Post Man OK
 	@RequestMapping(value="/new", method = RequestMethod.POST)
-	public ResponseEntity<CalendarVO> insertCalendar(@RequestBody CalendarVO calendar
+	public ResponseEntity<Integer> insertCalendar(@RequestBody CalendarVO calendar
 												//@PathVariable("member_num") int member_num,
 												//@PathVariable("team_num") int team_num
 																				){
@@ -42,8 +42,8 @@ public class CalendarController {
 		int insertCount = service.insertCalendar(calendar);
 		
 		return insertCount == 1
-				? new ResponseEntity<>(HttpStatus.OK)
-				:  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+				? new ResponseEntity<>(insertCount, HttpStatus.OK)
+				:  new ResponseEntity<>(insertCount, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	//�룷�뒪�듃留� o 
