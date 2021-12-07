@@ -7,6 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment-with-locales.min.js"></script>
 <!-- Mobile -->
 <meta name="viewport"
 	content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
@@ -76,14 +78,14 @@ html, body {
 					<div class="modal-body">
 						<input type="hidden" class="form-control" id="cal_num"
 							name="cal_num" value="cal_num"> 일정<br> <input
-							type="text" class="form-control" id="cal_title" name="일정"
-							value=""> 일정 시작 시간<input type="date" class="form-control"
-							id="starts" name="일정시작시간" value=""> 일정 종료 시간<input
-							type="date" class="form-control" id="ends" name="일정 종료 시간"
-							value=""> 하루종일<input type="text" class="form-control"
-							id="allday" name="하루종일 true = 1 or false = 0" value="">
-						<br> <input type="button" class="btn btn-success"
-							onclick="newEvent()" value="생성" id="saveBtn">
+							type="text" class="form-control" id="title" name="일정" value="">
+						일정 시작 시간<input type="date" class="form-control" id="starts"
+							name="일정시작시간" value=""> 일정 종료 시간<input type="date"
+							class="form-control" id="ends" name="일정 종료 시간" value="">
+						하루종일<input type="text" class="form-control" id="allday"
+							name="하루종일 true = 1 or false = 0" value=""> <br> <input
+							type="button" class="btn btn-success" onclick="newEvent()"
+							value="생성" id="saveBtn">
 						<div class="modal-scroll">
 							<ul class="list-group">
 
@@ -96,7 +98,7 @@ html, body {
 	</form>
 	<script>
 		var csrfToken = $("meta[name='_csrf']").attr("content");
-
+		
 		$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
 			if (options['type'].toLowerCase() === "post") {
 				jqXHR.setRequestHeader('X-CSRF-TOKEN', csrfToken);
@@ -118,15 +120,23 @@ html, body {
 				navLinks : true, // can click day/week names to navigate views
 				selectable : true,
 				selectMirror : true,
-				select : function(start, end) {
+				select : function() {
 					// Display the modal.
 					// You could fill in the start and end fields based on the parameters
 					$('.modal').modal('show');
 
-				},//select end  
-				eventClick : function(event, arg) {
+				},//select end 
+
+				events : [
+					{
+						title : '이벤트 제목',
+						start : '2021-12-07',
+						end : '2021-12-15'
+					}
+				],//events end
+				eventClick : function(arg) {
 					console.log("일정등록 이벤트 삭제");
-					console.log(arg.event);
+					console.log(arg.events);
 					if (confirm("일정을 삭제하시겠습니까?")) {
 						arg.event.remove();
 					}
@@ -139,37 +149,43 @@ html, body {
 
 		//일정 추가
 		function newEvent() {
-				var cal_title = document.getElementById('cal_title').value;
-				var starts = document.getElementById('starts').value;
-				var ends = document.getElementById('ends').value;
-				var allday = document.getElementById('allday').value;
-				
-				
-				
-				// hide modal
-				//$('.modal').modal('hide');
 
-				$.ajax({
-					url : "/calendar/new",
-					type : "post",
-					dataType : "json",
-					contentType: "application/json",
-					data : JSON.stringify({
-						"cal_title" : cal_title,
-						"starts" : starts,
-						"ends" : ends,
-						"allday" : allday
-					}),
-					success : function(data) {
-						alert("등록 완료");
-						$('.modal').modal('hide');
-					},
-					error : function() {
-						alert("실패");
-						$('.modal').modal('hide');
-					}
-				});
-			
+			var title = document.getElementById('title').value;
+			var starts = document.getElementById('starts').value;
+			var ends = document.getElementById('ends').value;
+			var allday = document.getElementById('allday').value;
+
+			starts = moment(starts).format('YYYY-MM-DD'); //date 날짜형식
+			ends = moment(ends).format('YYYY-MM-DD'); //date 날짜형식
+
+			// hide modal
+			//$('.modal').modal('hide');
+
+			$.ajax({
+				url : "/calendar/new",
+				type : "post",
+				dataType : "json",
+				contentType : "application/json",
+				data : JSON.stringify({
+					"title" : title,
+					"starts" : starts,
+					"ends" : ends,
+					"allday" : allday
+				}),
+				success : function(data) {
+					alert("등록 완료");
+					$('.modal').modal('hide');
+				},
+				error : function() {
+					alert("실패");
+					$('.modal').modal('hide');
+					console.log(title);
+					console.log(starts);
+					console.log(ends);
+					console.log(allday);
+				}
+			});
+
 		}; //newEvent end
 	</script>
 </body>

@@ -21,12 +21,12 @@
 	<!-- TO_char(starts,"YYYY-MM-DD HH24:MI:SS")  -->
 	<!-- 댓글 생성 -->
 	<insert id="insertCalendar" parameterType="org.jobcho.domain.CalendarVO"> 		 
-			insert into calendar(cal_num, cal_title, starts, ends, allday) 
+			insert into calendar(cal_num, title, starts, ends, allday) 
 				values(
 					calendar_num.nextval,
-					#{cal_title},  
-					#{starts}, 
-					#{ends}, 
+					#{title},
+					#{starts},
+					#{ends},  
 					#{allday}
 				)
 	</insert>

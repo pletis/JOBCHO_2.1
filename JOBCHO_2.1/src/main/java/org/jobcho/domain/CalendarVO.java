@@ -8,13 +8,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Data;
 
 @Data
-public class CalendarVO implements Serializable{
+public class CalendarVO {
 	private int cal_num;
-	private String cal_title;
+	private String title;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "YYYY-MM-DD")
 	private Date starts;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	
+	@DateTimeFormat(pattern = "YYYY-MM-DD")
 	private Date ends;
 	private int allday;
 	private int isLive;

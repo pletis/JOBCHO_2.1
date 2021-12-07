@@ -55,15 +55,16 @@
 
 		});
 
-		$("#starts, #ends").datetimepicker();
+		$("#starts, #ends").datetimepicker({});
 
 
 		$('#save-event').on('click', function() {
+
 			var title = document.getElementById('title').value;
 			var starts = document.getElementById('starts').value;
 			var ends = document.getElementById('ends').value;
 			var allday = document.getElementById('allday').value;
-
+			
 			var title = $('#title').val();
 			if (title) {
 				var eventData = {
@@ -82,11 +83,15 @@
 			// hide modal
 			$('.modal').modal('hide');
 			
-			//날짜 형식 포맷팅 (되는지 모르겠음)
+			//날짜 형식 포맷팅
 			starts = moment(starts).format('YYYY/MM/DD hh:mm');
 			ends = moment(ends).format('YYYY/MM/DD hh:mm');
+			console.log(eventData);
 			console.log(starts);
 			console.log(ends);
+			
+			
+			
 			//일정 추가 
 			$.ajax({
 				url : "/calendar/new",
@@ -99,15 +104,23 @@
 					"ends" : ends,
 					"allday" : allday
 				}),
-				success : function(arg) {
+				success : function(data) {
 					alert("등록 완료");
+					console.log(title);
+					console.log(starts);
+					console.log(ends);
+					console.log(allday);
 					$('.modal').modal('hide');
 				},
 				error : function() {
 					alert("실패");
+					console.log(title);
+					console.log(starts);
+					console.log(ends);
+					console.log(allday);
 					//$('.modal').modal('hide');
 				}
-			});
+			});//ajax end
 		});
 
 	});
@@ -123,6 +136,10 @@ body {
 #calendar {
 	max-width: 900px;
 	margin: 0 auto;
+}
+
+.row {
+	padding: 5px;
 }
 </style>
 </head>
