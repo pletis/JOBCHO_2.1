@@ -97,6 +97,9 @@ html, body {
 		</div>
 	</form>
 	<script>
+			
+	
+		
 		var csrfToken = $("meta[name='_csrf']").attr("content");
 		
 		$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
@@ -107,7 +110,7 @@ html, body {
 
 		document.addEventListener("DOMContentLoaded", function() {
 			var calendarEl = document.getElementById("calendar");
-
+			
 			var calendar = new FullCalendar.Calendar(calendarEl, {
 				headerToolbar : {
 					left : "prev,next today",
@@ -124,16 +127,24 @@ html, body {
 					// Display the modal.
 					// You could fill in the start and end fields based on the parameters
 					$('.modal').modal('show');
+					
+					
+						var title = prompt('Event Title:');
+						var start = prompt('Event startDate:');
+						var end = prompt('Event endDate:');
+						var allDay = prompt('Event allDay:');
+						if (title) {
+							calendar.addEvent({
+								title: title,
+								start: start,
+								end: end,
+								allDay: allDay
+							})
+						}
+							calendar.unselect()
+						
 
 				},//select end 
-
-				events : [
-					{
-						title : '이벤트 제목',
-						start : '2021-12-07',
-						end : '2021-12-15'
-					}
-				],//events end
 				eventClick : function(arg) {
 					console.log("일정등록 이벤트 삭제");
 					console.log(arg.events);
@@ -146,47 +157,44 @@ html, body {
 			});
 			calendar.render();
 		});
+		
 
-		//일정 추가
+		//일정 추가 밸류값
 		function newEvent() {
+			var calTitle = document.getElementById('title').value;
+			var calStarts = document.getElementById('starts').value;
+			var calEnds = document.getElementById('ends').value;
+			var calallday = document.getElementById('allday').value;
+			
+			//date format
+			calStarts = moment(starts).format('YYYY-MM-DD'); //date 날짜형식
+			calEnds = moment(ends).format('YYYY-MM-DD'); //date 날짜형식
 
-			var title = document.getElementById('title').value;
-			var starts = document.getElementById('starts').value;
-			var ends = document.getElementById('ends').value;
-			var allday = document.getElementById('allday').value;
-
-			starts = moment(starts).format('YYYY-MM-DD'); //date 날짜형식
-			ends = moment(ends).format('YYYY-MM-DD'); //date 날짜형식
-
-			// hide modal
-			//$('.modal').modal('hide');
-
+			//일정 추가 Ajax
 			$.ajax({
 				url : "/calendar/new",
 				type : "post",
 				dataType : "json",
 				contentType : "application/json",
 				data : JSON.stringify({
-					"title" : title,
-					"starts" : starts,
-					"ends" : ends,
-					"allday" : allday
+					"title" : calTitle,
+					"starts" : calStarts,
+					"ends" : calEnds,
+					"allday" : calallday
 				}),
 				success : function(data) {
 					alert("등록 완료");
 					$('.modal').modal('hide');
+					
 				},
 				error : function() {
 					alert("실패");
-					$('.modal').modal('hide');
-					console.log(title);
-					console.log(starts);
-					console.log(ends);
-					console.log(allday);
+					//$('.modal').modal('hide');
 				}
 			});
-
 		}; //newEvent end
+		
+		
 	</script>
 </body>
 </html>
