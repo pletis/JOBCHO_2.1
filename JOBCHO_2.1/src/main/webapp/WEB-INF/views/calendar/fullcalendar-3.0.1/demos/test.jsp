@@ -82,7 +82,11 @@
 			// hide modal
 			$('.modal').modal('hide');
 			
-			
+			//날짜 형식 포맷팅 (되는지 모르겠음)
+			starts = moment(starts).format('YYYY/MM/DD hh:mm');
+			ends = moment(ends).format('YYYY/MM/DD hh:mm');
+			console.log(starts);
+			console.log(ends);
 			//일정 추가 
 			$.ajax({
 				url : "/calendar/new",

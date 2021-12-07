@@ -12,9 +12,9 @@ public class CalendarVO implements Serializable{
 	private int cal_num;
 	private String cal_title;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date starts;
-	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date ends;
 	private int allday;
 	private int isLive;
