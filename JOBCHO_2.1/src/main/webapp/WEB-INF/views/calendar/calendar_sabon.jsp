@@ -126,7 +126,7 @@ html, body {
 				select : function() {
 					// Display the modal.
 					// You could fill in the start and end fields based on the parameters
-					$('.modal').modal('show');
+					$('.calendar_modal').modal('show');
 					
 					
 						var title = prompt('Event Title:');
@@ -184,7 +184,7 @@ html, body {
 				}),
 				success : function(data) {
 					alert("등록 완료");
-					$('.modal').modal('hide');
+					$('.calendar_modal').modal('hide');
 					
 				},
 				error : function() {

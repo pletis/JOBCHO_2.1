@@ -8,6 +8,17 @@
 <head>
 <meta charset='utf-8'>
 <title>Page Title</title>
+<!-- fullcalendar CDN -->
+<link
+	href="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js"></script>
+<!-- fullcalendar locale CDN==================== -->
+<script
+	src="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment-with-locales.min.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
@@ -54,7 +65,7 @@
 				</div>
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
-					
+
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown"><a id="inviteSearch" href="#"
 							role="button" data-target="#modal" data-toggle="modal"
@@ -86,8 +97,12 @@
 						style="background-image: url('/resources/css/99D279435B3D788602.jfif');"></div>
 					<div class="nav-profile-content-left">
 						<p>${team.team_name }</p>
-						<p><sec:authentication property="principal.users.user_email"/></p>
-						<p><sec:authentication property="principal.users.user_name"/></p>
+						<p>
+							<sec:authentication property="principal.users.user_email" />
+						</p>
+						<p>
+							<sec:authentication property="principal.users.user_name" />
+						</p>
 					</div>
 				</div>
 				<!--프로필 끝-->
@@ -165,7 +180,7 @@
 
 			</div>
 
-			<a href="#" class="nav__link-left"  id="LogOutAction"> <ion-icon
+			<a href="#" class="nav__link-left" id="LogOutAction"> <ion-icon
 					name="log-out-outline" class="nav__icon-left"></ion-icon> <span
 				class="nav__name-left">Log Out</span>
 			</a>
@@ -356,7 +371,7 @@
 		<nav class="nav-search">
 			<div class="nav-search-title">할일</div>
 			<div class="nav-search-content">
-				<div id="createToDo" style="cursor:pointer">➕할일생성</div>
+				<div id="createToDo" style="cursor: pointer">➕할일생성</div>
 				<ul class="nav-todo-option">
 					<SELECT NAME=sltSample SIZE=1> 토픽
 						<OPTION VALUE=1>1번 보기입니다.</OPTION>
@@ -377,24 +392,24 @@
 					</SELECT>
 
 				</ul>
-				
-				<div class="nav-search-result-scroll">
-					<div class="job-todolist-wrap" style="cursor:pointer">
-					<div class="nav-search-result active-right">
-						<div class="result-container">
-							<div class="result-image"
-								style="background-image: url('99D279435B3D788602.jfif');"></div>
-							<div>
-								<p class="team-profile-name">최지훈</p>
-								<p class="team-profile-email">2015/21/505</p>
-								<p class="team-profile-email">이건또 어떻게</p>
-								<p class="team-profile-email">공지사항</p>
 
+				<div class="nav-search-result-scroll">
+					<div class="job-todolist-wrap" style="cursor: pointer">
+						<div class="nav-search-result active-right">
+							<div class="result-container">
+								<div class="result-image"
+									style="background-image: url('99D279435B3D788602.jfif');"></div>
+								<div>
+									<p class="team-profile-name">최지훈</p>
+									<p class="team-profile-email">2015/21/505</p>
+									<p class="team-profile-email">이건또 어떻게</p>
+									<p class="team-profile-email">공지사항</p>
+
+								</div>
 							</div>
 						</div>
-					</div>
-					<hr>
-					
+						<hr>
+
 					</div>
 				</div>
 			</div>
@@ -527,14 +542,18 @@
 	<!-- 컨텐츠 시작-->
 	<div class="body-content" id="body-pd-left">
 
-		<div class="job-team-body"></div>
+		<div class="job-team-body">
+			<div id="calendar"></div>
+		</div>
 	</div>
 	<!-- 컨텐츠 끝-->
 	<!-- 컨텐츠 끝-->
 
+
 	<!-- 로그아웃 -->
 	<form action="/customLogout" method="post" id="logoutForm">
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
 	</form>
 
 
@@ -557,6 +576,37 @@
 									<button class="badge">초대</button>
 								</li>
 
+
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 달력 모달 -->
+		<!-- calendar  -->
+		<!-- Calendar Modal -->
+		<div class="modal calendar_modal" id="CalModal" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						Calendar
+						<button class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<input type="hidden" class="form-control" id="cal_num"
+							name="cal_num" value="cal_num"> 일정<br> <input
+							type="text" class="form-control" id="title" name="일정" value="">
+						일정 시작 시간<input type="date" class="form-control" id="starts"
+							name="일정시작시간" value=""> 일정 종료 시간<input type="date"
+							class="form-control" id="ends" name="일정 종료 시간" value="">
+						하루종일<input type="text" class="form-control" id="allday"
+							name="하루종일 true = 1 or false = 0" value=""> <br> <input
+							type="button" class="btn btn-success" onclick="newEvent()"
+							value="생성" id="saveBtn">
+						<div class="modal-scroll">
+							<ul class="list-group">
 
 							</ul>
 						</div>
@@ -643,9 +693,11 @@
 						오늘의 할일<input id="todo_title" type="text" class="form-control">
 						내용<input id="todo_description" type="text" class="form-control">
 						마감날짜<input id="todo_endDate" type="date" class="form-control">
-						<input id="member_num" type="hidden" class="form-control" value="${param.member_num}"> 
-						<input id="team_num" type="hidden" class="form-control" value="${param.team_num}">
-						<input id="insertTeamAction" type="button" class="btn btn-success" onclick="insertTodoListAction();" value="오늘의 할일 생성">
+						<input id="member_num" type="hidden" class="form-control"
+							value="${param.member_num}"> <input id="team_num"
+							type="hidden" class="form-control" value="${param.team_num}">
+						<input id="insertTeamAction" type="button" class="btn btn-success"
+							onclick="insertTodoListAction();" value="오늘의 할일 생성">
 
 					</div>
 				</div>
@@ -661,12 +713,13 @@
 					</div>
 					<div class="modal-body">
 
-						<input id="updateTodoNum" type="hidden"> 
-						오늘의 할일<input id="updateTodoTitle" type="text" class="form-control"> 
-						내용<input id="updateTodoDescription" type="text" class="form-control">
+						<input id="updateTodoNum" type="hidden"> 오늘의 할일<input
+							id="updateTodoTitle" type="text" class="form-control"> 내용<input
+							id="updateTodoDescription" type="text" class="form-control">
 						마감날짜<input id="updateTodoEnd" type="date" class="form-control">
-						<input id="updateTodoAction" type="button" class="btn btn-success" value="수정"> 
-						<input id="deleteTodoAction" type="button" class="btn btn-success" value="삭제">
+						<input id="updateTodoAction" type="button" class="btn btn-success"
+							value="수정"> <input id="deleteTodoAction" type="button"
+							class="btn btn-success" value="삭제">
 					</div>
 				</div>
 			</div>
@@ -705,14 +758,14 @@
 		<!-- 채팅방 추가 모달 끝-->
 
 	</div>
-	
+
 	<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
 	<script src="/resources/main/css/sidebar-right.js"></script>
 	<script src="/resources/main/css/sidebar-left.js"></script>
 	<script src="/resources/members/js/todoList.js"></script>
 	<script src="/resources/chat/js/onchat.js"></script>
 	<script src="/resources/chat/js/dragable.js"></script>
-	
+
 	<!-- 외부js에 변수 전달 -->
 	<input type="hidden" id="userName"
 		value="<sec:authentication property="principal.users.user_name"/>">
@@ -1012,15 +1065,140 @@
                         }
                     });//$.ajax
             	}
-            	
-            	
-            	
+   	
             });
-            
+       
         });//끝
     </script>
 
+	<script>
+					console.log("캘린더 불러오기");
+            document.addEventListener("DOMContentLoaded", function() {
+    			var calendarEl = document.getElementById("calendar");
+    			
+    			var calendar = new FullCalendar.Calendar(calendarEl, {
+    				headerToolbar : {
+    					left : "prev,next today",
+    					center : "title",
+    					right : "dayGridMonth,timeGridWeek,timeGridDay",
+    				},
+    				locale : "ko",
+    				timeZone : "local",
+    				navLinks : true, 
+    				selectable : true,
+    				selectMirror : true,
+    				select : function() {
+    					// Display the modal.
+    					// You could fill in the start and end fields based on the parameters
+    					$('#CalModal').modal('show');
+    					
+    					
+    						var title = prompt('Event Title:');
+    						var start = prompt('Event startDate:');
+    						var end = prompt('Event endDate:');
+    						var allDay = prompt('Event allDay:');
+    						if (title) {
+    							calendar.addEvent({
+    								title: title,
+    								start: start,
+    								end: end,
+    								allDay: allDay
+    							})
+    						}
+    							calendar.unselect()
+    							console.log("화면 이벤트 출력 성공");
+    						
 
+    				},//select end
+    				events:[ 
+    					{
+    						title : "이벤트 들어가라",
+    						start : "2021-12-03",
+    						end 	: "2021-12-06"
+    					},
+    					{
+    						title : "이벤트 추가",
+    						start : "2021-12-03",
+    						end 	: "2021-12-08"
+    					},
+    					{
+    						title : "잘들어가지는데 ㅠ",
+    						start : "2021-12-17",
+    						end 	: "2021-12-25"
+    					},
+    					{
+    						title : "제에발",
+    						start : "2021-12-04",
+    						end 	: "2021-12-11"
+    					},
+    					{
+    						title : "일정 추가",
+    						start : "2021-12-03",
+    						end 	: "2021-12-09				"
+    					},
+    					{
+    						title : "정말 현명한 선택이군요",
+    						start : "2021-12-03",
+    						end 	: "2021-12-10"
+    					}
+    					
+    				],
+    				eventClick : function(arg) {
+    					console.log("일정등록 이벤트 삭제");
+    					console.log(arg.events);
+    					if (confirm("일정을 삭제하시겠습니까?")) {
+    						arg.event.remove();
+    					}
+    				},
+    				editable : true,
+    				dayMaxEvents : true,
+    			});
+    			calendar.render();
+    		});
+    		
+
+    		//일정 추가 밸류값
+    		function newEvent() {
+    			var calTitle = document.getElementById('title').value;
+    			var calStarts = document.getElementById('starts').value;
+    			var calEnds = document.getElementById('ends').value;
+    			var calallday = document.getElementById('allday').value;
+    			
+    			//date format
+    			calStarts = moment(starts).format('YYYY-MM-DD'); //date 날짜형식
+    			calEnds = moment(ends).format('YYYY-MM-DD'); //date 날짜형식
+
+    			//일정 추가 Ajax
+    			$.ajax({
+    				url : "/calendar/new",
+    				type : "post",
+    				dataType : "json",
+    				contentType : "application/json",
+    				data : JSON.stringify({
+    					"title" : calTitle,
+    					"starts" : calStarts,
+    					"ends" : calEnds,
+    					"allday" : calallday
+    				}),
+    				success : function(data) {
+    					alert("등록 완료");
+    					$('#CalModal').modal('hide');
+    					console.log(calTitle);
+    					console.log(calStarts);
+    					console.log(calEnds);
+    					console.log(calallday);
+    				},
+    				error : function() {
+    					alert("실패");
+    					//$('.modal').modal('hide');
+    					console.log(calTitle);
+    					console.log(calStarts);
+    					console.log(calEnds);
+    					console.log(calallday);
+    				}
+    			});
+    		}; //newEvent end
+		</script>
 
 </body>
 </html>
