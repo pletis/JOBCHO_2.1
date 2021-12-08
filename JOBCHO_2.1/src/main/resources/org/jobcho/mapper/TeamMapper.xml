@@ -25,7 +25,7 @@
 	<select id="getListTeam" parameterType="int" resultType="org.jobcho.domain.TeamVO">
 		<![CDATA[
 			select
-			* from team where user_num = #{user_num} and islive=1 order by team_num asc
+			* from team where user_num = #{user_num} order by team_num asc
 		]]>
 	</select>
 	
@@ -51,7 +51,7 @@
 			select t.TEAM_NUM, t.TEAM_NAME, t.TEAM_INFO, t.USER_NUM, t.ISLIVE, t.TEAM_DATE from team t, member m
 			where t.TEAM_NUM = m.TEAM_NUM
 			and m.user_num = #{user_num}
-			and t.islive=1 order by t.team_num asc
+			order by t.team_num asc
 		]]>
 	</select>
 

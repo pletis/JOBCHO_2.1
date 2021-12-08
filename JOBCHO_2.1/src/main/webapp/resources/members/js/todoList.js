@@ -195,6 +195,7 @@ $(document).ready(function(){
 	
 	//오늘의 할일 생성버튼 눌렀을 때 수정시키는 함수 실행
 	$("#insertTeamAction").on("click", function(){
+		console.log("버튼눌리는중");
 		insertTodoListAction();
 		getTodoList();
 	})
