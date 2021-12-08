@@ -408,9 +408,10 @@
 	<!--오른쪽 사이드서치바3-->
 	<div class="search-navbar-right navbar-font-search" id="navbar-search3">
 		<nav class="nav-search">
-			<div class="nav-search-title">할일</div>
+			<div class="nav-search-title">투표</div>
 			<div class="nav-search-content">
-				<div id="createToDo">➕할일생성</div>
+				<div id="createVote">➕투표생성</div>
+				<div id="end-vote-list">▶이전투표</div>
 				<ul class="nav-todo-option">
 					<SELECT NAME=sltSample SIZE=1> 토픽
 						<OPTION VALUE=1>1번 보기입니다.</OPTION>
@@ -432,6 +433,7 @@
 
 				</ul>
 				<div class="nav-search-result-scroll">
+				<div class="job-vote-wrap" style="cursor:pointer">
 					<div class="nav-search-result active-right">
 						<div class="result-container">
 							<div class="result-image"
@@ -446,74 +448,6 @@
 						</div>
 					</div>
 					<hr>
-					<div class="nav-search-result active-right">
-						<div class="result-container">
-							<div class="result-image"
-								style="background-image: url('99D279435B3D788602.jfif');"></div>
-							<div>
-								<p class="team-profile-name">최지훈</p>
-								<p class="team-profile-email">2015/21/505</p>
-								<p class="team-profile-email">이건또 어떻게</p>
-								<p class="team-profile-email">공지사항</p>
-
-							</div>
-						</div>
-					</div>
-					<hr>
-					<div class="nav-search-result ">
-						<div class="result-container">
-							<div class="result-image"
-								style="background-image: url('99D279435B3D788602.jfif');"></div>
-							<div>
-								<p class="team-profile-name">최지훈</p>
-								<p class="team-profile-email">2015/21/505</p>
-								<p class="team-profile-email">이건또 어떻게</p>
-								<p class="team-profile-email">공지사항</p>
-
-							</div>
-						</div>
-					</div>
-					<hr>
-					<div class="nav-search-result ">
-						<div class="result-container">
-							<div class="result-image"
-								style="background-image: url('99D279435B3D788602.jfif');"></div>
-							<div>
-								<p class="team-profile-name">최지훈</p>
-								<p class="team-profile-email">2015/21/505</p>
-								<p class="team-profile-email">이건또 어떻게</p>
-								<p class="team-profile-email">공지사항</p>
-
-							</div>
-						</div>
-					</div>
-					<hr>
-					<div class="nav-search-result ">
-						<div class="result-container">
-							<div class="result-image"
-								style="background-image: url('99D279435B3D788602.jfif');"></div>
-							<div>
-								<p class="team-profile-name">최지훈</p>
-								<p class="team-profile-email">2015/21/505</p>
-								<p class="team-profile-email">이건또 어떻게</p>
-								<p class="team-profile-email">공지사항</p>
-
-							</div>
-						</div>
-					</div>
-					<hr>
-					<div class="nav-search-result active-right">
-						<div class="result-container">
-							<div class="result-image"
-								style="background-image: url('99D279435B3D788602.jfif');"></div>
-							<div>
-								<p class="team-profile-name">최지훈</p>
-								<p class="team-profile-email">2015/21/505</p>
-								<p class="team-profile-email">이건또 어떻게</p>
-								<p class="team-profile-email">공지사항</p>
-
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -538,7 +472,7 @@
 	</form>
 
 
-	<!-- modal 모음-->
+<!-- modal 모음-->
 	<div class="row">
 		<div class="modal" id="modal" tabindex="-1">
 			<div class="modal-dialog">
@@ -643,9 +577,11 @@
 						오늘의 할일<input id="todo_title" type="text" class="form-control">
 						내용<input id="todo_description" type="text" class="form-control">
 						마감날짜<input id="todo_endDate" type="date" class="form-control">
-						<input id="member_num" type="hidden" class="form-control" value="${param.member_num}"> 
-						<input id="team_num" type="hidden" class="form-control" value="${param.team_num}">
-						<input id="insertTeamAction" type="button" class="btn btn-success" onclick="insertTodoListAction();" value="오늘의 할일 생성">
+						member_num<input id="member_num" type="text" class="form-control"
+							value="${param.member_num}"> team_num<input id="team_num"
+							type="text" class="form-control" value="${param.team_num}">
+						<input id="insertTeamAction" type="button" class="btn btn-success"
+							onclick="insertTodoListAction();" value="오늘의 할일 생성">
 
 					</div>
 				</div>
@@ -661,12 +597,13 @@
 					</div>
 					<div class="modal-body">
 
-						<input id="updateTodoNum" type="hidden"> 
-						오늘의 할일<input id="updateTodoTitle" type="text" class="form-control"> 
-						내용<input id="updateTodoDescription" type="text" class="form-control">
+						<input id="updateTodoNum" type="hidden"> 오늘의 할일<input
+							id="updateTodoTitle" type="text" class="form-control"> 내용<input
+							id="updateTodoDescription" type="text" class="form-control">
 						마감날짜<input id="updateTodoEnd" type="date" class="form-control">
-						<input id="updateTodoAction" type="button" class="btn btn-success" value="수정"> 
-						<input id="deleteTodoAction" type="button" class="btn btn-success" value="삭제">
+						<input id="updateTodoAction" type="button" class="btn btn-success"
+							value="수정"> <input id="deleteTodoAction" type="button"
+							class="btn btn-success" value="삭제">
 					</div>
 				</div>
 			</div>
@@ -703,7 +640,165 @@
 			</div>
 		</div>
 		<!-- 채팅방 추가 모달 끝-->
+		
+		<!-- 게시판 생성 모달창 -->
+      <div class="modal" id="boardModal" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"
+                aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">게시판 등록</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+               		<label>게시판 이름</label> 
+                	<input class="form-control" name='board_name' value=''>
+              </div>      
+              <div class="form-group">
+                	<label>게시판 정보</label> 
+                	<input class="form-control" name='board_info' value=''>
+              </div>
+            </div>
+            
+			<div class="modal-footer">
+        		<button id='modalRegisterBtn' type="button" class="btn btn-primary">등록</button>
+        		<button id='modalCloseBtn' type="button" class="btn btn-default">취소</button>
+       		</div>
+	</div>
+  </div>
+</div><!--  게시판 생성모달 끝-->
 
+		<!-- 투표 생성 모달 -->
+	<div class = "modal" id ="insertVoteModal" tabindex = "-1">
+		<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						투표 생성
+						<button class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="vote-modal-body">
+						
+						투표 제목<input id="vote_name" type="text" class="form-control"> 
+						투표 내용1<input id="vote_content1" type="text" class="form-control">
+						투표 내용2<input id="vote_content2" type="text" class="form-control">
+						투표 내용3<input id="vote_content3" type="text" class="form-control">
+						투표 내용4<input id="vote_content4" type="text" class="form-control">
+						투표 내용5<input id="vote_content5" type="text" class="form-control">
+						<input id="member_num" type="hidden" class="form-control" value="${param.member_num}">
+						<input id="team_num" type="hidden" class="form-control" value="${param.team_num}">
+ 						<input id="insertVoteAction" type="button" class="btn btn-success" value="투표 생성">
+						
+					</div>
+				</div>
+			</div>
+	</div>	
+	<!-- 투표 생성 모달 끝 -->
+	
+	<!-- 투표창 확인 모달 -->
+	<div class = "modal" id ="voting" tabindex = "-1">
+		<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						투표 확인
+						<button class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="vote-modal-body">
+					<div class="job-vote-result-wrap" style="cursor:pointer">	
+						
+						
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>	
+	<!-- 투표창 확인 모달 끝 -->
+	
+	<!-- 투표결과 확인 모달 -->
+	<div class = "modal" id ="voteResult" tabindex = "-1">
+		<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						투표 결과
+						<button class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="vote-modal-body">
+					<div class="job-vote-result-view-wrap" style="cursor:pointer">	
+						
+						
+					</div>
+				</div>
+			</div>
+	</div>	
+	</div>
+	<!-- 투표결과 확인 모달 끝 -->
+	
+	
+	<!-- 투표결과 멤버확인 모달 끝 -->
+	
+		<!-- 투표 완료확인 모달 -->
+	<div class = "modal" id ="end-list-vote-modal" tabindex = "-1">
+		<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						투표 결과
+						<button class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="vote-modal-body">
+					<div class="job-vote-end-view-wrap" style="cursor:pointer">	
+						
+						
+					</div>
+				</div>
+			</div>
+	</div>	
+	</div>
+	<!-- 투표결과 완료확인 모달 끝 -->
+	
+			<!-- 완료된 투표 확인 모달 -->
+	<div class = "modal" id ="end-list-vote-result-modal" tabindex = "-1">
+		<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						투표 결과
+						<button class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="vote-modal-body">
+					<div class="job-vote-end-result-view-wrap" style="cursor:pointer">	
+						
+						
+					</div>
+				</div>
+			</div>
+	</div>	
+	</div>
+	<!-- 완료된 투표 확인 모달 끝 -->
+	
+		<!-- 투표결과 멤버확인 모달 -->
+	<div class = "modal" id ="voteResultMember" tabindex = "-1">
+		<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						투표 결과
+						<button class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="vote-modal-body">
+					<div class="job-vote-result-member-view-wrap" style="cursor:pointer">	
+						
+						
+					</div>
+				</div>
+			</div>
+	</div>	
+	</div>
+	<!-- 투표결과 멤버확인 모달 -->
+<!-- 게시판 board_num 계속 유지시키기 -->
+    	<form id='actionForm' action="/post/list" method='get'>
+				<input type='hidden' name='board_num' value='${pageMaker.cri.pageNum}'>
+				<input type='hidden' name='team_num' value='${param.team_num}'>
+				<input type='hidden' name='member_num' value='${param.member_num }'>
+		</form>
 	</div>
 	
 	<script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
@@ -712,6 +807,7 @@
 	<script src="/resources/members/js/todoList.js"></script>
 	<script src="/resources/chat/js/onchat.js"></script>
 	<script src="/resources/chat/js/dragable.js"></script>
+	<script src="/resources/members/js/vote.js"></script>
 	
 	<!-- 외부js에 변수 전달 -->
 	<input type="hidden" id="userName"
@@ -1019,7 +1115,12 @@
             
         });//끝
     </script>
-
+<style>
+.vote-modal-body {
+height:400px;
+overflow-y : scroll;
+}
+</style>
 
 
 </body>
