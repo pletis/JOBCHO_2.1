@@ -57,8 +57,8 @@ public class UsersController {
 	public ResponseEntity<Integer> register(@RequestBody UsersVO users) {
 		System.out.println(users);
 		// 비밀번호 암호화 (인코더)
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		users.setUser_pw(passwordEncoder.encode(users.getUser_pw()));
+		//BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		//users.setUser_pw(passwordEncoder.encode(users.getUser_pw()));
 		// 회원가입
 		int re = service.insertUsers(users);
 		// 권한부여
@@ -101,7 +101,7 @@ public class UsersController {
 
 		HttpSession session = request.getSession();
 		UsersVO users = (UsersVO) session.getAttribute("users");
-		users.setUser_pw(passwordEncoder.encode(user_pw));
+		//users.setUser_pw(passwordEncoder.encode(user_pw));
 		int re = service.updatePw(users);
 		System.out.println(re);
 		// 세션 초기화
@@ -132,8 +132,8 @@ public class UsersController {
 			re = service.updateUsers2(users);
 		}else{
 			// 비밀번호 암호화 (인코더)
-			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			users.setUser_pw(passwordEncoder.encode(users.getUser_pw()));
+			//BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			//users.setUser_pw(passwordEncoder.encode(users.getUser_pw()));
 			 re = service.updateUsers(users);
 		}
 
@@ -183,12 +183,12 @@ public class UsersController {
 			emailSender.sendEmail(email);
 
 			// 비밀번호 암호화 (인코더)
-			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			//BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			// 임시로 만든 비밀번호를 db에 적용
 			// 암호화된 비밀번호
-			String encodePw = passwordEncoder.encode(pwd);
-			System.out.println("암호화된 비밀번호 : " + encodePw);
-			users1.setUser_pw(encodePw);
+			//String encodePw = passwordEncoder.encode(pwd);
+			//System.out.println("암호화된 비밀번호 : " + encodePw);
+			//users1.setUser_pw(encodePw);
 			int re = service.updatePw(users1);
 			System.out.println("비밀번호 변경 성공여부 : " + re);
 
@@ -197,6 +197,17 @@ public class UsersController {
 		return new ResponseEntity<String>(user_pw, HttpStatus.OK);
 	}
 	
+	//로그인 -> sql문을 이용해서 -> 비동기 
+	@PostMapping("/login2")
+	public ResponseEntity<UsersVO> login2(@RequestBody UsersVO users){
+		System.out.println("users객체 : " + users );
+		
+		UsersVO users2 = null;
+		
+		users2 = service.loginUsers(users);
+		
+		return users2 !=null ?  new ResponseEntity<UsersVO>(users2, HttpStatus.OK) : new ResponseEntity<UsersVO>(users2, HttpStatus.BAD_REQUEST);
+	}
 	
 
 }// endController

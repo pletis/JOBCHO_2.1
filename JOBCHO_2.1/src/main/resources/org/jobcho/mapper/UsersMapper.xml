@@ -15,6 +15,12 @@
 					user_num.nextval, #{user_name}, #{user_phoneNum}, #{user_email}, #{user_pw}, #{user_birth}, #{user_pwHint}
 				)
 	</insert>
+	
+	<!-- 로그인 -->
+	<select id="loginUsers" parameterType="org.jobcho.domain.UsersVO" resultType="org.jobcho.domain.UsersVO">
+		select * from users
+			where user_email = #{user_email} and user_pw = #{user_pw}
+	</select>
 
 	<!-- 회원가입할 때 권한부여 -->
 	<insert id="insertAuth" parameterType="String">
@@ -36,11 +42,6 @@
 				where user_num = #{user_num}
 	</update>
 	
-	<!-- 로그인 -->
-	<select id="loginUsers" parameterType="org.jobcho.domain.UsersVO" resultType="org.jobcho.domain.UsersVO">
-		select * from users
-			where user_email = #{user_email} and user_pw = #{user_pw}
-	</select>
 	
 	<!-- 수정 -->
 	<update id="updateUsers" parameterType="org.jobcho.domain.UsersVO">

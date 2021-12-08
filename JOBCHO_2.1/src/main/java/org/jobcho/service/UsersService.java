@@ -16,4 +16,5 @@ public interface UsersService {
 	public int idCheck(UsersVO users);
 	public UsersVO emailFindPw(Map<String, String> map);
 	public UsersVO read(String user_email);
+	
 }
