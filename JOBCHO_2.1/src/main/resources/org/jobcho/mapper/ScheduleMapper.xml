@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="org.jobcho.mapper.ScheduleMapper">
+	<cache />
+
+	
+	
+	<!-- 일정 목록 -->
+	<select id="getListSchedule" resultType="org.jobcho.domain.ScheduleVO">
+			SELECT 
+					subject, startDate, endDate, memo
+			FROM schedule
+			ORDER BY
+			DESC
+	</select>
+	<!-- where islive = 1 -->
+	<!-- TO_char(starts,"YYYY-MM-DD HH24:MI:SS")  -->
+	<!-- 댓글 생성 -->
+	<insert id="insertCalendar" parameterType="org.jobcho.domain.CalendarVO"> 		 
+			insert into 
+						schedule(subject, startDate, endDate, memo) 
+				VALUES(#{subject},#{startDate},#{endDate},#{memo})
+	</insert>
+<!-- 	
+	일정 수정
+	<update id="updateCalendar" parameterType="org.jobcho.domain.CalendarVO">
+		update calendar set 
+		cal_title= #{cal_titel},
+		starts = #{starts},
+		ends = #{ends}
+		where cal_num= #{cal_num}
+	</update>
+	
+	일정 삭제
+	<select id="deleteCalendar" parameterType="int">
+		update calendar set islive = 0
+		where cal_num = #{cal_num}
+	</select> 
+	
+	일정 반환
+	<select id="getCalendar" resultType="org.jobcho.domain.CalendarVO">
+		select * from calendar where cal_num = #{cal_num}
+		</select>
+	 -->
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

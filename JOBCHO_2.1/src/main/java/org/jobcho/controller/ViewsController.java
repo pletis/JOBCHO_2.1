@@ -77,7 +77,14 @@ public class ViewsController {
 	
 	@GetMapping("/calendar/calendar")
 	public String calendar(){
-		return "/calendar/calendar_sabon";
+		return "/calendar/examples/schedule";
+		//return "/calendar/FullCalendar-Example-master/index";
+		//return "/calendar/fullcalendar-3.0.1/demos/test";
+	}
+	
+	@GetMapping("/calendar/calendarPopup")
+	public String calendarPopup(){
+		return "/calendar/examples/schedulePopup";
 		//return "/calendar/FullCalendar-Example-master/index";
 		//return "/calendar/fullcalendar-3.0.1/demos/test";
 	}
