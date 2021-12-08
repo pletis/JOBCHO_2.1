@@ -12,6 +12,8 @@
 	<select id="getListReply" resultType="org.jobcho.domain.ReplyVO">
 		<![CDATA[ 
 			select * from reply
+			where post_num = #{post_num}
+			and islive = 1
 		]]>
 	</select>
 	

@@ -11,6 +11,7 @@
 		<result property="board_num" column="board_num"/>
 		<result property="member_num" column="member_num"/>
 		<result property="isLive" column="islive"/>
+		<result property="writer" column="writer"/>
 		<association property="member" javaType="org.jobcho.domain.MemberVO">
 			<id property="member_num" column="member_num"/>
 			<result property="member_position" column="member_position"/>
