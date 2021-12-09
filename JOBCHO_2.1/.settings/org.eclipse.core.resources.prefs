@@ -5,3 +5,4 @@ encoding//src/main/java/org/jobcho/controller/ScheduleController.java=UTF-8
 encoding//src/main/java/org/jobcho/controller/ViewsController.java=UTF-8
 encoding//src/main/java/org/jobcho/domain/BoardVO.java=UTF-8
 encoding//src/main/java/org/jobcho/service/PostService.java=UTF-8
+encoding//src/main/webapp/WEB-INF/views/calendar/calendar_sabon.jsp=UTF-8
