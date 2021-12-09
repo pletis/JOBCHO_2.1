@@ -195,6 +195,8 @@ $(document).ready(function(){
 		        dataType:'json',
 		        success:function(result){
 		        	console.log("member invite succss");
+		        	$("#insertChatRoomModal").modal("hide");
+		        	alert("채팅방 생성");
 		        }
 	    	});
 		})
